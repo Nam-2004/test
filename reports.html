@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Báo cáo thống kê - Hệ thống quản lý thư viện</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stats-card.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        
+        .stats-card.warning {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .stats-card.info {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .stats-card.danger {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .stats-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .chart-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .report-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .report-table .table {
+            margin-bottom: 0;
+        }
+        
+        .report-table .table thead th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 15px;
+        }
+        
+        .report-table .table tbody td {
+            padding: 12px 15px;
+            border-color: #f0f0f0;
+        }
+        
+        .trend-indicator {
+            display: inline-flex;
+            align-items: center;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .trend-up {
+            color: #28a745;
+        }
+        
+        .trend-down {
+            color: #dc3545;
+        }
+        
+        .trend-stable {
+            color: #6c757d;
+        }
+        
+        .export-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .period-selector {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .comparison-chart {
+            height: 400px;
+        }
+        
+        .top-items-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .top-item {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .top-item:last-child {
+            border-bottom: none;
+        }
+        
+        .rank-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .rank-badge.gold {
+            background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
+        }
+        
+        .rank-badge.silver {
+            background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
+        }
+        
+        .rank-badge.bronze {
+            background: linear-gradient(135deg, #cd7f32 0%, #8b4513 100%);
+        }
+        
+        .loading-chart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
+            color: #6c757d;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .export-buttons {
+                justify-content: center;
+            }
+            
+            .chart-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-chart-bar"></i> Báo cáo thống kê
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="readers.html">
+                            <i class="fas fa-users"></i> Độc giả
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">
+                            <i class="fas fa-book"></i> Sách
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="borrow-return.html">
+                            <i class="fas fa-exchange-alt"></i> Mượn/Trả
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="reports.html">
+                            <i class="fas fa-chart-bar"></i> Báo cáo
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user"></i> <span id="currentUser">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user-cog"></i> Cài đặt</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+        <!-- Page Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h2><i class="fas fa-chart-bar text-primary"></i> Báo cáo thống kê</h2>
+                        <p class="text-muted">Theo dõi và phân tích hoạt động thư viện</p>
+                    </div>
+                    <div class="export-buttons">
+                        <button class="btn btn-success" onclick="exportAllReports()">
+                            <i class="fas fa-download"></i> Xuất tất cả
+                        </button>
+                        <button class="btn btn-primary" onclick="printReport()">
+                            <i class="fas fa-print"></i> In báo cáo
+                        </button>
+                        <button class="btn btn-info" onclick="scheduleReport()">
+                            <i class="fas fa-clock"></i> Lập lịch
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Period Selector -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="period-selector">
+                    <div class="row align-items-center">
+                        <div class="col-md-3">
+                            <label class="form-label fw-bold">Khoảng thời gian:</label>
+                            <select class="form-select" id="periodSelect" onchange="updateReports()">
+                                <option value="today">Hôm nay</option>
+                                <option value="week">Tuần này</option>
+                                <option value="month" selected>Tháng này</option>
+                                <option value="quarter">Quý này</option>
+                                <option value="year">Năm này</option>
+                                <option value="custom">Tùy chọn</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3" id="customDateRange" style="display: none;">
+                            <label class="form-label">Từ ngày:</label>
+                            <input type="date" class="form-control" id="fromDate">
+                        </div>
+                        <div class="col-md-3" id="customDateRange2" style="display: none;">
+                            <label class="form-label">Đến ngày:</label>
+                            <input type="date" class="form-control" id="toDate">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label">So sánh với:</label>
+                            <select class="form-select" id="compareSelect" onchange="updateComparison()">
+                                <option value="none">Không so sánh</option>
+                                <option value="previous">Kỳ trước</option>
+                                <option value="lastYear">Cùng kỳ năm trước</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stats-card">
+                <div class="stats-number" id="totalBorrows">0</div>
+                <div class="stats-label">
+                    <i class="fas fa-book-open"></i> Lượt mượn sách
+                </div>
+                <div class="trend-indicator" id="borrowTrend">
+                    <i class="fas fa-arrow-up"></i> +12% so với kỳ trước
+                </div>
+            </div>
+            
+            <div class="stats-card success">
+                <div class="stats-number" id="totalReturns">0</div>
+                <div class="stats-label">
+                    <i class="fas fa-undo"></i> Lượt trả sách
+                </div>
+                <div class="trend-indicator" id="returnTrend">
+                    <i class="fas fa-arrow-up"></i> +8% so với kỳ trước
+                </div>
+            </div>
+            
+            <div class="stats-card warning">
+                <div class="stats-number" id="overdueBooks">0</div>
+                <div class="stats-label">
+                    <i class="fas fa-exclamation-triangle"></i> Sách quá hạn
+                </div>
+                <div class="trend-indicator" id="overdueTrend">
+                    <i class="fas fa-arrow-down"></i> -5% so với kỳ trước
+                </div>
+            </div>
+            
+            <div class="stats-card info">
+                <div class="stats-number" id="activeReaders">0</div>
+                <div class="stats-label">
+                    <i class="fas fa-users"></i> Độc giả hoạt động
+                </div>
+                <div class="trend-indicator" id="readerTrend">
+                    <i class="fas fa-arrow-up"></i> +15% so với kỳ trước
+                </div>
+            </div>
+            
+            <div class="stats-card danger">
+                <div class="stats-number" id="totalFines">0đ</div>
+                <div class="stats-label">
+                    <i class="fas fa-money-bill-wave"></i> Tổng phí phạt
+                </div>
+                <div class="trend-indicator" id="fineTrend">
+                    <i class="fas fa-arrow-down"></i> -10% so với kỳ trước
+                </div>
+            </div>
+            
+            <div class="stats-card">
+                <div class="stats-number" id="renewalCount">0</div>
+                <div class="stats-label">
+                    <i class="fas fa-calendar-plus"></i> Lượt gia hạn
+                </div>
+                <div class="trend-indicator" id="renewalTrend">
+                    <i class="fas fa-minus"></i> Không đổi
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 1 -->
+        <div class="row mb-4">
+            <!-- Borrow/Return Trend Chart -->
+            <div class="col-lg-8">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="chart-title">
+                            <i class="fas fa-chart-line text-primary"></i> 
+                            Xu hướng mượn/trả sách
+                        </h5>
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="trendChart" id="daily" checked>
+                            <label class="btn btn-outline-primary btn-sm" for="daily">Ngày</label>
+                            
+                            <input type="radio" class="btn-check" name="trendChart" id="weekly">
+                            <label class="btn btn-outline-primary btn-sm" for="weekly">Tuần</label>
+                            
+                            <input type="radio" class="btn-check" name="trendChart" id="monthly">
+                            <label class="btn btn-outline-primary btn-sm" for="monthly">Tháng</label>
+                        </div>
+                    </div>
+                    <canvas id="borrowReturnChart" height="100"></canvas>
+                </div>
+            </div>
+            
+            <!-- Book Categories Distribution -->
+            <div class="col-lg-4">
+                <div class="chart-container">
+                    <h5 class="chart-title">
+                        <i class="fas fa-chart-pie text-success"></i> 
+                        Phân bố theo thể loại
+                    </h5>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row 2 -->
+        <div class="row mb-4">
+            <!-- Reader Activity -->
+            <div class="col-lg-6">
+                <div class="chart-container">
+                    <h5 class="chart-title">
+                        <i class="fas fa-chart-bar text-info"></i> 
+                        Hoạt động theo lớp
+                    </h5>
+                    <canvas id="classActivityChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Monthly Comparison -->
+            <div class="col-lg-6">
+                <div class="chart-container">
+                    <h5 class="chart-title">
+                        <i class="fas fa-chart-area text-warning"></i> 
+                        So sánh theo tháng
+                    </h5>
+                    <canvas id="monthlyComparisonChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Lists Row -->
+        <div class="row mb-4">
+            <!-- Top Books -->
+            <div class="col-lg-4">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="chart-title">
+                            <i class="fas fa-trophy text-warning"></i> 
+                            Top sách được mượn
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="exportTopBooks()">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="top-items-list" id="topBooksList">
+                        <!-- Top books will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Top Readers -->
+            <div class="col-lg-4">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="chart-title">
+                            <i class="fas fa-medal text-success"></i> 
+                            Top độc giả tích cực
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="exportTopReaders()">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <div class="top-items-list" id="topReadersList">
+                        <!-- Top readers will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Overdue Analysis -->
+            <div class="col-lg-4">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="chart-title">
+                            <i class="fas fa-exclamation-circle text-danger"></i> 
+                            Phân tích quá hạn
+                        </h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="exportOverdueAnalysis()">
+                            <i class="fas fa-download"></i>
+                        </button>
+                    </div>
+                    <canvas id="overdueAnalysisChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Reports -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="report-table">
+                    <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+                        <h5 class="mb-0">
+                            <i class="fas fa-table text-primary"></i> 
+                            Báo cáo chi tiết
+                        </h5>
+                        <div class="btn-group">
+                            <button class="btn btn-outline-primary btn-sm active" onclick="showDetailedReport('summary')">
+                                Tổng quan
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showDetailedReport('daily')">
+                                Theo ngày
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showDetailedReport('books')">
+                                Theo sách
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showDetailedReport('readers')">
+                                Theo độc giả
+                            </button>
+                            <button class="btn btn-outline-primary btn-sm" onclick="showDetailedReport('fines')">
+                                Phí phạt
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead id="reportTableHeader">
+                                <!-- Dynamic header based on report type -->
+                            </thead>
+                            <tbody id="reportTableBody">
+                                <!-- Report data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Report pagination" class="p-3">
+                        <ul class="pagination justify-content-center mb-0" id="reportPagination">
+                            <!-- Pagination will be generated here -->
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <!-- Advanced Analytics -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="chart-container">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="chart-title">
+                            <i class="fas fa-analytics text-info"></i> 
+                            Phân tích nâng cao
+                        </h5>
+                        <div class="btn-group">
+                            <button class="btn btn-outline-info btn-sm" onclick="showPredictiveAnalysis()">
+                                <i class="fas fa-crystal-ball"></i> Dự đoán
+                            </button>
+                            <button class="btn btn-outline-info btn-sm" onclick="showSeasonalAnalysis()">
+                                <i class="fas fa-calendar-alt"></i> Theo mùa
+                            </button>
+                            <button class="btn btn-outline-info btn-sm" onclick="showCorrelationAnalysis()">
+                                <i class="fas fa-project-diagram"></i> Tương quan
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="advancedAnalyticsContent">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <canvas id="advancedChart" height="100"></canvas>
+                            </div>
+                            <div class="col-lg-4">
+                                <div id="analyticsInsights">
+                                    <h6>Thông tin chi tiết</h6>
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-lightbulb"></i>
+                                        Chọn một loại phân tích để xem thông tin chi tiết.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Export Modal -->
+    <div class="modal fade" id="exportModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-download"></i> Xuất báo cáo
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Định dạng xuất:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exportFormat" id="exportExcel" value="excel" checked>
+                            <label class="form-check-label" for="exportExcel">
+                                <i class="fas fa-file-excel text-success"></i> Excel (.xlsx)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exportFormat" id="exportPDF" value="pdf">
+                            <label class="form-check-label" for="exportPDF">
+                                <i class="fas fa-file-pdf text-danger"></i> PDF (.pdf)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exportFormat" id="exportCSV" value="csv">
+                            <label class="form-check-label" for="exportCSV">
+                                <i class="fas fa-file-csv text-info"></i> CSV (.csv)
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Nội dung báo cáo:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeCharts" checked>
+                            <label class="form-check-label" for="includeCharts">
+                                Bao gồm biểu đồ
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeDetails" checked>
+                            <label class="form-check-label" for="includeDetails">
+                                Bao gồm dữ liệu chi tiết
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="includeSummary" checked>
+                            <label class="form-check-label" for="includeSummary">
+                                Bao gồm tóm tắt
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Tên file:</label>
+                        <input type="text" class="form-control" id="exportFileName" 
+                               placeholder="bao-cao-thu-vien">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="processExport()">
+                        <i class="fas fa-download"></i> Xuất báo cáo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Schedule Report Modal -->
+    <div class="modal fade" id="scheduleModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-clock"></i> Lập lịch báo cáo
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Tần suất:</label>
+                        <select class="form-select" id="scheduleFrequency">
+                            <option value="daily">Hàng ngày</option>
+                            <option value="weekly">Hàng tuần</option>
+                            <option value="monthly">Hàng tháng</option>
+                            <option value="quarterly">Hàng quý</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Thời gian gửi:</label>
+                        <input type="time" class="form-control" id="scheduleTime" value="08:00">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Email nhận báo cáo:</label>
+                        <textarea class="form-control" id="scheduleEmails" rows="3" 
+                                placeholder="admin@school.edu.vn&#10;principal@school.edu.vn"></textarea>
+                        <small class="form-text text-muted">Mỗi email một dòng</small>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Loại báo cáo:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="scheduleSummary" checked>
+                            <label class="form-check-label" for="scheduleSummary">
+                                Báo cáo tổng quan
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="scheduleOverdue">
+                            <label class="form-check-label" for="scheduleOverdue">
+                                Báo cáo sách quá hạn
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="scheduleActivity">
+                            <label class="form-check-label" for="scheduleActivity">
+                                Báo cáo hoạt động
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="saveSchedule()">
+                        <i class="fas fa-save"></i> Lưu lịch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay d-none">
+        <div class="loading-spinner">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;"></div>
+            <div class="mt-3">Đang tạo báo cáo...</div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Global variables
+        let charts = {};
+        let currentReportType = 'summary';
+        let currentPeriod = 'month';
+        let reportData = {};
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            initializeReportsPage();
+            setCurrentUser();
+            loadReportData();
+        });
+
+        // Check authentication
+        function checkAuthentication() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'index.html';
+                return;
+            }
+        }
+
+        // Set current user
+        function setCurrentUser() {
+            const username = sessionStorage.getItem('username') || 'Admin';
+            document.getElementById('currentUser').textContent = username;
+        }
+
+        // Initialize reports page
+        function initializeReportsPage() {
+            // Set default date range
+            const today = new Date();
+            const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+            
+            document.getElementById('fromDate').value = firstDayOfMonth.toISOString().split('T')[0];
+            document.getElementById('toDate').value = today.toISOString().split('T')[0];
+            
+            // Initialize period selector
+            document.getElementById('periodSelect').addEventListener('change', function() {
+                const customRanges = document.querySelectorAll('#customDateRange, #customDateRange2');
+                if (this.value === 'custom') {
+                    customRanges.forEach(el => el.style.display = 'block');
+                } else {
+                    customRanges.forEach(el => el.style.display = 'none');
+                }
+                updateReports();
+            });
+
+            // Initialize chart radio buttons
+            document.querySelectorAll('input[name="trendChart"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    updateBorrowReturnChart(this.id);
+                });
+            });
+        }
+
+        // Load report data
+        function loadReportData() {
+            showLoading();
+            
+            setTimeout(() => {
+                // Simulate data loading
+                reportData = generateReportData();
+                updateAllCharts();
+                updateQuickStats();
+                updateTopLists();
+                showDetailedReport('summary');
+                hideLoading();
+            }, 1500);
+        }
+
+        // Generate report data
+        function generateReportData() {
+            const period = document.getElementById('periodSelect').value;
+            
+            // This would normally fetch data from the server
+            return {
+                summary: {
+                    totalBorrows: 1247,
+                    totalReturns: 1189,
+                    overdueBooks: 58,
+                    activeReaders: 342,
+                    totalFines: 1160000,
+                    renewalCount: 156
+                },
+                trends: {
+                    borrowTrend: 12,
+                    returnTrend: 8,
+                    overdueTrend: -5,
+                    readerTrend: 15,
+                    fineTrend: -10,
+                    renewalTrend: 0
+                },
+                borrowReturnData: generateBorrowReturnData(period),
+                categoryData: generateCategoryData(),
+                classData: generateClassData(),
+                monthlyData: generateMonthlyData(),
+                topBooks: generateTopBooks(),
+                topReaders: generateTopReaders(),
+                overdueAnalysis: generateOverdueAnalysis()
+            };
+        }
+
+        // Update all charts
+        function updateAllCharts() {
+            updateBorrowReturnChart('daily');
+            updateCategoryChart();
+            updateClassActivityChart();
+            updateMonthlyComparisonChart();
+            updateOverdueAnalysisChart();
+        }
+
+        // Update quick stats
+        function updateQuickStats() {
+            const data = reportData.summary;
+            const trends = reportData.trends;
+            
+            document.getElementById('totalBorrows').textContent = data.totalBorrows.toLocaleString();
+            document.getElementById('totalReturns').textContent = data.totalReturns.toLocaleString();
+            document.getElementById('overdueBooks').textContent = data.overdueBooks.toLocaleString();
+            document.getElementById('activeReaders').textContent = data.activeReaders.toLocaleString();
+            document.getElementById('totalFines').textContent = formatCurrency(data.totalFines);
+            document.getElementById('renewalCount').textContent = data.renewalCount.toLocaleString();
+            
+            // Update trends
+            updateTrendIndicator('borrowTrend', trends.borrowTrend);
+            updateTrendIndicator('returnTrend', trends.returnTrend);
+            updateTrendIndicator('overdueTrend', trends.overdueTrend);
+            updateTrendIndicator('readerTrend', trends.readerTrend);
+            updateTrendIndicator('fineTrend', trends.fineTrend);
+            updateTrendIndicator('renewalTrend', trends.renewalTrend);
+        }
+
+        // Update trend indicator
+        function updateTrendIndicator(elementId, value) {
+            const element = document.getElementById(elementId);
+            let icon, text, className;
+            
+            if (value > 0) {
+                icon = 'fas fa-arrow-up';
+                text = `+${value}% so với kỳ trước`;
+                className = 'trend-up';
+            } else if (value < 0) {
+                icon = 'fas fa-arrow-down';
+                text = `${value}% so với kỳ trước`;
+                className = 'trend-down';
+            } else {
+                icon = 'fas fa-minus';
+                text = 'Không đổi';
+                className = 'trend-stable';
+            }
+            
+            element.innerHTML = `<i class="${icon}"></i> ${text}`;
+            element.className = `trend-indicator ${className}`;
+        }
+
+        // Update borrow/return chart
+        function updateBorrowReturnChart(period) {
+            const ctx = document.getElementById('borrowReturnChart').getContext('2d');
+            
+            if (charts.borrowReturn) {
+                charts.borrowReturn.destroy();
+            }
+            
+            const data = reportData.borrowReturnData[period];
+            
+            charts.borrowReturn = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Lượt mượn',
+                        data: data.borrows,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Lượt trả',
+                        data: data.returns,
+                        borderColor: '#38ef7d',
+                        backgroundColor: 'rgba(56, 239, 125, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                        }
+                    },
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: period === 'daily' ? 'Ngày' : period === 'weekly' ? 'Tuần' : 'Tháng'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Số lượng'
+                            },
+                            beginAtZero: true
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // Update category chart
+        function updateCategoryChart() {
+            const ctx = document.getElementById('categoryChart').getContext('2d');
+            
+            if (charts.category) {
+                charts.category.destroy();
+            }
+            
+            const data = reportData.categoryData;
+            
+            charts.category = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        data: data.values,
+                        backgroundColor: [
+                            '#667eea',
+                            '#38ef7d',
+                            '#f093fb',
+                            '#4facfe',
+                            '#fa709a',
+                            '#ffd200',
+                            '#ff6b6b',
+                            '#4ecdc4'
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((context.parsed * 100) / total).toFixed(1);
+                                    return `${context.label}: ${context.parsed} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update class activity chart
+        function updateClassActivityChart() {
+            const ctx = document.getElementById('classActivityChart').getContext('2d');
+            
+            if (charts.classActivity) {
+                charts.classActivity.destroy();
+            }
+            
+            const data = reportData.classData;
+            
+            charts.classActivity = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Số lượt mượn',
+                        data: data.values,
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: '#667eea',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Lớp'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Số lượt mượn'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update monthly comparison chart
+        function updateMonthlyComparisonChart() {
+            const ctx = document.getElementById('monthlyComparisonChart').getContext('2d');
+            
+            if (charts.monthlyComparison) {
+                charts.monthlyComparison.destroy();
+            }
+            
+            const data = reportData.monthlyData;
+            
+            charts.monthlyComparison = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Năm nay',
+                        data: data.currentYear,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Năm trước',
+                        data: data.lastYear,
+                        borderColor: '#38ef7d',
+                        backgroundColor: 'rgba(56, 239, 125, 0.1)',
+                        tension: 0.4,
+                        borderDash: [5, 5]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Tháng'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Số lượt mượn'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update overdue analysis chart
+        function updateOverdueAnalysisChart() {
+            const ctx = document.getElementById('overdueAnalysisChart').getContext('2d');
+            
+            if (charts.overdueAnalysis) {
+                charts.overdueAnalysis.destroy();
+            }
+            
+            const data = reportData.overdueAnalysis;
+            
+            charts.overdueAnalysis = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.labels,
+                    datasets: [{
+                        label: 'Số sách',
+                        data: data.values,
+                        backgroundColor: [
+                            '#ffd200',
+                            '#f093fb',
+                            '#fa709a',
+                            '#ff6b6b'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Số ngày quá hạn'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Số sách'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+
+        // Update top lists
+        function updateTopLists() {
+            updateTopBooks();
+            updateTopReaders();
+        }
+
+        // Update top books
+        function updateTopBooks() {
+            const container = document.getElementById('topBooksList');
+            const books = reportData.topBooks;
+            
+            let html = '';
+            books.forEach((book, index) => {
+                const rankClass = index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : '';
+                html += `
+                    <div class="top-item">
+                        <div class="d-flex align-items-center">
+                            <div class="rank-badge ${rankClass} me-3">
+                                ${index + 1}
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">${book.title}</h6>
+                                <small class="text-muted">${book.author}</small>
+                            </div>
+                            <div class="text-end">
+                                <strong class="text-primary">${book.borrowCount}</strong>
+                                <small class="text-muted d-block">lượt mượn</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Update top readers
+        function updateTopReaders() {
+            const container = document.getElementById('topReadersList');
+            const readers = reportData.topReaders;
+            
+            let html = '';
+            readers.forEach((reader, index) => {
+                const rankClass = index === 0 ? 'gold' : index === 1 ? 'silver' : index === 2 ? 'bronze' : '';
+                html += `
+                    <div class="top-item">
+                        <div class="d-flex align-items-center">
+                            <div class="rank-badge ${rankClass} me-3">
+                                ${index + 1}
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">${reader.name}</h6>
+                                <small class="text-muted">${reader.class}</small>
+                            </div>
+                            <div class="text-end">
+                                <strong class="text-success">${reader.borrowCount}</strong>
+                                <small class="text-muted d-block">cuốn sách</small>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Show detailed report
+        function showDetailedReport(type) {
+            currentReportType = type;
+            
+            // Update active button
+            document.querySelectorAll('.btn-group .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const header = document.getElementById('reportTableHeader');
+            const body = document.getElementById('reportTableBody');
+            
+            showLoading();
+            
+            setTimeout(() => {
+                switch(type) {
+                    case 'summary':
+                        showSummaryReport(header, body);
+                        break;
+                    case 'daily':
+                        showDailyReport(header, body);
+                        break;
+                    case 'books':
+                        showBooksReport(header, body);
+                        break;
+                    case 'readers':
+                        showReadersReport(header, body);
+                        break;
+                    case 'fines':
+                        showFinesReport(header, body);
+                        break;
+                }
+                hideLoading();
+            }, 500);
+        }
+
+        // Show summary report
+        function showSummaryReport(header, body) {
+            header.innerHTML = `
+                <tr>
+                    <th>Chỉ số</th>
+                    <th>Giá trị</th>
+                    <th>So với kỳ trước</th>
+                    <th>Mục tiêu</th>
+                    <th>Đạt được</th>
+                </tr>
+            `;
+            
+            const summaryData = [
+                { metric: 'Tổng lượt mượn', value: '1,247', change: '+12%', target: '1,200', achieved: '103.9%' },
+                { metric: 'Tổng lượt trả', value: '1,189', change: '+8%', target: '1,150', achieved: '103.4%' },
+                { metric: 'Sách quá hạn', value: '58', change: '-5%', target: '< 60', achieved: '96.7%' },
+                { metric: 'Độc giả hoạt động', value: '342', change: '+15%', target: '300', achieved: '114.0%' },
+                { metric: 'Tổng phí phạt', value: '1,160,000đ', change: '-10%', target: '< 1,500,000đ', achieved: '77.3%' },
+                { metric: 'Lượt gia hạn', value: '156', change: '0%', target: '150', achieved: '104.0%' }
+            ];
+            
+            let html = '';
+            summaryData.forEach(item => {
+                const changeClass = item.change.includes('+') ? 'text-success' : 
+                                  item.change.includes('-') ? 'text-danger' : 'text-muted';
+                const achievedClass = parseFloat(item.achieved) >= 100 ? 'text-success' : 'text-warning';
+                
+                html += `
+                    <tr>
+                        <td><strong>${item.metric}</strong></td>
+                        <td>${item.value}</td>
+                        <td class="${changeClass}">
+                            <i class="fas fa-${item.change.includes('+') ? 'arrow-up' : 
+                                              item.change.includes('-') ? 'arrow-down' : 'minus'}"></i>
+                            ${item.change}
+                        </td>
+                        <td>${item.target}</td>
+                        <td class="${achievedClass}"><strong>${item.achieved}</strong></td>
+                    </tr>
+                `;
+            });
+            
+            body.innerHTML = html;
+        }
+
+        // Show daily report
+        function showDailyReport(header, body) {
+            header.innerHTML = `
+                <tr>
+                    <th>Ngày</th>
+                    <th>Lượt mượn</th>
+                    <th>Lượt trả</th>
+                    <th>Gia hạn</th>
+                    <th>Quá hạn mới</th>
+                    <th>Phí phạt</th>
+                </tr>
+            `;
+            
+            const dailyData = generateDailyReportData();
+            
+            let html = '';
+            dailyData.forEach(day => {
+                html += `
+                    <tr>
+                        <td>${formatDate(day.date)}</td>
+                        <td><span class="badge bg-primary">${day.borrows}</span></td>
+                        <td><span class="badge bg-success">${day.returns}</span></td>
+                        <td><span class="badge bg-info">${day.renewals}</span></td>
+                        <td><span class="badge bg-warning">${day.newOverdue}</span></td>
+                        <td><strong>${formatCurrency(day.fines)}</strong></td>
+                    </tr>
+                `;
+            });
+            
+            body.innerHTML = html;
+        }
+
+        // Show books report
+        function showBooksReport(header, body) {
+            header.innerHTML = `
+                <tr>
+                    <th>Mã sách</th>
+                    <th>Tên sách</th>
+                    <th>Tác giả</th>
+                    <th>Thể loại</th>
+                    <th>Lượt mượn</th>
+                    <th>Đang mượn</th>
+                    <th>Tỷ lệ sử dụng</th>
+                </tr>
+            `;
+            
+            const booksData = generateBooksReportData();
+            
+            let html = '';
+            booksData.forEach(book => {
+                const utilizationClass = book.utilization >= 80 ? 'text-success' : 
+                                       book.utilization >= 50 ? 'text-warning' : 'text-danger';
+                
+                html += `
+                    <tr>
+                        <td><code>${book.code}</code></td>
+                        <td><strong>${book.title}</strong></td>
+                        <td>${book.author}</td>
+                        <td><span class="badge bg-secondary">${book.category}</span></td>
+                        <td><span class="badge bg-primary">${book.borrowCount}</span></td>
+                        <td><span class="badge bg-warning">${book.currentBorrows}</span></td>
+                        <td class="${utilizationClass}"><strong>${book.utilization}%</strong></td>
+                    </tr>
+                `;
+            });
+            
+            body.innerHTML = html;
+        }
+
+        // Show readers report
+        function showReadersReport(header, body) {
+            header.innerHTML = `
+                <tr>
+                    <th>Mã thẻ</th>
+                    <th>Họ tên</th>
+                    <th>Lớp</th>
+                    <th>Đã mượn</th>
+                    <th>Đang mượn</th>
+                    <th>Quá hạn</th>
+                    <th>Phí phạt</th>
+                    <th>Trạng thái</th>
+                </tr>
+            `;
+            
+            const readersData = generateReadersReportData();
+            
+            let html = '';
+            readersData.forEach(reader => {
+                const statusClass = reader.status === 'Hoạt động' ? 'bg-success' : 
+                                  reader.status === 'Tạm khóa' ? 'bg-danger' : 'bg-warning';
+                
+                html += `
+                    <tr>
+                        <td><code>${reader.cardId}</code></td>
+                        <td><strong>${reader.name}</strong></td>
+                        <td>${reader.class}</td>
+                        <td><span class="badge bg-info">${reader.totalBorrows}</span></td>
+                        <td><span class="badge bg-warning">${reader.currentBorrows}</span></td>
+                        <td><span class="badge bg-danger">${reader.overdueBooks}</span></td>
+                        <td><strong>${formatCurrency(reader.fines)}</strong></td>
+                        <td><span class="badge ${statusClass}">${reader.status}</span></td>
+                    </tr>
+                `;
+            });
+            
+            body.innerHTML = html;
+        }
+
+        // Show fines report
+        function showFinesReport(header, body) {
+            header.innerHTML = `
+                <tr>
+                    <th>Ngày</th>
+                    <th>Độc giả</th>
+                    <th>Sách</th>
+                    <th>Ngày quá hạn</th>
+                    <th>Số ngày</th>
+                    <th>Phí phạt</th>
+                    <th>Trạng thái</th>
+                </tr>
+            `;
+            
+            const finesData = generateFinesReportData();
+            
+            let html = '';
+            finesData.forEach(fine => {
+                const statusClass = fine.status === 'Đã thu' ? 'bg-success' : 'bg-warning';
+                
+                html += `
+                    <tr>
+                        <td>${formatDate(fine.date)}</td>
+                        <td>
+                            <strong>${fine.readerName}</strong><br>
+                            <small class="text-muted">${fine.cardId}</small>
+                        </td>
+                        <td>
+                            <strong>${fine.bookTitle}</strong><br>
+                            <small class="text-muted">${fine.bookCode}</small>
+                        </td>
+                        <td>${formatDate(fine.overdueDate)}</td>
+                        <td><span class="badge bg-danger">${fine.overdueDays}</span></td>
+                        <td><strong>${formatCurrency(fine.amount)}</strong></td>
+                        <td><span class="badge ${statusClass}">${fine.status}</span></td>
+                    </tr>
+                `;
+            });
+            
+            body.innerHTML = html;
+        }
+
+        // Update reports based on period
+        function updateReports() {
+            currentPeriod = document.getElementById('periodSelect').value;
+            loadReportData();
+        }
+
+        // Update comparison
+        function updateComparison() {
+            const compareType = document.getElementById('compareSelect').value;
+            // Update comparison logic here
+            updateAllCharts();
+        }
+
+        // Advanced analytics functions
+        function showPredictiveAnalysis() {
+            const ctx = document.getElementById('advancedChart').getContext('2d');
+            
+            if (charts.advanced) {
+                charts.advanced.destroy();
+            }
+            
+            // Generate predictive data
+            const predictiveData = generatePredictiveData();
+            
+            charts.advanced = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: predictiveData.labels,
+                    datasets: [{
+                        label: 'Dữ liệu thực tế',
+                        data: predictiveData.actual,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4
+                    }, {
+                        label: 'Dự đoán',
+                        data: predictiveData.predicted,
+                        borderColor: '#f093fb',
+                        backgroundColor: 'rgba(240, 147, 251, 0.1)',
+                        borderDash: [5, 5],
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Update insights
+            document.getElementById('analyticsInsights').innerHTML = `
+                <h6>Dự đoán xu hướng</h6>
+                <div class="alert alert-info">
+                    <i class="fas fa-lightbulb"></i>
+                    <strong>Thông tin chi tiết:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Dự kiến lượt mượn sách sẽ tăng 15% trong tháng tới</li>
+                        <li>Thể loại "Khoa học" có xu hướng tăng mạnh</li>
+                        <li>Cần chuẩn bị thêm sách cho kỳ thi cuối năm</li>
+                        <li>Độc giả lớp 12 sẽ giảm hoạt động từ tháng 4</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function showSeasonalAnalysis() {
+            const ctx = document.getElementById('advancedChart').getContext('2d');
+            
+            if (charts.advanced) {
+                charts.advanced.destroy();
+            }
+            
+            const seasonalData = generateSeasonalData();
+            
+            charts.advanced = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: seasonalData.labels,
+                    datasets: [{
+                        label: 'Mùa xuân',
+                        data: seasonalData.spring,
+                        borderColor: '#38ef7d',
+                        backgroundColor: 'rgba(56, 239, 125, 0.2)'
+                    }, {
+                        label: 'Mùa hè',
+                        data: seasonalData.summer,
+                        borderColor: '#ffd200',
+                        backgroundColor: 'rgba(255, 210, 0, 0.2)'
+                    }, {
+                        label: 'Mùa thu',
+                        data: seasonalData.autumn,
+                        borderColor: '#fa709a',
+                        backgroundColor: 'rgba(250, 112, 154, 0.2)'
+                    }, {
+                        label: 'Mùa đông',
+                        data: seasonalData.winter,
+                        borderColor: '#4facfe',
+                        backgroundColor: 'rgba(79, 172, 254, 0.2)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('analyticsInsights').innerHTML = `
+                <h6>Phân tích theo mùa</h6>
+                <div class="alert alert-success">
+                    <i class="fas fa-calendar-alt"></i>
+                    <strong>Nhận xét:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Mùa thu có hoạt động mượn sách cao nhất</li>
+                        <li>Mùa hè giảm 40% so với các mùa khác</li>
+                        <li>Thể loại "Giáo khoa" tăng mạnh vào đầu năm học</li>
+                        <li>Sách "Tham khảo" được ưa chuộng vào mùa thi</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        function showCorrelationAnalysis() {
+            const ctx = document.getElementById('advancedChart').getContext('2d');
+            
+            if (charts.advanced) {
+                charts.advanced.destroy();
+            }
+            
+            const correlationData = generateCorrelationData();
+            
+            charts.advanced = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [{
+                        label: 'Mối tương quan',
+                        data: correlationData.data,
+                        backgroundColor: 'rgba(102, 126, 234, 0.6)',
+                        borderColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Số lượng sách trong thư viện'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Lượt mượn trung bình/tháng'
+                            }
+                        }
+                    }
+                }
+            });
+            
+            document.getElementById('analyticsInsights').innerHTML = `
+                <h6>Phân tích tương quan</h6>
+                <div class="alert alert-warning">
+                    <i class="fas fa-project-diagram"></i>
+                    <strong>Kết quả phân tích:</strong>
+                    <ul class="mb-0 mt-2">
+                        <li>Hệ số tương quan: 0.78 (mạnh)</li>
+                        <li>Tăng số lượng sách có thể tăng lượt mượn</li>
+                        <li>Thể loại "Văn học" có tương quan cao nhất</li>
+                        <li>Cần đầu tư thêm sách cho các thể loại phổ biến</li>
+                    </ul>
+                </div>
+            `;
+        }
+
+        // Export functions
+        function exportAllReports() {
+            const modal = new bootstrap.Modal(document.getElementById('exportModal'));
+            modal.show();
+        }
+
+        function exportTopBooks() {
+            const data = reportData.topBooks;
+            const csv = generateTopBooksCSV(data);
+            downloadCSV(csv, 'top-sach-duoc-muon.csv');
+        }
+
+        function exportTopReaders() {
+            const data = reportData.topReaders;
+            const csv = generateTopReadersCSV(data);
+            downloadCSV(csv, 'top-doc-gia-tich-cuc.csv');
+        }
+
+        function exportOverdueAnalysis() {
+            const data = reportData.overdueAnalysis;
+            const csv = generateOverdueAnalysisCSV(data);
+            downloadCSV(csv, 'phan-tich-qua-han.csv');
+        }
+
+        function processExport() {
+            const format = document.querySelector('input[name="exportFormat"]:checked').value;
+            const includeCharts = document.getElementById('includeCharts').checked;
+            const includeDetails = document.getElementById('includeDetails').checked;
+            const includeSummary = document.getElementById('includeSummary').checked;
+            const fileName = document.getElementById('exportFileName').value || 'bao-cao-thu-vien';
+            
+            showLoading();
+            
+            setTimeout(() => {
+                switch(format) {
+                    case 'excel':
+                        exportToExcel(fileName, includeCharts, includeDetails, includeSummary);
+                        break;
+                    case 'pdf':
+                        exportToPDF(fileName, includeCharts, includeDetails, includeSummary);
+                        break;
+                    case 'csv':
+                        exportToCSV(fileName, includeDetails);
+                        break;
+                }
+                
+                hideLoading();
+                
+                const modal = bootstrap.Modal.getInstance(document.getElementById('exportModal'));
+                modal.hide();
+                
+                showNotification('Xuất báo cáo thành công!', 'success');
+            }, 2000);
+        }
+
+        // Print report
+        function printReport() {
+            const printContent = generatePrintableReport();
+            const printWindow = window.open('', '_blank');
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Báo cáo thống kê thư viện</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #000; padding-bottom: 20px; }
+                        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 20px 0; }
+                        .stat-item { border: 1px solid #ddd; padding: 15px; text-align: center; }
+                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                        th { background-color: #f0f0f0; }
+                        @media print { body { margin: 0; } }
+                    </style>
+                </head>
+                <body>
+                    ${printContent}
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Schedule report
+        function scheduleReport() {
+            const modal = new bootstrap.Modal(document.getElementById('scheduleModal'));
+            modal.show();
+        }
+
+        function saveSchedule() {
+            const frequency = document.getElementById('scheduleFrequency').value;
+            const time = document.getElementById('scheduleTime').value;
+            const emails = document.getElementById('scheduleEmails').value;
+            const reportTypes = [];
+            
+            if (document.getElementById('scheduleSummary').checked) reportTypes.push('summary');
+            if (document.getElementById('scheduleOverdue').checked) reportTypes.push('overdue');
+            if (document.getElementById('scheduleActivity').checked) reportTypes.push('activity');
+            
+            showLoading();
+            
+            setTimeout(() => {
+                // Save schedule to backend
+                const scheduleData = {
+                    frequency,
+                    time,
+                    emails: emails.split('\n').filter(email => email.trim()),
+                    reportTypes,
+                    createdBy: sessionStorage.getItem('username'),
+                    createdAt: new Date().toISOString()
+                };
+                
+                // Simulate saving
+                console.log('Schedule saved:', scheduleData);
+                
+                hideLoading();
+                
+                const modal = bootstrap.Modal.getInstance(document.getElementById('scheduleModal'));
+                modal.hide();
+                
+                showNotification('Lưu lịch báo cáo thành công!', 'success');
+            }, 1000);
+        }
+
+        // Data generation functions
+        function generateBorrowReturnData(period) {
+            const data = {
+                daily: {
+                    labels: Array.from({length: 30}, (_, i) => `${i + 1}/11`),
+                    borrows: Array.from({length: 30}, () => Math.floor(Math.random() * 50) + 20),
+                    returns: Array.from({length: 30}, () => Math.floor(Math.random() * 45) + 15)
+                },
+                weekly: {
+                    labels: ['Tuần 1', 'Tuần 2', 'Tuần 3', 'Tuần 4'],
+                    borrows: [280, 320, 290, 310],
+                    returns: [260, 300, 280, 295]
+                },
+                monthly: {
+                    labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+                    borrows: [1200, 1100, 1300, 1250, 1400, 800, 600, 900, 1350, 1300, 1247, 1100],
+                    returns: [1150, 1080, 1280, 1200, 1350, 780, 580, 870, 1300, 1250, 1189, 1050]
+                }
+            };
+            
+            return data;
+        }
+
+        function generateCategoryData() {
+            return {
+                labels: ['Văn học', 'Khoa học', 'Lịch sử', 'Địa lý', 'Toán học', 'Ngoại ngữ', 'Tin học', 'Khác'],
+                values: [320, 280, 180, 150, 200, 160, 120, 90]
+            };
+        }
+
+        function generateClassData() {
+            return {
+                labels: ['10A1', '10A2', '10A3', '11A1', '11A2', '11A3', '12A1', '12A2', '12A3'],
+                values: [145, 132, 128, 156, 142, 138, 98, 89, 95]
+            };
+        }
+
+        function generateMonthlyData() {
+            return {
+                labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+                currentYear: [1200, 1100, 1300, 1250, 1400, 800, 600, 900, 1350, 1300, 1247, 1100],
+                lastYear: [1100, 1050, 1200, 1180, 1250, 750, 550, 850, 1200, 1150, 1100, 1000]
+            };
+        }
+
+        function generateTopBooks() {
+            return [
+                { title: 'Tắt đèn', author: 'Ngô Tất Tố', borrowCount: 45 },
+                { title: 'Số đỏ', author: 'Vũ Trọng Phụng', borrowCount: 42 },
+                { title: 'Chí Phèo', author: 'Nam Cao', borrowCount: 38 },
+                { title: 'Lão Hạc', author: 'Nam Cao', borrowCount: 35 },
+                { title: 'Vợ nhặt', author: 'Kim Lân', borrowCount: 33 },
+                { title: 'Hai đứa trẻ', author: 'Thạch Lam', borrowCount: 30 },
+                { title: 'Những ngôi sao xa xôi', author: 'Lê Minh Khuê', borrowCount: 28 },
+                { title: 'Bước đường cùng', author: 'Nguyễn Công Hoan', borrowCount: 25 }
+            ];
+        }
+
+        function generateTopReaders() {
+            return [
+                { name: 'Nguyễn Văn An', class: '11A1', borrowCount: 28 },
+                { name: 'Trần Thị Bình', class: '10A2', borrowCount: 25 },
+                { name: 'Lê Văn Cường', class: '12A1', borrowCount: 23 },
+                { name: 'Phạm Thị Dung', class: '11A3', borrowCount: 22 },
+                { name: 'Hoàng Văn Em', class: '10A1', borrowCount: 20 },
+                { name: 'Vũ Thị Phương', class: '12A2', borrowCount: 19 },
+                { name: 'Đỗ Văn Giang', class: '11A2', borrowCount: 18 },
+                { name: 'Ngô Thị Hoa', class: '10A3', borrowCount: 17 }
+            ];
+        }
+
+        function generateOverdueAnalysis() {
+            return {
+                labels: ['1-3 ngày', '4-7 ngày', '8-14 ngày', '> 14 ngày'],
+                values: [25, 18, 10, 5]
+            };
+        }
+
+        function generateDailyReportData() {
+            const data = [];
+            const today = new Date();
+            
+            for (let i = 29; i >= 0; i--) {
+                const date = new Date(today);
+                date.setDate(date.getDate() - i);
+                
+                data.push({
+                    date: date.toISOString().split('T')[0],
+                    borrows: Math.floor(Math.random() * 50) + 20,
+                    returns: Math.floor(Math.random() * 45) + 15,
+                    renewals: Math.floor(Math.random() * 10) + 2,
+                    newOverdue: Math.floor(Math.random() * 5),
+                    fines: Math.floor(Math.random() * 100000) + 20000
+                });
+            }
+            
+            return data;
+        }
+
+        function generateBooksReportData() {
+            const books = [
+                { code: 'VH001', title: 'Tắt đèn', author: 'Ngô Tất Tố', category: 'Văn học', borrowCount: 45, currentBorrows: 3, utilization: 85 },
+                { code: 'VH002', title: 'Số đỏ', author: 'Vũ Trọng Phụng', category: 'Văn học', borrowCount: 42, currentBorrows: 2, utilization: 82 },
+                { code: 'KH001', title: 'Vật lý 11', author: 'Bộ GD&ĐT', category: 'Khoa học', borrowCount: 38, currentBorrows: 5, utilization: 78 },
+                { code: 'LS001', title: 'Lịch sử Việt Nam', author: 'Trần Trọng Kim', category: 'Lịch sử', borrowCount: 35, currentBorrows: 1, utilization: 75 },
+                { code: 'TH001', title: 'Toán học 12', author: 'Bộ GD&ĐT', category: 'Toán học', borrowCount: 33, currentBorrows: 4, utilization: 72 },
+                { code: 'NN001', title: 'English Grammar', author: 'Murphy', category: 'Ngoại ngữ', borrowCount: 30, currentBorrows: 2, utilization: 68 },
+                { code: 'DL001', title: 'Địa lý Việt Nam', author: 'Bộ GD&ĐT', category: 'Địa lý', borrowCount: 28, currentBorrows: 1, utilization: 65 },
+                { code: 'TH002', title: 'Tin học cơ bản', author: 'Nguyễn Văn A', category: 'Tin học', borrowCount: 25, currentBorrows: 0, utilization: 60 }
+            ];
+            
+            return books;
+        }
+
+        function generateReadersReportData() {
+            const readers = [
+                { cardId: 'DG001', name: 'Nguyễn Văn An', class: '11A1', totalBorrows: 28, currentBorrows: 3, overdueBooks: 0, fines: 0, status: 'Hoạt động' },
+                { cardId: 'DG002', name: 'Trần Thị Bình', class: '10A2', totalBorrows: 25, currentBorrows: 2, overdueBooks: 1, fines: 6000, status: 'Hoạt động' },
+                { cardId: 'DG003', name: 'Lê Văn Cường', class: '12A1', totalBorrows: 23, currentBorrows: 1, overdueBooks: 0, fines: 0, status: 'Hoạt động' },
+                { cardId: 'DG004', name: 'Phạm Thị Dung', class: '11A3', totalBorrows: 22, currentBorrows: 4, overdueBooks: 2, fines: 12000, status: 'Cảnh báo' },
+                { cardId: 'DG005', name: 'Hoàng Văn Em', class: '10A1', totalBorrows: 20, currentBorrows: 2, overdueBooks: 0, fines: 0, status: 'Hoạt động' },
+                { cardId: 'DG006', name: 'Vũ Thị Phương', class: '12A2', totalBorrows: 19, currentBorrows: 0, overdueBooks: 0, fines: 0, status: 'Hoạt động' },
+                { cardId: 'DG007', name: 'Đỗ Văn Giang', class: '11A2', totalBorrows: 18, currentBorrows: 3, overdueBooks: 1, fines: 4000, status: 'Hoạt động' },
+                { cardId: 'DG008', name: 'Ngô Thị Hoa', class: '10A3', totalBorrows: 17, currentBorrows: 1, overdueBooks: 0, fines: 0, status: 'Hoạt động' }
+            ];
+            
+            return readers;
+        }
+
+        function generateFinesReportData() {
+            const fines = [
+                { date: '2024-11-15', readerName: 'Trần Thị Bình', cardId: 'DG002', bookTitle: 'Tắt đèn', bookCode: 'VH001', overdueDate: '2024-11-10', overdueDays: 5, amount: 10000, status: 'Chưa thu' },
+                { date: '2024-11-14', readerName: 'Phạm Thị Dung', cardId: 'DG004', bookTitle: 'Vật lý 11', bookCode: 'KH001', overdueDate: '2024-11-08', overdueDays: 6, amount: 12000, status: 'Chưa thu' },
+                { date: '2024-11-13', readerName: 'Lê Văn Minh', cardId: 'DG015', bookTitle: 'Số đỏ', bookCode: 'VH002', overdueDate: '2024-11-05', overdueDays: 8, amount: 16000, status: 'Đã thu' },
+                { date: '2024-11-12', readerName: 'Nguyễn Thị Lan', cardId: 'DG023', bookTitle: 'Toán học 12', bookCode: 'TH001', overdueDate: '2024-11-01', overdueDays: 11, amount: 22000, status: 'Đã thu' },
+                { date: '2024-11-11', readerName: 'Đỗ Văn Giang', cardId: 'DG007', bookTitle: 'Lịch sử Việt Nam', bookCode: 'LS001', overdueDate: '2024-11-07', overdueDays: 4, amount: 8000, status: 'Chưa thu' },
+                { date: '2024-11-10', readerName: 'Hoàng Thị Mai', cardId: 'DG031', bookTitle: 'English Grammar', bookCode: 'NN001', overdueDate: '2024-10-28', overdueDays: 13, amount: 26000, status: 'Đã thu' }
+            ];
+            
+            return fines;
+        }
+
+        function generatePredictiveData() {
+            const labels = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'];
+            const actual = [1200, 1100, 1300, 1250, 1400, 800, 600, 900, 1350, 1300, 1247, null];
+            const predicted = [null, null, null, null, null, null, null, null, null, null, 1247, 1350, 1420, 1380, 1450];
+            
+            return { labels: [...labels, 'T1 (2025)', 'T2 (2025)', 'T3 (2025)'], actual, predicted };
+        }
+
+        function generateSeasonalData() {
+            return {
+                labels: ['Văn học', 'Khoa học', 'Lịch sử', 'Địa lý', 'Toán học', 'Ngoại ngữ'],
+                spring: [85, 70, 60, 55, 80, 65],
+                summer: [45, 30, 25, 20, 35, 40],
+                autumn: [95, 85, 75, 70, 90, 75],
+                winter: [75, 65, 55, 50, 70, 60]
+            };
+        }
+
+        function generateCorrelationData() {
+            const data = [];
+            for (let i = 0; i < 50; i++) {
+                const x = Math.random() * 100 + 50; // Số lượng sách
+                const y = x * 0.8 + Math.random() * 20; // Lượt mượn (có tương quan)
+                data.push({ x, y });
+            }
+            return { data };
+        }
+
+        // CSV generation functions
+        function generateTopBooksCSV(data) {
+            let csv = 'STT,Tên sách,Tác giả,Số lượt mượn\n';
+            data.forEach((book, index) => {
+                csv += `${index + 1},"${book.title}","${book.author}",${book.borrowCount}\n`;
+            });
+            return csv;
+        }
+
+        function generateTopReadersCSV(data) {
+            let csv = 'STT,Họ tên,Lớp,Số sách đã mượn\n';
+            data.forEach((reader, index) => {
+                csv += `${index + 1},"${reader.name}","${reader.class}",${reader.borrowCount}\n`;
+            });
+            return csv;
+        }
+
+        function generateOverdueAnalysisCSV(data) {
+            let csv = 'Khoảng thời gian,Số sách\n';
+            data.labels.forEach((label, index) => {
+                csv += `"${label}",${data.values[index]}\n`;
+            });
+            return csv;
+        }
+
+        // Export functions
+        function exportToExcel(fileName, includeCharts, includeDetails, includeSummary) {
+            // Simulate Excel export
+            console.log('Exporting to Excel:', { fileName, includeCharts, includeDetails, includeSummary });
+            
+            // In a real implementation, you would use a library like SheetJS
+            const data = {
+                summary: reportData.summary,
+                details: currentReportType === 'summary' ? generateDailyReportData() : 
+                        currentReportType === 'books' ? generateBooksReportData() :
+                        currentReportType === 'readers' ? generateReadersReportData() :
+                        generateFinesReportData()
+            };
+            
+            // Create a simple CSV for demonstration
+            let csv = 'Báo cáo thống kê thư viện\n\n';
+            
+            if (includeSummary) {
+                csv += 'TỔNG QUAN\n';
+                csv += `Tổng lượt mượn,${data.summary.totalBorrows}\n`;
+                csv += `Tổng lượt trả,${data.summary.totalReturns}\n`;
+                csv += `Sách quá hạn,${data.summary.overdueBooks}\n`;
+                csv += `Độc giả hoạt động,${data.summary.activeReaders}\n`;
+                csv += `Tổng phí phạt,${data.summary.totalFines}\n`;
+                csv += `Lượt gia hạn,${data.summary.renewalCount}\n\n`;
+            }
+            
+            downloadCSV(csv, `${fileName}.csv`);
+        }
+
+        function exportToPDF(fileName, includeCharts, includeDetails, includeSummary) {
+            // Simulate PDF export
+            console.log('Exporting to PDF:', { fileName, includeCharts, includeDetails, includeSummary });
+            
+            // In a real implementation, you would use a library like jsPDF
+            showNotification('Tính năng xuất PDF đang được phát triển!', 'info');
+        }
+
+        function exportToCSV(fileName, includeDetails) {
+            let csv = 'Báo cáo thống kê thư viện\n';
+            csv += `Ngày tạo: ${formatDate(new Date().toISOString().split('T')[0])}\n\n`;
+            
+            // Add summary
+            csv += 'TỔNG QUAN\n';
+            csv += `Tổng lượt mượn,${reportData.summary.totalBorrows}\n`;
+            csv += `Tổng lượt trả,${reportData.summary.totalReturns}\n`;
+            csv += `Sách quá hạn,${reportData.summary.overdueBooks}\n`;
+            csv += `Độc giả hoạt động,${reportData.summary.activeReaders}\n`;
+            csv += `Tổng phí phạt,${reportData.summary.totalFines}\n`;
+            csv += `Lượt gia hạn,${reportData.summary.renewalCount}\n\n`;
+            
+            if (includeDetails) {
+                csv += 'TOP SÁCH ĐƯỢC MƯỢN\n';
+                csv += 'STT,Tên sách,Tác giả,Số lượt mượn\n';
+                reportData.topBooks.forEach((book, index) => {
+                    csv += `${index + 1},"${book.title}","${book.author}",${book.borrowCount}\n`;
+                });
+                
+                csv += '\nTOP ĐỘC GIẢ TÍCH CỰC\n';
+                csv += 'STT,Họ tên,Lớp,Số sách đã mượn\n';
+                reportData.topReaders.forEach((reader, index) => {
+                    csv += `${index + 1},"${reader.name}","${reader.class}",${reader.borrowCount}\n`;
+                });
+            }
+            
+            downloadCSV(csv, `${fileName}.csv`);
+        }
+
+        function generatePrintableReport() {
+            const today = new Date();
+            const period = document.getElementById('periodSelect').value;
+            
+            return `
+                <div class="header">
+                    <h1>BÁO CÁO THỐNG KÊ THƯ VIỆN</h1>
+                    <h3>Trường THPT ABC</h3>
+                    <p>Kỳ báo cáo: ${getPeriodText(period)}</p>
+                    <p>Ngày tạo: ${formatDate(today.toISOString().split('T')[0])}</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>${reportData.summary.totalBorrows.toLocaleString()}</h3>
+                        <p>Tổng lượt mượn</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>${reportData.summary.totalReturns.toLocaleString()}</h3>
+                        <p>Tổng lượt trả</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>${reportData.summary.overdueBooks.toLocaleString()}</h3>
+                        <p>Sách quá hạn</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>${reportData.summary.activeReaders.toLocaleString()}</h3>
+                        <p>Độc giả hoạt động</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>${formatCurrency(reportData.summary.totalFines)}</h3>
+                        <p>Tổng phí phạt</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>${reportData.summary.renewalCount.toLocaleString()}</h3>
+                        <p>Lượt gia hạn</p>
+                    </div>
+                </div>
+                
+                <h2>Top sách được mượn nhiều nhất</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Tên sách</th>
+                            <th>Tác giả</th>
+                            <th>Số lượt mượn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${reportData.topBooks.map((book, index) => `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${book.title}</td>
+                                <td>${book.author}</td>
+                                <td>${book.borrowCount}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                
+                <h2>Top độc giả tích cực nhất</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Họ tên</th>
+                            <th>Lớp</th>
+                            <th>Số sách đã mượn</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${reportData.topReaders.map((reader, index) => `
+                            <tr>
+                                <td>${index + 1}</td>
+                                <td>${reader.name}</td>
+                                <td>${reader.class}</td>
+                                <td>${reader.borrowCount}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        // Utility functions
+        function getPeriodText(period) {
+            const periods = {
+                'today': 'Hôm nay',
+                'week': 'Tuần này',
+                'month': 'Tháng này',
+                'quarter': 'Quý này',
+                'year': 'Năm này',
+                'custom': 'Tùy chọn'
+            };
+            return periods[period] || 'Không xác định';
+        }
+
+        function downloadCSV(csvContent, fileName) {
+            const blob = new Blob(['\ufeff' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', fileName);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN');
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(amount);
+        }
+
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('d-none');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('d-none');
+        }
+
+        function showNotification(message, type = 'info') {
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'error' ? 'danger' : type} position-fixed`;
+            toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+                <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+
+        function logout() {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Auto-refresh data every 5 minutes
+        setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                loadReportData();
+            }
+        }, 300000);
+
+        // Handle window resize for charts
+        window.addEventListener('resize', function() {
+            Object.values(charts).forEach(chart => {
+                if (chart && typeof chart.resize === 'function') {
+                    chart.resize();
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

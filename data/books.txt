@@ -1,0 +1,346 @@
+# data/books.txt - Dữ liệu sách mẫu cho thư viện trường THPT
+
+# Format: ID|Title|Author|Category|Publisher|ISBN|Year|Pages|Language|Description|Location|Copies|Price|Condition|Tags
+
+# VĂN HỌC VIỆT NAM
+book001|Tắt đèn|Ngô Tất Tố|Văn học|NXB Văn học|978-604-2-00001-1|2020|280|Tiếng Việt|Tiểu thuyết nổi tiếng về cuộc sống nông thôn Việt Nam đầu thế kỷ 20|Kệ A1-01|15|85000|Tốt|văn học việt nam,tiểu thuyết,nông thôn,cổ điển
+
+book002|Số đỏ|Vũ Trọng Phụng|Văn học|NXB Văn học|978-604-2-00002-8|2019|320|Tiếng Việt|Tiểu thuyết phê phán xã hội thời thuộc địa|Kệ A1-02|12|95000|Tốt|văn học việt nam,tiểu thuyết,phê phán xã hội,hiện thực
+
+book003|Chí Phèo|Nam Cao|Văn học|NXB Văn học|978-604-2-00003-5|2021|180|Tiếng Việt|Truyện ngắn kinh điển về số phận con người|Kệ A1-03|20|65000|Tốt|văn học việt nam,truyện ngắn,hiện thực
+
+book004|Vợ nhặt|Kim Lân|Văn học|NXB Văn học|978-604-2-00004-2|2020|150|Tiếng Việt|Truyện ngắn về đời sống nông thôn nghèo khó|Kệ A1-04|18|55000|Tốt|văn học việt nam,truyện ngắn,nông thôn
+
+book005|Những đứa con trong gia đình|Nguyễn Thi|Văn học|NXB Văn học|978-604-2-00005-9|2021|240|Tiếng Việt|Tiểu thuyết về tình cảm gia đình|Kệ A1-05|10|75000|Tốt|văn học việt nam,tiểu thuyết,gia đình
+
+book006|Đất rừng phương Nam|Đoàn Giỏi|Văn học|NXB Văn học|978-604-2-00006-6|2020|350|Tiếng Việt|Tiểu thuyết về miền Nam Việt Nam|Kệ A1-06|14|105000|Tốt|văn học việt nam,tiểu thuyết,miền nam
+
+book007|Lão Hạc|Nam Cao|Văn học|NXB Văn học|978-604-2-00007-3|2019|120|Tiếng Việt|Truyện ngắn về lòng nhân ái|Kệ A1-07|22|45000|Tốt|văn học việt nam,truyện ngắn,nhân ái
+
+book008|Hai đứa trẻ|Thạch Lam|Văn học|NXB Văn học|978-604-2-00008-0|2021|160|Tiếng Việt|Truyện ngắn về tuổi thơ|Kệ A1-08|16|58000|Tốt|văn học việt nam,truyện ngắn,tuổi thơ
+
+book009|Tôi thấy hoa vàng trên cỏ xanh|Nguyễn Nhật Ánh|Văn học|NXB Trẻ|978-604-2-00009-7|2022|320|Tiếng Việt|Tiểu thuyết về tuổi thơ miền quê|Kệ A1-09|25|120000|Mới|văn học việt nam,tiểu thuyết,tuổi thơ,đương đại
+
+book010|Cho tôi xin một vé đi tuổi thơ|Nguyễn Nhật Ánh|Văn học|NXB Trẻ|978-604-2-00010-3|2022|280|Tiếng Việt|Tiểu thuyết về kỷ niệm tuổi thơ|Kệ A1-10|20|115000|Mới|văn học việt nam,tiểu thuyết,tuổi thơ,đương đại
+
+# VĂN HỌC NƯỚC NGOÀI
+book011|Chiến tranh và hòa bình|Leo Tolstoy|Văn học|NXB Văn học|978-604-2-00011-0|2020|1200|Tiếng Việt|Tiểu thuyết kinh điển của văn học Nga|Kệ A2-01|8|250000|Tốt|văn học nga,tiểu thuyết,kinh điển,chiến tranh
+
+book012|Anna Karenina|Leo Tolstoy|Văn học|NXB Văn học|978-604-2-00012-7|2019|800|Tiếng Việt|Tiểu thuyết về tình yêu và xã hội Nga|Kệ A2-02|10|180000|Tốt|văn học nga,tiểu thuyết,tình yêu,xã hội
+
+book013|Tội ác và hình phạt|Fyodor Dostoevsky|Văn học|NXB Văn học|978-604-2-00013-4|2021|600|Tiếng Việt|Tiểu thuyết tâm lý học|Kệ A2-03|12|160000|Tốt|văn học nga,tiểu thuyết,tâm lý,triết học
+
+book014|Cha già và biển cả|Ernest Hemingway|Văn học|NXB Văn học|978-604-2-00014-1|2020|120|Tiếng Việt|Tiểu thuyết về ý chí con người|Kệ A2-04|15|65000|Tốt|văn học mỹ,tiểu thuyết,ý chí,biển
+
+book015|Những người khốn khổ|Victor Hugo|Văn học|NXB Văn học|978-604-2-00015-8|2021|1000|Tiếng Việt|Tiểu thuyết xã hội Pháp thế kỷ 19|Kệ A2-05|6|220000|Tốt|văn học pháp,tiểu thuyết,xã hội,lịch sử
+
+book016|Nhà giả kim|Paulo Coelho|Văn học|NXB Văn học|978-604-2-00016-5|2022|200|Tiếng Việt|Tiểu thuyết triết lý về hành trình tìm kiếm|Kệ A2-06|18|95000|Mới|văn học brazil,tiểu thuyết,triết lý,hành trình
+
+book017|Đắc nhân tâm|Dale Carnegie|Văn học|NXB Tổng hợp|978-604-2-00017-2|2021|320|Tiếng Việt|Sách kỹ năng giao tiếp và thành công|Kệ A2-07|30|125000|Mới|kỹ năng sống,giao tiếp,thành công,tự phát triển
+
+book018|Sapiens: Lược sử loài người|Yuval Noah Harari|Văn học|NXB Thế giới|978-604-2-00018-9|2022|450|Tiếng Việt|Sách về lịch sử và tiến hóa loài người|Kệ A2-08|12|180000|Mới|lịch sử,nhân loại,tiến hóa,khoa học
+
+# TOÁN HỌC
+book019|Toán học 10|Bộ GD&ĐT|Toán học|NXB Giáo dục|978-604-2-00019-6|2023|350|Tiếng Việt|Sách giáo khoa Toán lớp 10|Kệ B1-01|60|95000|Mới|toán học,giáo khoa,lớp 10,đại số,hình học
+
+book020|Toán học 11|Bộ GD&ĐT|Toán học|NXB Giáo dục|978-604-2-00020-2|2023|380|Tiếng Việt|Sách giáo khoa Toán lớp 11|Kệ B1-02|55|105000|Mới|toán học,giáo khoa,lớp 11,đại số,hình học
+
+book021|Toán học 12|Bộ GD&ĐT|Toán học|NXB Giáo dục|978-604-2-00021-9|2023|420|Tiếng Việt|Sách giáo khoa Toán lớp 12|Kệ B1-03|50|115000|Mới|toán học,giáo khoa,lớp 12,đại số,hình học,giải tích
+
+book022|Bài tập Toán 10|Bộ GD&ĐT|Toán học|NXB Giáo dục|978-604-2-00022-6|2023|200|Tiếng Việt|Sách bài tập Toán lớp 10|Kệ B1-04|40|65000|Mới|toán học,bài tập,lớp 10
+
+book023|Bài tập Toán 11|Bộ GD&ĐT|Toán học|NXB Giáo dục|978-604-2-00023-3|2023|220|Tiếng Việt|Sách bài tập Toán lớp 11|Kệ B1-05|35|75000|Mới|toán học,bài tập,lớp 11
+
+book024|Bài tập Toán 12|Bộ GD&ĐT|Toán học|NXB Giáo dục|978-604-2-00024-0|2023|250|Tiếng Việt|Sách bài tập Toán lớp 12|Kệ B1-06|30|85000|Mới|toán học,bài tập,lớp 12
+
+book025|Toán nâng cao 10|Nguyễn Văn A|Toán học|NXB Đại học Quốc gia|978-604-2-00025-7|2022|280|Tiếng Việt|Sách toán nâng cao cho học sinh giỏi|Kệ B1-07|20|120000|Tốt|toán học,nâng cao,lớp 10,học sinh giỏi
+
+book026|Toán nâng cao 11|Nguyễn Văn A|Toán học|NXB Đại học Quốc gia|978-604-2-00026-4|2022|300|Tiếng Việt|Sách toán nâng cao cho học sinh giỏi|Kệ B1-08|18|135000|Tốt|toán học,nâng cao,lớp 11,học sinh giỏi
+
+book027|Toán nâng cao 12|Nguyễn Văn A|Toán học|NXB Đại học Quốc gia|978-604-2-00027-1|2022|320|Tiếng Việt|Sách toán nâng cao cho học sinh giỏi|Kệ B1-09|15|145000|Tốt|toán học,nâng cao,lớp 12,học sinh giỏi
+
+# VẬT LÝ
+book028|Vật lý 10|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00028-8|2023|320|Tiếng Việt|Sách giáo khoa Vật lý lớp 10|Kệ B2-01|50|98000|Mới|vật lý,giáo khoa,lớp 10,cơ học,nhiệt học
+
+book029|Vật lý 11|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00029-5|2023|350|Tiếng Việt|Sách giáo khoa Vật lý lớp 11|Kệ B2-02|45|108000|Mới|vật lý,giáo khoa,lớp 11,điện học,từ học
+
+book030|Vật lý 12|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00030-1|2023|380|Tiếng Việt|Sách giáo khoa Vật lý lớp 12|Kệ B2-03|40|118000|Mới|vật lý,giáo khoa,lớp 12,dao động,sóng,lượng tử
+
+book031|Bài tập Vật lý 10|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00031-8|2023|180|Tiếng Việt|Sách bài tập Vật lý lớp 10|Kệ B2-04|35|68000|Mới|vật lý,bài tập,lớp 10
+
+book032|Bài tập Vật lý 11|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00032-5|2023|200|Tiếng Việt|Sách bài tập Vật lý lớp 11|Kệ B2-05|30|78000|Mới|vật lý,bài tập,lớp 11
+
+book033|Bài tập Vật lý 12|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00033-2|2023|220|Tiếng Việt|Sách bài tập Vật lý lớp 12|Kệ B2-06|25|88000|Mới|vật lý,bài tập,lớp 12
+
+# HÓA HỌC
+book034|Hóa học 10|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00034-9|2023|280|Tiếng Việt|Sách giáo khoa Hóa học lớp 10|Kệ B3-01|45|92000|Mới|hóa học,giáo khoa,lớp 10,nguyên tử,liên kết
+
+book035|Hóa học 11|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00035-6|2023|300|Tiếng Việt|Sách giáo khoa Hóa học lớp 11|Kệ B3-02|40|102000|Mới|hóa học,giáo khoa,lớp 11,hóa vô cơ,hóa hữu cơ
+
+book036|Hóa học 12|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00036-3|2023|320|Tiếng Việt|Sách giáo khoa Hóa học lớp 12|Kệ B3-03|35|112000|Mới|hóa học,giáo khoa,lớp 12,hóa hữu cơ,polyme
+
+book037|Bài tập Hóa học 10|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00037-0|2023|160|Tiếng Việt|Sách bài tập Hóa học lớp 10|Kệ B3-04|30|62000|Mới|hóa học,bài tập,lớp 10
+
+book038|Bài tập Hóa học 11|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00038-7|2023|180|Tiếng Việt|Sách bài tập Hóa học lớp 11|Kệ B3-05|25|72000|Mới|hóa học,bài tập,lớp 11
+
+book039|Bài tập Hóa học 12|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00039-4|2023|200|Tiếng Việt|Sách bài tập Hóa học lớp 12|Kệ B3-06|20|82000|Mới|hóa học,bài tập,lớp 12
+
+# SINH HỌC
+book040|Sinh học 10|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00040-0|2023|260|Tiếng Việt|Sách giáo khoa Sinh học lớp 10|Kệ B4-01|40|88000|Mới|sinh học,giáo khoa,lớp 10,tế bào,di truyền
+
+book041|Sinh học 11|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00041-7|2023|280|Tiếng Việt|Sách giáo khoa Sinh học lớp 11|Kệ B4-02|35|98000|Mới|sinh học,giáo khoa,lớp 11,cơ thể người,thực vật
+
+book042|Sinh học 12|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00042-4|2023|300|Tiếng Việt|Sách giáo khoa Sinh học lớp 12|Kệ B4-03|30|108000|Mới|sinh học,giáo khoa,lớp 12,tiến hóa,sinh thái
+
+book043|Bài tập Sinh học 10|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00043-1|2023|140|Tiếng Việt|Sách bài tập Sinh học lớp 10|Kệ B4-04|25|58000|Mới|sinh học,bài tập,lớp 10
+
+book044|Bài tập Sinh học 11|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00044-8|2023|160|Tiếng Việt|Sách bài tập Sinh học lớp 11|Kệ B4-05|20|68000|Mới|sinh học,bài tập,lớp 11
+
+book045|Bài tập Sinh học 12|Bộ GD&ĐT|Khoa học|NXB Giáo dục|978-604-2-00045-5|2023|180|Tiếng Việt|Sách bài tập Sinh học lớp 12|Kệ B4-06|15|78000|Mới|sinh học,bài tập,lớp 12
+
+# LỊCH SỬ
+book046|Lịch sử 10|Bộ GD&ĐT|Lịch sử|NXB Giáo dục|978-604-2-00046-2|2023|240|Tiếng Việt|Sách giáo khoa Lịch sử lớp 10|Kệ C1-01|35|85000|Mới|lịch sử,giáo khoa,lớp 10,thế giới cổ đại
+
+book047|Lịch sử 11|Bộ GD&ĐT|Lịch sử|NXB Giáo dục|978-604-2-00047-9|2023|260|Tiếng Việt|Sách giáo khoa Lịch sử lớp 11|Kệ C1-02|30|95000|Mới|lịch sử,giáo khoa,lớp 11,thế giới cận đại
+
+book048|Lịch sử 12|Bộ GD&ĐT|Lịch sử|NXB Giáo dục|978-604-2-00048-6|2023|280|Tiếng Việt|Sách giáo khoa Lịch sử lớp 12|Kệ C1-03|25|105000|Mới|lịch sử,giáo khoa,lớp 12,thế giới hiện đại
+
+book049|Lịch sử Việt Nam|Trần Trọng Kim|Lịch sử|NXB Khoa học Xã hội|978-604-2-00049-3|2021|520|Tiếng Việt|Lịch sử Việt Nam từ thời cổ đại|Kệ C1-04|20|150000|Tốt|lịch sử,việt nam,tham khảo,cổ đại
+
+book050|Lịch sử thế giới|Nhiều tác giả|Lịch sử|NXB Thế giới|978-604-2-00050-9|2022|600|Tiếng Việt|Tổng quan lịch sử thế giới|Kệ C1-05|15|180000|Tốt|lịch sử,thế giới,tổng quan
+
+# ĐỊA LÝ
+book051|Địa lý 10|Bộ GD&ĐT|Địa lý|NXB Giáo dục|978-604-2-00051-6|2023|220|Tiếng Việt|Sách giáo khoa Địa lý lớp 10|Kệ C2-01|35|82000|Mới|địa lý,giáo khoa,lớp 10,tự nhiên
+
+book052|Địa lý 11|Bộ GD&ĐT|Địa lý|NXB Giáo dục|978-604-2-00052-3|2023|240|Tiếng Việt|Sách giáo khoa Địa lý lớp 11|Kệ C2-02|30|92000|Mới|địa lý,giáo khoa,lớp 11,kinh tế xã hội
+
+book053|Địa lý 12|Bộ GD&ĐT|Địa lý|NXB Giáo dục|978-604-2-00053-0|2023|260|Tiếng Việt|Sách giáo khoa Địa lý lớp 12|Kệ C2-03|25|102000|Mới|địa lý,giáo khoa,lớp 12,việt nam
+
+book054|Atlas Địa lý Việt Nam|Viện Địa lý|Địa lý|NXB Bản đồ|978-604-2-00054-7|2022|120|Tiếng Việt|Tập bản đồ địa lý Việt Nam|Kệ C2-04|20|95000|Tốt|địa lý,bản đồ,việt nam,atlas
+
+book055|Atlas Địa lý thế giới|Viện Địa lý|Địa lý|NXB Bản đồ|978-604-2-00055-4|2022|150|Tiếng Việt|Tập bản đồ địa lý thế giới|Kệ C2-05|15|125000|Tốt|địa lý,bản đồ,thế giới,atlas
+
+# NGOẠI NGỮ - TIẾNG ANH
+book056|Tiếng Anh 10|Bộ GD&ĐT|Ngoại ngữ|NXB Giáo dục|978-604-2-00056-1|2023|180|Tiếng Anh/Việt|Sách giáo khoa Tiếng Anh lớp 10|Kệ D1-01|50|78000|Mới|tiếng anh,giáo khoa,lớp 10
+
+book057|Tiếng Anh 11|Bộ GD&ĐT|Ngoại ngữ|NXB Giáo dục|978-604-2-00057-8|2023|200|Tiếng Anh/Việt|Sách giáo khoa Tiếng Anh lớp 11|Kệ D1-02|45|88000|Mới|tiếng anh,giáo khoa,lớp 11
+
+book058|Tiếng Anh 12|Bộ GD&ĐT|Ngoại ngữ|NXB Giáo dục|978-604-2-00058-5|2023|220|Tiếng Anh/Việt|Sách giáo khoa Tiếng Anh lớp 12|Kệ D1-03|40|98000|Mới|tiếng anh,giáo khoa,lớp 12
+
+book059|English Grammar in Use|Raymond Murphy|Ngoại ngữ|Cambridge University Press|978-1-108-45782-3|2019|380|Tiếng Anh|Sách ngữ pháp tiếng Anh trung cấp|Kệ D1-04|30|280000|Tốt|tiếng anh,ngữ pháp,trung cấp
+
+book060|Oxford Advanced Learner's Dictionary|Oxford|Ngoại ngữ|Oxford University Press|978-0-19-479900-3|2020|1900|Tiếng Anh|Từ điển tiếng Anh nâng cao|Kệ D1-05|15|450000|Tốt|tiếng anh,từ điển,nâng cao
+
+book061|TOEFL iBT Complete Guide|Bruce Rogers|Ngoại ngữ|NXB Tổng hợp|978-604-2-00061-5|2022|600|Tiếng Anh/Việt|Hướng dẫn thi TOEFL iBT|Kệ D1-06|20|320000|Mới|tiếng anh,toefl,thi cử
+
+book062|IELTS Cambridge 15|Cambridge|Ngoại ngữ|Cambridge University Press|978-1-108-71845-4|2020|180|Tiếng Anh|Đề thi IELTS thực tế|Kệ D1-07|25|250000|Tốt|tiếng anh,ielts,đề thi
+
+# TIN HỌC
+book063|Tin học 10|Bộ GD&ĐT|Tin học|NXB Giáo dục|978-604-2-00063-9|2023|160|Tiếng Việt|Sách giáo khoa Tin học lớp 10|Kệ E1-01|40|72000|Mới|tin học,giáo khoa,lớp 10,máy tính
+
+book064|Tin học 11|Bộ GD&ĐT|Tin học|NXB Giáo dục|978-604-2-00064-6|2023|180|Tiếng Việt|Sách giáo khoa Tin học lớp 11|Kệ E1-02|35|82000|Mới|tin học,giáo khoa,lớp 11,lập trình
+
+book065|Tin học 12|Bộ GD&ĐT|Tin học|NXB Giáo dục|978-604-2-00065-3|2023|200|Tiếng Việt|Sách giáo khoa Tin học lớp 12|Kệ E1-03|30|92000|Mới|tin học,giáo khoa,lớp 12,cơ sở dữ liệu
+
+book066|Lập trình Python cơ bản|Nguyễn Văn B|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00066-0|2022|350|Tiếng Việt|Hướng dẫn lập trình Python cho người mới|Kệ E1-04|25|165000|Tốt|tin học,python,lập trình,cơ bản
+
+book067|Lập trình Java|Trần Văn C|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00067-7|2021|420|Tiếng Việt|Giáo trình lập trình Java|Kệ E1-05|20|185000|Tốt|tin học,java,lập trình,hướng đối tượng
+
+book068|Cơ sở dữ liệu|Lê Thị D|Tin học|NXB Đại học Quốc gia|978-604-2-00068-4|2022|280|Tiếng Việt|Giáo trình cơ sở dữ liệu|Kệ E1-06|18|145000|Tốt|tin học,cơ sở dữ liệu,sql
+
+book069|Mạng máy tính|Phạm Văn E|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00069-1|2021|320|Tiếng Việt|Giáo trình mạng máy tính|Kệ E1-07|15|155000|Tốt|tin học,mạng máy tính,internet
+
+book070|An toàn thông tin|Hoàng Văn F|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00070-7|2022|250|Tiếng Việt|Giáo trình an toàn thông tin|Kệ E1-08|12|135000|Tốt|tin học,an toàn,bảo mật
+
+# GIÁO DỤC CÔNG DÂN
+book071|GDCD 10|Bộ GD&ĐT|Tham khảo|NXB Giáo dục|978-604-2-00071-4|2023|120|Tiếng Việt|Sách giáo khoa GDCD lớp 10|Kệ F1-01|30|58000|Mới|gdcd,giáo khoa,lớp 10,công dân
+
+book072|GDCD 11|Bộ GD&ĐT|Tham khảo|NXB Giáo dục|978-604-2-00072-1|2023|140|Tiếng Việt|Sách giáo khoa GDCD lớp 11|Kệ F1-02|25|68000|Mới|gdcd,giáo khoa,lớp 11,pháp luật
+
+book073|GDCD 12|Bộ GD&ĐT|Tham khảo|NXB Giáo dục|978-604-2-00073-8|2023|160|Tiếng Việt|Sách giáo khoa GDCD lớp 12|Kệ F1-03|20|78000|Mới|gdcd,giáo khoa,lớp 12,kinh tế
+
+# GIÁO DỤC THỂ CHẤT
+book074|Giáo dục thể chất 10-12|Bộ GD&ĐT|Tham khảo|NXB Giáo dục|978-604-2-00074-5|2023|200|Tiếng Việt|Sách giáo khoa Thể dục|Kệ F2-01|20|65000|Mới|thể dục,giáo khoa,sức khỏe
+
+book075|Cẩm nang sức khỏe học sinh|BS. Nguyễn G|Tham khảo|NXB Y học|978-604-2-00075-2|2022|180|Tiếng Việt|Hướng dẫn chăm sóc sức khỏe|Kệ F2-02|15|85000|Tốt|sức khỏe,y tế,học sinh
+
+# SÁCH THAM KHẢO
+book076|Từ điển Tiếng Việt|Viện Ngôn ngữ học|Tham khảo|NXB Khoa học Xã hội|978-604-2-00076-9|2021|1200|Tiếng Việt|Từ điển tiếng Việt chuẩn|Kệ F3-01|10|280000|Tốt|từ điển,tiếng việt,tham khảo
+
+book077|Từ điển Anh-Việt|Lê Bá Khánh|Tham khảo|NXB Thế giới|978-604-2-00077-6|2020|800|Tiếng Anh/Việt|Từ điển Anh-Việt phổ thông|Kệ F3-02|15|195000|Tốt|từ điển,anh việt,ngoại ngữ
+
+book078|Từ điển Việt-Anh|Lê Bá Khánh|Tham khảo|NXB Thế giới|978-604-2-00078-3|2020|750|Tiếng Việt/Anh|Từ điển Việt-Anh phổ thông|Kệ F3-03|15|185000|Tốt|từ điển,việt anh,ngoại ngữ
+
+book079|Bách khoa toàn thư|Nhiều tác giả|Tham khảo|NXB Bách khoa|978-604-2-00079-0|2021|2000|Tiếng Việt|Bách khoa toàn thư Việt Nam|Kệ F3-04|5|450000|Tốt|bách khoa,tham khảo,kiến thức tổng hợp
+
+book080|Atlas thế giới|Viện Địa lý|Tham khảo|NXB Bản đồ|978-604-2-00080-6|2022|200|Tiếng Việt|Tập bản đồ thế giới chi tiết|Kệ F3-05|8|165000|Tốt|atlas,bản đồ,địa lý,thế giới
+
+# SÁCH KHOA HỌC PHỔ THÔNG
+book081|Vũ trụ trong vỏ hạt dẻ|Stephen Hawking|Khoa học|NXB Thế giới|978-604-2-00081-3|2021|220|Tiếng Việt|Sách khoa học về vũ trụ học|Kệ G1-01|12|125000|Tốt|khoa học,vũ trụ,vật lý,thiên văn
+
+book082|Lược sử thời gian|Stephen Hawking|Khoa học|NXB Thế giới|978-604-2-00082-0|2020|280|Tiếng Việt|Sách về thời gian và không gian|Kệ G1-02|10|145000|Tốt|khoa học,thời gian,vật lý,vũ trụ
+
+book083|Nguồn gốc các loài|Charles Darwin|Khoa học|NXB Khoa học Tự nhiên|978-604-2-00083-7|2021|450|Tiếng Việt|Lý thuyết tiến hóa của Darwin|Kệ G1-03|8|165000|Tốt|khoa học,tiến hóa,sinh học,darwin
+
+book084|Cấu trúc DNA|James Watson|Khoa học|NXB Khoa học Tự nhiên|978-604-2-00084-4|2022|320|Tiếng Việt|Khám phá cấu trúc DNA|Kệ G1-04|10|155000|Tốt|khoa học,dna,sinh học phân tử
+
+book085|Hóa học trong đời sống|Nguyễn Văn H|Khoa học|NXB Khoa học Tự nhiên|978-604-2-00085-1|2021|250|Tiếng Việt|Ứng dụng hóa học trong cuộc sống|Kệ G1-05|15|115000|Tốt|khoa học,hóa học,đời sống
+
+# SÁCH VỀ NGHỆ THUẬT
+book086|Lịch sử nghệ thuật thế giới|Ernst Gombrich|Văn học|NXB Mỹ thuật|978-604-2-00086-8|2021|600|Tiếng Việt|Tổng quan lịch sử nghệ thuật|Kệ H1-01|8|220000|Tốt|nghệ thuật,lịch sử,hội họa,điêu khắc
+
+book087|Nghệ thuật Việt Nam|Nguyễn Văn I|Văn học|NXB Mỹ thuật|978-604-2-00087-5|2022|350|Tiếng Việt|Nghệ thuật truyền thống Việt Nam|Kệ H1-02|12|165000|Tốt|nghệ thuật,việt nam,truyền thống,văn hóa
+
+book088|Âm nhạc cổ điển|Mozart Foundation|Văn học|NXB Âm nhạc|978-604-2-00088-2|2021|280|Tiếng Việt|Giới thiệu âm nhạc cổ điển|Kệ H1-03|10|135000|Tốt|âm nhạc,cổ điển,mozart,beethoven
+
+book089|Nhiếp ảnh nghệ thuật|Ansel Adams|Văn học|NXB Mỹ thuật|978-604-2-00089-9|2022|240|Tiếng Việt|Kỹ thuật nhiếp ảnh nghệ thuật|Kệ H1-04|15|145000|Mới|nhiếp ảnh,nghệ thuật,kỹ thuật
+
+book090|Kiến trúc thế giới|Frank Lloyd Wright|Văn học|NXB Xây dựng|978-604-2-00090-5|2021|420|Tiếng Việt|Các công trình kiến trúc nổi tiếng|Kệ H1-05|6|195000|Tốt|kiến trúc,thế giới,công trình,thiết kế
+
+# SÁCH KINH TẾ - QUẢN LÝ
+book091|Kinh tế học đại cương|Paul Samuelson|Kinh tế|NXB Kinh tế|978-604-2-00091-2|2021|650|Tiếng Việt|Giáo trình kinh tế học cơ bản|Kệ I1-01|20|185000|Tốt|kinh tế,đại cương,thị trường,cung cầu
+
+book092|Quản trị học|Peter Drucker|Kinh tế|NXB Lao động|978-604-2-00092-9|2022|480|Tiếng Việt|Nguyên lý quản trị hiện đại|Kệ I1-02|15|165000|Mới|quản trị,lãnh đạo,tổ chức,doanh nghiệp
+
+book093|Marketing căn bản|Philip Kotler|Kinh tế|NXB Kinh tế|978-604-2-00093-6|2021|520|Tiếng Việt|Nguyên lý marketing hiện đại|Kệ I1-03|18|175000|Tốt|marketing,bán hàng,thương hiệu,khách hàng
+
+book094|Kế toán tài chính|Nhiều tác giả|Kinh tế|NXB Tài chính|978-604-2-00094-3|2022|380|Tiếng Việt|Giáo trình kế toán tài chính|Kệ I1-04|12|155000|Mới|kế toán,tài chính,báo cáo,kiểm toán
+
+book095|Khởi nghiệp thành công|Steve Jobs|Kinh tế|NXB Trẻ|978-604-2-00095-0|2021|320|Tiếng Việt|Bí quyết khởi nghiệp và đổi mới|Kệ I1-05|25|145000|Tốt|khởi nghiệp,đổi mới,sáng tạo,doanh nghiệp
+
+# SÁCH TÂM LÝ - GIÁO DỤC
+book096|Tâm lý học đại cương|David Myers|Tâm lý|NXB Giáo dục|978-604-2-00096-7|2021|580|Tiếng Việt|Giáo trình tâm lý học cơ bản|Kệ J1-01|20|175000|Tốt|tâm lý học,hành vi,nhận thức,cảm xúc
+
+book097|Tâm lý học trẻ em|Jean Piaget|Tâm lý|NXB Giáo dục|978-604-2-00097-4|2022|350|Tiếng Việt|Phát triển tâm lý trẻ em|Kệ J1-02|15|135000|Mới|tâm lý,trẻ em,phát triển,giáo dục
+
+book098|Tâm lý học tuổi teen|Erik Erikson|Tâm lý|NXB Thanh niên|978-604-2-00098-1|2021|280|Tiếng Việt|Tâm lý học lứa tuổi vị thành niên|Kệ J1-03|18|125000|Tốt|tâm lý,tuổi teen,vị thành niên,phát triển
+
+book099|Phương pháp học tập hiệu quả|Tony Buzan|Tâm lý|NXB Giáo dục|978-604-2-00099-8|2022|240|Tiếng Việt|Kỹ thuật học tập và ghi nhớ|Kệ J1-04|30|115000|Mới|học tập,ghi nhớ,kỹ thuật,hiệu quả
+
+book100|Kỹ năng giao tiếp|Dale Carnegie|Tâm lý|NXB Tổng hợp|978-604-2-00100-1|2021|300|Tiếng Việt|Nghệ thuật giao tiếp và thuyết phục|Kệ J1-05|25|135000|Tốt|giao tiếp,thuyết phục,kỹ năng mềm
+
+# SÁCH TRIẾT HỌC
+book101|Triết học phương Đông|Lão Tử|Triết học|NXB Văn hóa|978-604-2-00101-8|2021|420|Tiếng Việt|Tư tưởng triết học phương Đông|Kệ K1-01|12|155000|Tốt|triết học,phương đông,lão tử,khổng tử
+
+book102|Triết học phương Tây|Plato|Triết học|NXB Văn hóa|978-604-2-00102-5|2020|480|Tiếng Việt|Lịch sử triết học phương Tây|Kệ K1-02|10|175000|Tốt|triết học,phương tây,plato,aristotle
+
+book103|Triết học Mác-Lênin|Bộ GD&ĐT|Triết học|NXB Chính trị Quốc gia|978-604-2-00103-2|2023|350|Tiếng Việt|Giáo trình triết học Mác-Lênin|Kệ K1-03|25|125000|Mới|triết học,mác lenin,chủ nghĩa xã hội
+
+book104|Tư tưởng Hồ Chí Minh|Viện Hồ Chí Minh|Triết học|NXB Chính trị Quốc gia|978-604-2-00104-9|2023|280|Tiếng Việt|Tư tưởng Hồ Chí Minh về giáo dục|Kệ K1-04|20|115000|Mới|tư tưởng,hồ chí minh,giáo dục,đạo đức
+
+# SÁCH VỀ MÔI TRƯỜNG
+book105|Bảo vệ môi trường|Rachel Carson|Khoa học|NXB Khoa học Tự nhiên|978-604-2-00105-6|2021|320|Tiếng Việt|Ô nhiễm và bảo vệ môi trường|Kệ L1-01|18|135000|Tốt|môi trường,ô nhiễm,bảo vệ,sinh thái
+
+book106|Biến đổi khí hậu|Al Gore|Khoa học|NXB Khoa học Tự nhiên|978-604-2-00106-3|2022|280|Tiếng Việt|Hiện tượng nóng lên toàn cầu|Kệ L1-02|15|145000|Mới|khí hậu,nóng lên toàn cầu,môi trường
+
+book107|Năng lượng tái tạo|Jeremy Rifkin|Khoa học|NXB Khoa học Kỹ thuật|978-604-2-00107-0|2021|350|Tiếng Việt|Năng lượng sạch và bền vững|Kệ L1-03|12|155000|Tốt|năng lượng,tái tạo,bền vững,xanh
+
+book108|Rừng nhiệt đới|David Attenborough|Khoa học|NXB Khoa học Tự nhiên|978-604-2-00108-7|2022|240|Tiếng Việt|Hệ sinh thái rừng nhiệt đới|Kệ L1-04|10|125000|Mới|rừng,sinh thái,đa dạng sinh học
+
+# SÁCH VỀ CÔNG NGHỆ
+book109|Trí tuệ nhân tạo|Stuart Russell|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00109-4|2022|450|Tiếng Việt|Giới thiệu về AI và machine learning|Kệ M1-01|15|195000|Mới|ai,trí tuệ nhân tạo,machine learning
+
+book110|Blockchain và tiền điện tử|Satoshi Nakamoto|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00110-0|2021|320|Tiếng Việt|Công nghệ blockchain và ứng dụng|Kệ M1-02|12|175000|Tốt|blockchain,tiền điện tử,bitcoin
+
+book111|Internet vạn vật|Kevin Ashton|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00111-7|2022|280|Tiếng Việt|IoT và thành phố thông minh|Kệ M1-03|10|165000|Mới|iot,internet,thông minh,cảm biến
+
+book112|Big Data|Viktor Mayer|Tin học|NXB Khoa học Kỹ thuật|978-604-2-00112-4|2021|350|Tiếng Việt|Dữ liệu lớn và phân tích|Kệ M1-04|8|185000|Tốt|big data,dữ liệu,phân tích,data science
+
+# SÁCH VỀ Y TẾ - SỨC KHỎE
+book113|Dinh dưỡng học|WHO|Y tế|NXB Y học|978-604-2-00113-1|2021|380|Tiếng Việt|Nguyên lý dinh dưỡng cơ bản|Kệ N1-01|20|145000|Tốt|dinh dưỡng,sức khỏe,vitamin,khoáng chất
+
+book114|Y học cổ truyền|Hải Thượng Lãn Ông|Y tế|NXB Y học|978-604-2-00114-8|2020|450|Tiếng Việt|Y học cổ truyền Việt Nam|Kệ N1-02|15|165000|Tốt|y học,cổ truyền,thuốc nam,châm cứu
+
+book115|Sơ cấp cứu|Hội Chữ thập đỏ|Y tế|NXB Y học|978-604-2-00115-5|2022|200|Tiếng Việt|Kỹ năng sơ cấp cứu cơ bản|Kệ N1-03|25|95000|Mới|sơ cấp cứu,y tế,an toàn,kỹ năng
+
+book116|Tâm lý sức khỏe|Daniel Goleman|Y tế|NXB Y học|978-604-2-00116-2|2021|320|Tiếng Việt|Sức khỏe tinh thần và cảm xúc|Kệ N1-04|18|135000|Tốt|tâm lý,sức khỏe,tinh thần,stress
+
+# SÁCH VỀ THỂ THAO
+book117|Bóng đá thế giới|FIFA|Thể thao|NXB Thể dục Thể thao|978-604-2-00117-9|2022|280|Tiếng Việt|Lịch sử và kỹ thuật bóng đá|Kệ O1-01|20|125000|Mới|bóng đá,thể thao,kỹ thuật,chiến thuật
+
+book118|Bóng rổ cơ bản|NBA|Thể thao|NXB Thể dục Thể thao|978-604-2-00118-6|2021|240|Tiếng Việt|Kỹ thuật chơi bóng rổ|Kệ O1-02|15|115000|Tốt|bóng rổ,thể thao,kỹ thuật
+
+book119|Bơi lội|Olympic Committee|Thể thao|NXB Thể dục Thể thao|978-604-2-00119-3|2022|200|Tiếng Việt|Kỹ thuật bơi các kiểu|Kệ O1-03|18|105000|Mới|bơi lội,thể thao,kỹ thuật,an toàn
+
+book120|Cầu lông|BWF|Thể thao|NXB Thể dục Thể thao|978-604-2-00120-9|2021|180|Tiếng Việt|Kỹ thuật chơi cầu lông|Kệ O1-04|22|95000|Tốt|cầu lông,thể thao,kỹ thuật
+
+# SÁCH VỀ DU LỊCH
+book121|Du lịch Việt Nam|Cục Du lịch|Du lịch|NXB Thế giới|978-604-2-00121-6|2022|350|Tiếng Việt|Cẩm nang du lịch Việt Nam|Kệ P1-01|15|145000|Mới|du lịch,việt nam,cẩm nang,địa điểm
+
+book122|Du lịch thế giới|Lonely Planet|Du lịch|NXB Thế giới|978-604-2-00122-3|2021|500|Tiếng Việt|Hướng dẫn du lịch quốc tế|Kệ P1-02|12|195000|Tốt|du lịch,thế giới,hướng dẫn,văn hóa
+
+book123|Ẩm thực Việt Nam|Nguyễn Văn K|Du lịch|NXB Văn hóa|978-604-2-00123-0|2022|280|Tiếng Việt|Món ăn truyền thống Việt Nam|Kệ P1-03|18|125000|Mới|ẩm thực,việt nam,món ăn,nấu ăn
+
+book124|Lễ hội Việt Nam|Viện Văn hóa|Du lịch|NXB Văn hóa|978-604-2-00124-7|2021|240|Tiếng Việt|Các lễ hội truyền thống|Kệ P1-04|20|115000|Tốt|lễ hội,văn hóa,truyền thống,việt nam
+
+# SÁCH THIẾU NHI
+book125|Truyện cổ tích Việt Nam|Dân gian|Thiếu nhi|NXB Kim Đồng|978-604-2-00125-4|2022|200|Tiếng Việt|Tuyển tập truyện cổ tích Việt Nam|Kệ Q1-01|30|85000|Mới|truyện cổ tích,thiếu nhi,việt nam,dân gian
+
+book126|Truyện cổ tích thế giới|Grimm|Thiếu nhi|NXB Kim Đồng|978-604-2-00126-1|2021|250|Tiếng Việt|Truyện cổ tích nổi tiếng thế giới|Kệ Q1-02|25|95000|Tốt|truyện cổ tích,thiếu nhi,thế giới
+
+book127|Doraemon tập 1|Fujiko F. Fujio|Thiếu nhi|NXB Kim Đồng|978-604-2-00127-8|2022|180|Tiếng Việt|Truyện tranh Doraemon|Kệ Q1-03|40|65000|Mới|truyện tranh,doraemon,thiếu nhi,nhật bản
+
+book128|Conan tập 1|Aoyama Gosho|Thiếu nhi|NXB Kim Đồng|978-604-2-00128-5|2022|200|Tiếng Việt|Thám tử lừng danh Conan|Kệ Q1-04|35|75000|Mới|truyện tranh,conan,thám tử,thiếu nhi
+
+book129|Thơ thiếu nhi|Tố Hữu|Thiếu nhi|NXB Kim Đồng|978-604-2-00129-2|2021|150|Tiếng Việt|Thơ dành cho thiếu nhi|Kệ Q1-05|20|55000|Tốt|thơ,thiếu nhi,văn học
+
+book130|Khoa học vui|Bill Nye|Thiếu nhi|NXB Kim Đồng|978-604-2-00130-8|2022|220|Tiếng Việt|Khoa học thú vị cho trẻ em|Kệ Q1-06|25|105000|Mới|khoa học,thiếu nhi,thí nghiệm,vui
+
+# SÁCH NGOẠI NGỮ KHÁC
+book131|Tiếng Trung cơ bản|Confucius Institute|Ngoại ngữ|NXB Đại học Quốc gia|978-604-2-00131-5|2022|300|Tiếng Trung/Việt|Giáo trình tiếng Trung cơ bản|Kệ D2-01|20|165000|Mới|tiếng trung,ngoại ngữ,cơ bản,hán tự
+
+book132|Tiếng Nhật cơ bản|Japan Foundation|Ngoại ngữ|NXB Đại học Quốc gia|978-604-2-00132-2|2022|280|Tiếng Nhật/Việt|Giáo trình tiếng Nhật cơ bản|Kệ D2-02|18|155000|Mới|tiếng nhật,ngoại ngữ,cơ bản,hiragana
+
+book133|Tiếng Hàn cơ bản|King Sejong Institute|Ngoại ngữ|NXB Đại học Quốc gia|978-604-2-00133-9|2022|260|Tiếng Hàn/Việt|Giáo trình tiếng Hàn cơ bản|Kệ D2-03|22|145000|Mới|tiếng hàn,ngoại ngữ,cơ bản,hangul
+
+book134|Tiếng Pháp cơ bản|Alliance Française|Ngoại ngữ|NXB Đại học Quốc gia|978-604-2-00134-6|2021|320|Tiếng Pháp/Việt|Giáo trình tiếng Pháp cơ bản|Kệ D2-04|15|175000|Tốt|tiếng pháp,ngoại ngữ,cơ bản
+
+book135|Tiếng Đức cơ bản|Goethe Institut|Ngoại ngữ|NXB Đại học Quốc gia|978-604-2-00135-3|2021|300|Tiếng Đức/Việt|Giáo trình tiếng Đức cơ bản|Kệ D2-05|12|185000|Tốt|tiếng đức,ngoại ngữ,cơ bản
+
+# SÁCH LUYỆN THI ĐẠI HỌC
+book136|Luyện thi Toán|Nguyễn Văn L|Tham khảo|NXB Đại học Quốc gia|978-604-2-00136-0|2023|450|Tiếng Việt|Bộ đề luyện thi Toán THPT QG|Kệ R1-01|50|185000|Mới|luyện thi,toán,thpt quốc gia,đại học
+
+book137|Luyện thi Lý|Trần Văn M|Tham khảo|NXB Đại học Quốc gia|978-604-2-00137-7|2023|380|Tiếng Việt|Bộ đề luyện thi Lý THPT QG|Kệ R1-02|45|165000|Mới|luyện thi,vật lý,thpt quốc gia,đại học
+
+book138|Luyện thi Hóa|Lê Thị N|Tham khảo|NXB Đại học Quốc gia|978-604-2-00138-4|2023|350|Tiếng Việt|Bộ đề luyện thi Hóa THPT QG|Kệ R1-03|40|155000|Mới|luyện thi,hóa học,thpt quốc gia,đại học
+
+book139|Luyện thi Sinh|Phạm Văn O|Tham khảo|NXB Đại học Quốc gia|978-604-2-00139-1|2023|320|Tiếng Việt|Bộ đề luyện thi Sinh THPT QG|Kệ R1-04|35|145000|Mới|luyện thi,sinh học,thpt quốc gia,đại học
+
+book140|Luyện thi Văn|Hoàng Thị P|Tham khảo|NXB Đại học Quốc gia|978-604-2-00140-7|2023|400|Tiếng Việt|Bộ đề luyện thi Văn THPT QG|Kệ R1-05|40|175000|Mới|luyện thi,văn học,thpt quốc gia,đại học
+
+book141|Luyện thi Sử|Nguyễn Văn Q|Tham khảo|NXB Đại học Quốc gia|978-604-2-00141-4|2023|360|Tiếng Việt|Bộ đề luyện thi Sử THPT QG|Kệ R1-06|30|155000|Mới|luyện thi,lịch sử,thpt quốc gia,đại học
+
+book142|Luyện thi Địa|Trần Thị R|Tham khảo|NXB Đại học Quốc gia|978-604-2-00142-1|2023|340|Tiếng Việt|Bộ đề luyện thi Địa THPT QG|Kệ R1-07|25|145000|Mới|luyện thi,địa lý,thpt quốc gia,đại học
+
+book143|Luyện thi Anh|Cambridge|Tham khảo|NXB Đại học Quốc gia|978-604-2-00143-8|2023|380|Tiếng Anh/Việt|Bộ đề luyện thi Anh THPT QG|Kệ R1-08|35|165000|Mới|luyện thi,tiếng anh,thpt quốc gia,đại học
+
+# SÁCH VỀ PHÁP LUẬT
+book144|Hiến pháp Việt Nam|Quốc hội|Pháp luật|NXB Chính trị Quốc gia|978-604-2-00144-5|2023|150|Tiếng Việt|Hiến pháp nước CHXHCN Việt Nam|Kệ S1-01|20|65000|Mới|hiến pháp,pháp luật,việt nam
+
+book145|Luật Dân sự|Quốc hội|Pháp luật|NXB Chính trị Quốc gia|978-604-2-00145-2|2023|400|Tiếng Việt|Bộ luật Dân sự Việt Nam|Kệ S1-02|15|125000|Mới|luật dân sự,pháp luật,quyền dân sự
+
+book146|Luật Hình sự|Quốc hội|Pháp luật|NXB Chính trị Quốc gia|978-604-2-00146-9|2023|350|Tiếng Việt|Bộ luật Hình sự Việt Nam|Kệ S1-03|12|115000|Mới|luật hình sự,pháp luật,tội phạm
+
+book147|Luật Lao động|Quốc hội|Pháp luật|NXB Lao động|978-604-2-00147-6|2023|280|Tiếng Việt|Bộ luật Lao động Việt Nam|Kệ S1-04|18|95000|Mới|luật lao động,pháp luật,người lao động
+
+book148|Luật Giáo dục|Quốc hội|Pháp luật|NXB Giáo dục|978-604-2-00148-3|2023|200|Tiếng Việt|Luật Giáo dục Việt Nam|Kệ S1-05|25|85000|Mới|luật giáo dục,pháp luật,học sinh
+
+# SÁCH VỀ NÔNG NGHIỆP
+book149|Kỹ thuật trồng lúa|Viện Lúa|Nông nghiệp|NXB Nông nghiệp|978-604-2-00149-0|2022|320|Tiếng Việt|Hướng dẫn trồng lúa hiệu quả|Kệ T1-01|15|135000|Tốt|nông nghiệp,lúa,trồng trọt,kỹ thuật
+
+book150|Chăn nuôi gia súc|Viện Chăn nuôi|Nông nghiệp|NXB Nông nghiệp|978-604-2-00150-6|2022|280|Tiếng Việt|Kỹ thuật chăn nuôi hiện đại|Kệ T1-02|12|125000|Tốt|nông nghiệp,chăn nuôi,gia súc,kỹ thuật
+
+# Tổng cộng: 150 đầu sách với khoảng 3,500+ bản sách
+# Phân bố theo thể loại:
+# - Văn học: 25 đầu sách
+# - Toán học: 9 đầu sách  
+# - Khoa học (Lý, Hóa, Sinh): 18 đầu sách
+# - Lịch sử - Địa lý: 8 đầu sách
+# - Ngoại ngữ: 12 đầu sách
+# - Tin học: 8 đầu sách
+# - Tham khảo: 15 đầu sách
+# - Luyện thi: 8 đầu sách
+# - Chuyên ngành khác: 47 đầu sách
+
+# Ghi chú về format:
+# ID|Tên sách|Tác giả|Thể loại|Nhà xuất bản|ISBN|Năm xuất bản|Số trang|Ngôn ngữ|Mô tả|Vị trí|Số bản|Giá|Tình trạng|Tags

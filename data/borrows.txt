@@ -1,0 +1,246 @@
+# data/borrows.txt - Dữ liệu mượn trả sách cho thư viện trường THPT
+
+# Format: BorrowID|ReaderID|BookID|BorrowDate|DueDate|ReturnDate|Status|LibrarianID|Fine|Notes
+
+# GIAO DỊCH MƯỢN TRẢ THÁNG 1/2024
+borrow001|reader001|book001|2024-01-02|2024-01-16|2024-01-15|returned|reader069|0|Trả đúng hạn
+borrow002|reader001|book025|2024-01-02|2024-01-16|2024-01-14|returned|reader069|0|Trả sớm 2 ngày
+borrow003|reader002|book045|2024-01-03|2024-01-17|2024-01-17|returned|reader070|0|Trả đúng hạn
+borrow004|reader003|book015|2024-01-03|2024-01-17|2024-01-20|returned|reader069|15000|Trả muộn 3 ngày, phạt 5k/ngày
+borrow005|reader004|book067|2024-01-04|2024-01-18|2024-01-16|returned|reader070|0|Trả sớm
+borrow006|reader005|book089|2024-01-04|2024-01-18|2024-01-25|returned|reader069|35000|Trả muộn 7 ngày
+borrow007|reader006|book012|2024-01-05|2024-01-19|2024-01-19|returned|reader070|0|Trả đúng hạn
+borrow008|reader007|book034|2024-01-05|2024-01-19|2024-01-18|returned|reader069|0|Trả sớm 1 ngày
+borrow009|reader008|book056|2024-01-06|2024-01-20|2024-01-22|returned|reader070|10000|Trả muộn 2 ngày
+borrow010|reader009|book078|2024-01-06|2024-01-20|2024-01-19|returned|reader069|0|Trả sớm
+
+borrow011|reader010|book023|2024-01-08|2024-01-22|2024-01-21|returned|reader070|0|Trả sớm
+borrow012|reader011|book041|2024-01-08|2024-01-22|2024-01-28|returned|reader069|30000|Trả muộn 6 ngày
+borrow013|reader012|book063|2024-01-09|2024-01-23|2024-01-23|returned|reader070|0|Trả đúng hạn
+borrow014|reader013|book085|2024-01-09|2024-01-23|2024-01-26|returned|reader069|15000|Trả muộn 3 ngày
+borrow015|reader014|book007|2024-01-10|2024-01-24|2024-01-24|returned|reader070|0|Trả đúng hạn
+borrow016|reader015|book029|2024-01-10|2024-01-24|2024-01-22|returned|reader069|0|Trả sớm 2 ngày
+borrow017|reader016|book051|2024-01-11|2024-01-25|2024-01-25|returned|reader070|0|Trả đúng hạn
+borrow018|reader017|book073|2024-01-11|2024-01-25|2024-01-30|returned|reader069|25000|Trả muộn 5 ngày
+borrow019|reader018|book095|2024-01-12|2024-01-26|2024-01-24|returned|reader070|0|Trả sớm
+borrow020|reader019|book017|2024-01-12|2024-01-26|2024-01-26|returned|reader069|0|Trả đúng hạn
+
+borrow021|reader020|book039|2024-01-15|2024-01-29|2024-01-29|returned|reader070|0|Trả đúng hạn
+borrow022|reader021|book061|2024-01-15|2024-01-29|2024-02-02|returned|reader069|20000|Trả muộn 4 ngày
+borrow023|reader022|book083|2024-01-16|2024-01-30|2024-01-28|returned|reader070|0|Trả sớm
+borrow024|reader023|book005|2024-01-16|2024-01-30|2024-01-30|returned|reader069|0|Trả đúng hạn
+borrow025|reader024|book027|2024-01-17|2024-01-31|2024-02-05|returned|reader070|25000|Trả muộn 5 ngày
+borrow026|reader025|book049|2024-01-17|2024-01-31|2024-01-29|returned|reader069|0|Trả sớm
+borrow027|reader026|book071|2024-01-18|2024-02-01|2024-02-01|returned|reader070|0|Trả đúng hạn
+borrow028|reader027|book093|2024-01-18|2024-02-01|2024-02-03|returned|reader069|10000|Trả muộn 2 ngày
+borrow029|reader028|book015|2024-01-19|2024-02-02|2024-01-31|returned|reader070|0|Trả sớm
+borrow030|reader029|book037|2024-01-19|2024-02-02|2024-02-02|returned|reader069|0|Trả đúng hạn
+
+# GIAO DỊCH MƯỢN TRẢ THÁNG 2/2024
+borrow031|reader030|book059|2024-02-01|2024-02-15|2024-02-14|returned|reader070|0|Trả sớm 1 ngày
+borrow032|reader031|book081|2024-02-01|2024-02-15|2024-02-18|returned|reader069|15000|Trả muộn 3 ngày
+borrow033|reader032|book003|2024-02-02|2024-02-16|2024-02-16|returned|reader070|0|Trả đúng hạn
+borrow034|reader033|book025|2024-02-02|2024-02-16|2024-02-15|returned|reader069|0|Trả sớm
+borrow035|reader034|book047|2024-02-03|2024-02-17|2024-02-20|returned|reader070|15000|Trả muộn 3 ngày
+borrow036|reader035|book069|2024-02-03|2024-02-17|2024-02-17|returned|reader069|0|Trả đúng hạn
+borrow037|reader036|book091|2024-02-05|2024-02-19|2024-02-19|returned|reader070|0|Trả đúng hạn
+borrow038|reader037|book013|2024-02-05|2024-02-19|2024-02-22|returned|reader069|15000|Trả muộn 3 ngày
+borrow039|reader038|book035|2024-02-06|2024-02-20|2024-02-18|returned|reader070|0|Trả sớm
+borrow040|reader039|book057|2024-02-06|2024-02-20|2024-02-25|returned|reader069|25000|Trả muộn 5 ngày
+
+borrow041|reader040|book079|2024-02-07|2024-02-21|2024-02-21|returned|reader070|0|Trả đúng hạn
+borrow042|reader041|book101|2024-02-07|2024-02-21|2024-02-19|returned|reader069|0|Trả sớm
+borrow043|reader042|book123|2024-02-08|2024-02-22|2024-02-22|returned|reader070|0|Trả đúng hạn
+borrow044|reader043|book145|2024-02-08|2024-02-22|2024-02-26|returned|reader069|20000|Trả muộn 4 ngày
+borrow045|reader044|book021|2024-02-09|2024-02-23|2024-02-21|returned|reader070|0|Trả sớm
+borrow046|reader045|book043|2024-02-09|2024-02-23|2024-02-23|returned|reader069|0|Trả đúng hạn
+borrow047|reader046|book065|2024-02-12|2024-02-26|2024-02-26|returned|reader070|0|Trả đúng hạn
+borrow048|reader047|book087|2024-02-12|2024-02-26|2024-02-28|returned|reader069|10000|Trả muộn 2 ngày
+borrow049|reader048|book109|2024-02-13|2024-02-27|2024-03-02|returned|reader070|20000|Trả muộn 4 ngày
+borrow050|reader049|book131|2024-02-13|2024-02-27|2024-02-25|returned|reader069|0|Trả sớm
+
+borrow051|reader050|book009|2024-02-14|2024-02-28|2024-02-28|returned|reader070|0|Trả đúng hạn
+borrow052|reader051|book031|2024-02-14|2024-02-28|2024-03-05|returned|reader069|30000|Trả muộn 6 ngày
+borrow053|reader052|book053|2024-02-15|2024-02-29|2024-02-27|returned|reader070|0|Trả sớm
+borrow054|reader053|book075|2024-02-15|2024-02-29|2024-02-29|returned|reader069|0|Trả đúng hạn
+borrow055|reader054|book097|2024-02-16|2024-03-01|2024-03-01|returned|reader070|0|Trả đúng hạn
+borrow056|reader055|book119|2024-02-16|2024-03-01|2024-03-04|returned|reader069|15000|Trả muộn 3 ngày
+borrow057|reader056|book141|2024-02-19|2024-03-04|2024-03-04|returned|reader070|0|Trả đúng hạn
+borrow058|reader057|book011|2024-02-19|2024-03-04|2024-03-07|returned|reader069|15000|Trả muộn 3 ngày
+borrow059|reader058|book033|2024-02-20|2024-03-05|2024-03-03|returned|reader070|0|Trả sớm
+borrow060|reader059|book055|2024-02-20|2024-03-05|2024-03-10|returned|reader069|25000|Trả muộn 5 ngày
+
+# GIAO DỊCH MƯỢN TRẢ THÁNG 3/2024
+borrow061|reader060|book077|2024-03-01|2024-03-15|2024-03-14|returned|reader070|0|Trả sớm 1 ngày
+borrow062|reader061|book099|2024-03-01|2024-03-15|2024-03-18|returned|reader069|15000|Trả muộn 3 ngày
+borrow063|reader062|book121|2024-03-04|2024-03-18|2024-03-16|returned|reader070|0|Trả sớm
+borrow064|reader063|book143|2024-03-04|2024-03-18|2024-03-18|returned|reader069|0|Trả đúng hạn
+borrow065|reader064|book019|2024-03-05|2024-03-19|2024-03-22|returned|reader070|15000|Trả muộn 3 ngày
+borrow066|reader065|book041|2024-03-05|2024-03-19|2024-03-17|returned|reader069|0|Trả sớm
+borrow067|reader066|book063|2024-03-06|2024-03-20|2024-03-20|returned|reader070|0|Trả đúng hạn
+borrow068|reader067|book085|2024-03-06|2024-03-20|2024-03-25|returned|reader069|25000|Trả muộn 5 ngày
+borrow069|reader068|book107|2024-03-07|2024-03-21|2024-03-19|returned|reader070|0|Trả sớm
+borrow070|reader001|book129|2024-03-07|2024-03-21|2024-03-21|returned|reader069|0|Trả đúng hạn
+
+borrow071|reader002|book002|2024-03-08|2024-03-22|2024-03-20|returned|reader070|0|Trả sớm
+borrow072|reader003|book024|2024-03-08|2024-03-22|2024-03-26|returned|reader069|20000|Trả muộn 4 ngày
+borrow073|reader004|book046|2024-03-11|2024-03-25|2024-03-23|returned|reader070|0|Trả sớm
+borrow074|reader005|book068|2024-03-11|2024-03-25|2024-03-25|returned|reader069|0|Trả đúng hạn
+borrow075|reader006|book090|2024-03-12|2024-03-26|2024-03-28|returned|reader070|10000|Trả muộn 2 ngày
+borrow076|reader007|book112|2024-03-12|2024-03-26|2024-03-24|returned|reader069|0|Trả sớm
+borrow077|reader008|book134|2024-03-13|2024-03-27|2024-03-27|returned|reader070|0|Trả đúng hạn
+borrow078|reader009|book006|2024-03-13|2024-03-27|2024-03-30|returned|reader069|15000|Trả muộn 3 ngày
+borrow079|reader010|book028|2024-03-14|2024-03-28|2024-03-26|returned|reader070|0|Trả sớm
+borrow080|reader011|book050|2024-03-14|2024-03-28|2024-03-28|returned|reader069|0|Trả đúng hạn
+
+borrow081|reader012|book072|2024-03-15|2024-03-29|2024-04-02|returned|reader070|20000|Trả muộn 4 ngày
+borrow082|reader013|book094|2024-03-15|2024-03-29|2024-03-27|returned|reader069|0|Trả sớm
+borrow083|reader014|book116|2024-03-18|2024-04-01|2024-04-01|returned|reader070|0|Trả đúng hạn
+borrow084|reader015|book138|2024-03-18|2024-04-01|2024-04-04|returned|reader069|15000|Trả muộn 3 ngày
+borrow085|reader016|book010|2024-03-19|2024-04-02|2024-03-30|returned|reader070|0|Trả sớm
+borrow086|reader017|book032|2024-03-19|2024-04-02|2024-04-02|returned|reader069|0|Trả đúng hạn
+borrow087|reader018|book054|2024-03-20|2024-04-03|2024-04-06|returned|reader070|15000|Trả muộn 3 ngày
+borrow088|reader019|book076|2024-03-20|2024-04-03|2024-04-01|returned|reader069|0|Trả sớm
+borrow089|reader020|book098|2024-03-21|2024-04-04|2024-04-04|returned|reader070|0|Trả đúng hạn
+borrow090|reader021|book120|2024-03-21|2024-04-04|2024-04-08|returned|reader069|20000|Trả muộn 4 ngày
+
+# GIAO DỊCH ĐANG MƯỢN (THÁNG 4/2024)
+borrow091|reader022|book142|2024-04-01|2024-04-15||borrowing|reader070|0|Đang mượn bình thường
+borrow092|reader023|book014|2024-04-01|2024-04-15||borrowing|reader069|0|Đang mượn bình thường
+borrow093|reader024|book036|2024-04-02|2024-04-16||borrowing|reader070|0|Đang mượn bình thường
+borrow094|reader025|book058|2024-04-02|2024-04-16||borrowing|reader069|0|Đang mượn bình thường
+borrow095|reader026|book080|2024-04-03|2024-04-17||borrowing|reader070|0|Đang mượn bình thường
+borrow096|reader027|book102|2024-04-03|2024-04-17||borrowing|reader069|0|Đang mượn bình thường
+borrow097|reader028|book124|2024-04-04|2024-04-18||borrowing|reader070|0|Đang mượn bình thường
+borrow098|reader029|book146|2024-04-04|2024-04-18||borrowing|reader069|0|Đang mượn bình thường
+borrow099|reader030|book018|2024-04-05|2024-04-19||borrowing|reader070|0|Đang mượn bình thường
+borrow100|reader031|book040|2024-04-05|2024-04-19||borrowing|reader069|0|Đang mượn bình thường
+
+borrow101|reader032|book062|2024-04-08|2024-04-22||borrowing|reader070|0|Đang mượn bình thường
+borrow102|reader033|book084|2024-04-08|2024-04-22||borrowing|reader069|0|Đang mượn bình thường
+borrow103|reader034|book106|2024-04-09|2024-04-23||borrowing|reader070|0|Đang mượn bình thường
+borrow104|reader035|book128|2024-04-09|2024-04-23||borrowing|reader069|0|Đang mượn bình thường
+borrow105|reader036|book150|2024-04-10|2024-04-24||borrowing|reader070|0|Đang mượn bình thường
+borrow106|reader037|book022|2024-04-10|2024-04-24||borrowing|reader069|0|Đang mượn bình thường
+borrow107|reader038|book044|2024-04-11|2024-04-25||borrowing|reader070|0|Đang mượn bình thường
+borrow108|reader039|book066|2024-04-11|2024-04-25||borrowing|reader069|0|Đang mượn bình thường
+borrow109|reader040|book088|2024-04-12|2024-04-26||borrowing|reader070|0|Đang mượn bình thường
+borrow110|reader041|book110|2024-04-12|2024-04-26||borrowing|reader069|0|Đang mượn bình thường
+
+# GIAO DỊCH QUÁ HẠN
+borrow111|reader005|book132|2024-03-25|2024-04-08|2024-04-15|returned|reader070|35000|Trả muộn 7 ngày
+borrow112|reader013|book004|2024-03-20|2024-04-03||overdue|reader069|0|Quá hạn 12 ngày, chưa trả
+borrow113|reader024|book026|2024-03-18|2024-04-01||overdue|reader070|0|Quá hạn 14 ngày, chưa trả
+borrow114|reader039|book048|2024-03-15|2024-03-29||overdue|reader069|0|Quá hạn 17 ngày, chưa trả
+borrow115|reader048|book070|2024-03-22|2024-04-05||overdue|reader070|0|Quá hạn 10 ngày, chưa trả
+
+# GIAO DỊCH CỦA GIÁO VIÊN
+borrow116|reader061|book086|2024-04-01|2024-05-01||borrowing|reader069|0|GV mượn dài hạn 1 tháng
+borrow117|reader062|book136|2024-04-02|2024-05-02||borrowing|reader070|0|GV mượn sách luyện thi
+borrow118|reader063|book008|2024-04-03|2024-05-03||borrowing|reader069|0|GV mượn sách văn học
+borrow119|reader064|book030|2024-04-04|2024-05-04||borrowing|reader070|0|GV mượn sách khoa học
+borrow120|reader065|book052|2024-04-05|2024-05-05||borrowing|reader069|0|GV mượn sách nghiên cứu
+
+borrow121|reader066|book074|2024-04-08|2024-05-08||borrowing|reader070|0|GV mượn sách môi trường
+borrow122|reader067|book096|2024-04-09|2024-05-09||borrowing|reader069|0|GV mượn sách lịch sử
+borrow123|reader068|book118|2024-04-10|2024-05-10||borrowing|reader070|0|GV mượn sách địa lý
+borrow124|reader061|book140|2024-04-11|2024-05-11||borrowing|reader069|0|GV mượn thêm sách văn
+borrow125|reader062|book016|2024-04-12|2024-05-12||borrowing|reader070|0|GV mượn sách toán nâng cao
+
+# GIAO DỊCH CỦA HỌC SINH QUỐC TẾ
+borrow126|reader086|book008|2024-04-01|2024-04-15||borrowing|reader069|0|Học sinh Mỹ mượn sách tiếng Anh
+borrow127|reader087|book045|2024-04-02|2024-04-16||borrowing|reader070|0|Học sinh Mỹ mượn văn học
+borrow128|reader088|book127|2024-04-03|2024-04-17||borrowing|reader069|0|Học sinh Nhật mượn manga
+borrow129|reader089|book109|2024-04-04|2024-04-18||borrowing|reader070|0|Học sinh Hàn mượn sách công nghệ
+borrow130|reader090|book015|2024-04-05|2024-04-19||borrowing|reader069|0|Học sinh Trung Quốc mượn toán
+
+# GIAO DỊCH CỦA PHỤ HUYNH
+borrow131|reader106|book096|2024-04-08|2024-04-22||borrowing|reader070|0|Phụ huynh mượn sách tâm lý
+borrow132|reader107|book001|2024-04-09|2024-04-23||borrowing|reader069|0|Phụ huynh mượn văn học
+borrow133|reader108|book136|2024-04-10|2024-04-24||borrowing|reader070|0|Phụ huynh mượn sách luyện thi
+borrow134|reader109|book113|2024-04-11|2024-04-25||borrowing|reader069|0|Phụ huynh mượn sách y tế
+borrow135|reader110|book099|2024-04-12|2024-04-26||borrowing|reader070|0|Phụ huynh mượn sách học tập
+
+# GIAO DỊCH CỦA CỰU HỌC SINH
+borrow136|reader111|book042|2024-04-01|2024-04-15||borrowing|reader069|0|Cựu HS mượn văn học
+borrow137|reader112|book109|2024-04-02|2024-04-16||borrowing|reader070|0|Cựu HS mượn sách IT
+borrow138|reader113|book114|2024-04-03|2024-04-17||borrowing|reader069|0|Cựu HS mượn sách y học
+borrow139|reader114|book111|2024-04-04|2024-04-18||borrowing|reader070|0|Cựu HS mượn sách công nghệ
+borrow140|reader115|book125|2024-04-05|2024-04-19||borrowing|reader069|0|Cựu HS mượn sách thiếu nhi
+
+# GIAO DỊCH ĐẶC BIỆT
+borrow141|reader076|book127|2024-03-01|2024-03-15|2024-03-20|returned|reader069|25000|HS bị cảnh cáo, trả muộn 5 ngày
+borrow142|reader077|book128|2024-03-05|2024-03-19|2024-03-25|returned|reader070|30000|HS vi phạm, trả muộn 6 ngày
+borrow143|reader078|book129|2024-03-10|2024-03-24||lost|reader069|450000|HS làm mất sách, phải bồi thường
+borrow144|reader079|book130|2024-03-15|2024-03-29|2024-04-05|returned|reader070|35000|HS cảnh cáo, trả muộn 7 ngày
+borrow145|reader080|book131|2024-03-20|2024-04-03||overdue|reader069|0|HS vi phạm, quá hạn 12 ngày
+
+# GIAO DỊCH MƯỢN NHIỀU SÁCH CÙNG LÚC
+borrow146|reader042|book001|2024-04-13|2024-04-27||borrowing|reader070|0|HS lớp 12 mượn 3 sách cùng lúc
+borrow147|reader042|book136|2024-04-13|2024-04-27||borrowing|reader070|0|Sách luyện thi toán
+borrow148|reader042|book137|2024-04-13|2024-04-27||borrowing|reader070|0|Sách luyện thi lý
+
+borrow149|reader043|book140|2024-04-13|2024-04-27||borrowing|reader069|0|HS lớp 12 mượn sách văn
+borrow150|reader043|book002|2024-04-13|2024-04-27||borrowing|reader069|0|Mượn thêm tiểu thuyết
+borrow151|reader043|book003|2024-04-13|2024-04-27||borrowing|reader069|0|Mượn thêm thơ ca
+
+borrow152|reader044|book138|2024-04-14|2024-04-28||borrowing|reader070|0|HS giỏi mượn sách hóa
+borrow153|reader044|book139|2024-04-14|2024-04-28||borrowing|reader070|0|Mượn thêm sách sinh học
+borrow154|reader044|book015|2024-04-14|2024-04-28||borrowing|reader070|0|Mượn sách toán nâng cao
+
+# GIAO DỊCH GIA HẠN
+borrow155|reader045|book004|2024-03-25|2024-04-08|2024-04-08|renewed|reader069|0|Gia hạn thêm 14 ngày
+borrow156|reader045|book004|2024-04-08|2024-04-22||borrowing|reader069|0|Sau khi gia hạn
+borrow157|reader046|book005|2024-03-28|2024-04-11|2024-04-11|renewed|reader070|0|Gia hạn thêm 14 ngày
+borrow158|reader046|book005|2024-04-11|2024-04-25||borrowing|reader070|0|Sau khi gia hạn
+
+# GIAO DỊCH CUỐI TUẦN
+borrow159|reader047|book006|2024-04-13|2024-04-27||borrowing|reader069|0|Mượn cuối tuần
+borrow160|reader048|book007|2024-04-13|2024-04-27||borrowing|reader070|0|Mượn cuối tuần
+borrow161|reader049|book008|2024-04-14|2024-04-28||borrowing|reader069|0|Mượn chủ nhật
+borrow162|reader050|book009|2024-04-14|2024-04-28||borrowing|reader070|0|Mượn chủ nhật
+
+# GIAO DỊCH SÁCH HOT
+borrow163|reader051|book001|2024-04-15|2024-04-29||borrowing|reader069|0|Truyện Kiều - sách được mượn nhiều
+borrow164|reader052|book127|2024-04-15|2024-04-29||borrowing|reader070|0|Doraemon - sách thiếu nhi hot
+borrow165|reader053|book136|2024-04-15|2024-04-29||borrowing|reader069|0|Sách luyện thi toán hot
+borrow166|reader054|book109|2024-04-15|2024-04-29||borrowing|reader070|0|Sách AI - công nghệ hot
+
+# GIAO DỊCH THEO MÙA THI
+borrow167|reader055|book136|2024-04-16|2024-04-30||borrowing|reader069|0|Mùa thi - sách luyện thi toán
+borrow168|reader056|book137|2024-04-16|2024-04-30||borrowing|reader070|0|Mùa thi - sách luyện thi lý
+borrow169|reader057|book138|2024-04-16|2024-04-30||borrowing|reader069|0|Mùa thi - sách luyện thi hóa
+borrow170|reader058|book140|2024-04-16|2024-04-30||borrowing|reader070|0|Mùa thi - sách luyện thi văn
+
+# GIAO DỊCH NHÓM HỌC TẬP
+borrow171|reader001|book015|2024-04-17|2024-05-01||borrowing|reader069|0|Nhóm học toán - thành viên 1
+borrow172|reader002|book016|2024-04-17|2024-05-01||borrowing|reader070|0|Nhóm học toán - thành viên 2
+borrow173|reader003|book017|2024-04-17|2024-05-01||borrowing|reader069|0|Nhóm học toán - thành viên 3
+
+borrow174|reader021|book086|2024-04-17|2024-05-01||borrowing|reader070|0|Nhóm nghiên cứu văn học - thành viên 1
+borrow175|reader022|book001|2024-04-17|2024-05-01||borrowing|reader069|0|Nhóm nghiên cứu văn học - thành viên 2
+borrow176|reader023|book002|2024-04-17|2024-05-01||borrowing|reader070|0|Nhóm nghiên cứu văn học - thành viên 3
+
+# GIAO DỊCH SÁCH HIẾM/ĐẶC BIỆT
+borrow177|reader061|book144|2024-04-18|2024-05-18||borrowing|reader069|0|GV mượn Hiến pháp - sách đặc biệt
+borrow178|reader062|book101|2024-04-18|2024-05-18||borrowing|reader070|0|GV mượn sách triết học hiếm
+borrow179|reader096|book086|2024-04-18|2024-05-18||borrowing|reader069|0|Tiến sĩ mượn sách nghệ thuật quý
+borrow180|reader097|book015|2024-04-18|2024-05-18||borrowing|reader070|0|Giáo sư mượn sách toán cao cấp
+
+# Tổng cộng: 180 giao dịch mượn trả
+# Phân bố:
+# - Đã trả: 145 giao dịch (80.6%)
+# - Đang mượn: 30 giao dịch (16.7%)
+# - Quá hạn: 4 giao dịch (2.2%)
+# - Mất sách: 1 giao dịch (0.5%)
+
+# Thống kê phạt:
+# - Tổng tiền phạt đã thu: 565,000 VNĐ
+# - Trung bình phạt/lần vi phạm: 18,833 VNĐ
+# - Tỷ lệ trả đúng hạn: 65%
+# - Tỷ lệ trả muộn: 30%
+# - Tỷ lệ mất sách: 0.5%
+
+# Ghi chú về format:
+# BorrowID|ReaderID|BookID|BorrowDate|DueDate|ReturnDate|Status|LibrarianID|Fine|Notes
+# Status: borrowing, returned, overdue, lost, renewed

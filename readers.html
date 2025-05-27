@@ -1,0 +1,2360 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý độc giả - Hệ thống quản lý thư viện</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-custom {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            padding: 20px 0;
+        }
+        
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .search-filter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .readers-table-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #27ae60;
+            box-shadow: 0 0 0 0.2rem rgba(39, 174, 96, 0.25);
+        }
+        
+        .btn-custom {
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            color: white;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            color: white;
+        }
+        
+        .btn-success-custom {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            border: none;
+            color: white;
+        }
+        
+        .btn-success-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+            color: white;
+        }
+        
+        .btn-warning-custom {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            border: none;
+            color: white;
+        }
+        
+        .btn-warning-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
+            color: white;
+        }
+        
+        .btn-info-custom {
+            background: linear-gradient(45deg, #17a2b8, #138496);
+            border: none;
+            color: white;
+        }
+        
+        .btn-info-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(23, 162, 184, 0.3);
+            color: white;
+        }
+        
+        .table-custom {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .table-custom thead {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            color: white;
+        }
+        
+        .table-custom thead th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .table-custom tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .table-custom tbody tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+        
+        .status-badge {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-expiring {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-expired {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-blocked {
+            background: #e2e3e5;
+            color: #383d41;
+            border: 1px solid #d6d8db;
+        }
+        
+        .debt-badge {
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .debt-none {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .debt-low {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .debt-high {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .reader-actions {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-action {
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-action:hover {
+            transform: translateY(-1px);
+        }
+        
+        .btn-view {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-edit {
+            background: #ffc107;
+            color: #212529;
+        }
+        
+        .btn-extend {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-block {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-payment {
+            background: #fd7e14;
+            color: white;
+        }
+        
+        .stats-row {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .pagination-custom .page-link {
+            border-radius: 8px;
+            margin: 0 2px;
+            border: 1px solid #dee2e6;
+            color: #27ae60;
+        }
+        
+        .pagination-custom .page-link:hover {
+            background: #27ae60;
+            color: white;
+            border-color: #27ae60;
+        }
+        
+        .pagination-custom .page-item.active .page-link {
+            background: #27ae60;
+            border-color: #27ae60;
+        }
+        
+        .modal-custom .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-custom .modal-header {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loading-spinner {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .reader-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .activity-timeline {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .timeline-item {
+            border-left: 3px solid #27ae60;
+            padding-left: 15px;
+            padding-bottom: 15px;
+            margin-left: 10px;
+        }
+        
+        .timeline-item:last-child {
+            border-left-color: transparent;
+        }
+        
+        .timeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #27ae60;
+            margin-left: -8px;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .reader-actions {
+                justify-content: center;
+            }
+            
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+            
+            .btn-custom {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .reader-avatar {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-users"></i> 
+                Quản lý độc giả
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">
+                            <i class="fas fa-book"></i> Quản lý sách
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="readers.html">
+                            <i class="fas fa-users"></i> Quản lý độc giả
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="borrow-return.html">
+                            <i class="fas fa-exchange-alt"></i> Mượn/Trả sách
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar"></i> Báo cáo
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <span class="nav-link">
+                        <i class="fas fa-user"></i> 
+                        <span id="currentUser">Admin</span>
+                    </span>
+                    <button class="btn btn-outline-light btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-0">
+                        <i class="fas fa-user-friends text-success"></i> 
+                        Quản lý độc giả
+                    </h2>
+                    <p class="text-muted mb-0">Quản lý thông tin độc giả và thẻ thư viện</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="btn btn-success-custom btn-custom" onclick="showAddReaderModal()">
+                        <i class="fas fa-user-plus"></i> Đăng ký độc giả mới
+                    </button>
+                    <button class="btn btn-warning-custom btn-custom" onclick="exportReaders()">
+                        <i class="fas fa-download"></i> Xuất Excel
+                    </button>
+                    <button class="btn btn-info-custom btn-custom" onclick="showBulkActionsModal()">
+                        <i class="fas fa-tasks"></i> Thao tác hàng loạt
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Row -->
+        <div class="stats-row">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-success" id="totalReadersCount">0</div>
+                        <div class="stat-label">Tổng độc giả</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-primary" id="activeReadersCount">0</div>
+                        <div class="stat-label">Đang hoạt động</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-warning" id="expiringReadersCount">0</div>
+                        <div class="stat-label">Sắp hết hạn</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-danger" id="expiredReadersCount">0</div>
+                        <div class="stat-label">Hết hạn</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-info" id="borrowingReadersCount">0</div>
+                        <div class="stat-label">Đang mượn</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-secondary" id="debtReadersCount">0</div>
+                        <div class="stat-label">Có nợ phí</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search & Filter -->
+        <div class="search-filter-card">
+            <h5 class="mb-4">
+                <i class="fas fa-search text-success"></i> 
+                Tìm kiếm & Lọc độc giả
+            </h5>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="form-label">Tìm kiếm:</label>
+                    <div class="input-group">
+                        <input type="text" 
+                               class="form-control" 
+                               id="searchInput" 
+                               placeholder="Tên, mã thẻ, lớp..."
+                               onkeyup="handleSearch(event)">
+                        <button class="btn btn-primary-custom" onclick="searchReaders()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Lớp:</label>
+                    <select class="form-select" id="classFilter" onchange="filterReaders()">
+                        <option value="">Tất cả lớp</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Trạng thái:</label>
+                    <select class="form-select" id="statusFilter" onchange="filterReaders()">
+                        <option value="">Tất cả</option>
+                        <option value="active">Hoạt động</option>
+                        <option value="expiring">Sắp hết hạn</option>
+                        <option value="expired">Hết hạn</option>
+                        <option value="blocked">Bị khóa</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Nợ phí:</label>
+                    <select class="form-select" id="debtFilter" onchange="filterReaders()">
+                        <option value="">Tất cả</option>
+                        <option value="none">Không nợ</option>
+                        <option value="low">Dưới 50k</option>
+                        <option value="high">Trên 50k</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-2 mb-3">
+                    <label class="form-label">Hiển thị:</label>
+                    <select class="form-select" id="itemsPerPage" onchange="changeItemsPerPage()">
+                        <option value="10">10 độc giả</option>
+                        <option value="25">25 độc giả</option>
+                        <option value="50">50 độc giả</option>
+                        <option value="100">100 độc giả</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button class="btn btn-outline-secondary" onclick="clearFilters()">
+                        <i class="fas fa-times"></i> Xóa bộ lọc
+                    </button>
+                    <button class="btn btn-outline-info" onclick="refreshReaders()">
+                        <i class="fas fa-sync"></i> Làm mới
+                    </button>
+                    <button class="btn btn-outline-warning" onclick="showExpiringAlert()">
+                        <i class="fas fa-exclamation-triangle"></i> Cảnh báo hết hạn
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Readers Table -->
+        <div class="readers-table-card">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="mb-0">
+                    <i class="fas fa-list text-success"></i> 
+                    Danh sách độc giả
+                    <span class="badge bg-success" id="filteredCount">0</span>
+                </h5>
+                
+                <div class="btn-group" role="group">
+                    <button class="btn btn-outline-success btn-sm active" onclick="toggleView('table')" id="tableViewBtn">
+                        <i class="fas fa-table"></i> Bảng
+                    </button>
+                    <button class="btn btn-outline-success btn-sm" onclick="toggleView('cards')" id="cardsViewBtn">
+                        <i class="fas fa-th-large"></i> Thẻ
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Table View -->
+            <div id="tableView">
+                <div class="table-responsive">
+                    <table class="table table-custom">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" id="selectAll" onchange="toggleSelectAll()">
+                                </th>
+                                <th>Mã thẻ</th>
+                                <th>Độc giả</th>
+                                <th>Lớp</th>
+                                <th>Hạn thẻ</th>
+                                <th>Nợ phí</th>
+                                <th>Trạng thái</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="readersTableBody">
+                            <!-- Readers data will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Cards View -->
+            <div id="cardsView" class="d-none">
+                <div class="row" id="readersCardsContainer">
+                    <!-- Readers cards will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <nav aria-label="Readers pagination" class="mt-4">
+                <ul class="pagination pagination-custom justify-content-center" id="readersPagination">
+                    <!-- Pagination will be generated here -->
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Add/Edit Reader Modal -->
+    <div class="modal fade modal-custom" id="readerModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="readerModalTitle">
+                        <i class="fas fa-user-plus"></i> Đăng ký độc giả mới
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="readerForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Mã thẻ <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="readerId" required 
+                                       placeholder="VD: SV001">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="readerName" required
+                                       placeholder="VD: Nguyễn Văn A">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Lớp <span class="text-danger">*</span></label>
+                                <select class="form-select" id="readerClass" required>
+                                    <option value="">Chọn lớp</option>
+                                    <option value="CNTT01">CNTT01</option>
+                                    <option value="CNTT02">CNTT02</option>
+                                    <option value="CNTT03">CNTT03</option>
+                                    <option value="KT01">KT01</option>
+                                    <option value="KT02">KT02</option>
+                                    <option value="QT01">QT01</option>
+                                    <option value="QT02">QT02</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Ngày hết hạn <span class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="readerExpiry" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="readerPhone" 
+                                       placeholder="VD: 0987654321">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="readerEmail" 
+                                       placeholder="VD: student@hcub.edu.vn">
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Ngày sinh</label>
+                                <input type="date" class="form-control" id="readerBirthDate">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Trạng thái</label>
+                                <select class="form-select" id="readerStatus">
+                                    <option value="Hoạt động">Hoạt động</option>
+                                    <option value="Tạm khóa">Tạm khóa</option>
+                                    <option value="Hết hạn">Hết hạn</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Địa chỉ</label>
+                            <textarea class="form-control" id="readerAddress" rows="2" 
+                                    placeholder="Địa chỉ liên hệ..."></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea class="form-control" id="readerNotes" rows="2" 
+                                    placeholder="Ghi chú thêm..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-success-custom" onclick="saveReader()">
+                        <i class="fas fa-save"></i> Lưu thông tin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reader Details Modal -->
+    <div class="modal fade modal-custom" id="readerDetailsModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-user-circle"></i> Chi tiết độc giả
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="readerDetailsContent">
+                    <!-- Reader details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning-custom" onclick="editReaderFromDetails()">
+                        <i class="fas fa-edit"></i> Chỉnh sửa
+                    </button>
+                    <button type="button" class="btn btn-info-custom" onclick="extendReaderCard()">
+                        <i class="fas fa-calendar-plus"></i> Gia hạn thẻ
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extend Card Modal -->
+    <div class="modal fade modal-custom" id="extendCardModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-calendar-plus"></i> Gia hạn thẻ thư viện
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="extendCardInfo" class="mb-3">
+                        <!-- Reader info will be displayed here -->
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Hạn hiện tại:</label>
+                            <input type="date" class="form-control" id="currentExpiry" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Hạn mới <span class="text-danger">*</span>:</label>
+                            <input type="date" class="form-control" id="newExpiry" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="form-label">Lý do gia hạn:</label>
+                        <textarea class="form-control" id="extendReason" rows="3" 
+                                placeholder="Nhập lý do gia hạn..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-success-custom" onclick="confirmExtendCard()">
+                        <i class="fas fa-check"></i> Xác nhận gia hạn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade modal-custom" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title">
+                        <i class="fas fa-money-bill-wave"></i> Thanh toán phí
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="paymentInfo" class="mb-3">
+                        <!-- Payment info will be displayed here -->
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Tổng nợ:</label>
+                            <input type="text" class="form-control" id="totalDebt" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Thanh toán <span class="text-danger">*</span>:</label>
+                            <input type="number" class="form-control" id="paymentAmount" min="0" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="form-label">Phương thức:</label>
+                        <select class="form-select" id="paymentMethod">
+                            <option value="Tiền mặt">Tiền mặt</option>
+                            <option value="Chuyển khoản">Chuyển khoản</option>
+                            <option value="Ví điện tử">Ví điện tử</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="form-label">Ghi chú:</label>
+                        <textarea class="form-control" id="paymentNote" rows="2" 
+                                placeholder="Ghi chú thanh toán..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-warning-custom" onclick="confirmPayment()">
+                        <i class="fas fa-check"></i> Xác nhận thanh toán
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bulk Actions Modal -->
+    <div class="modal fade modal-custom" id="bulkActionsModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-tasks"></i> Thao tác hàng loạt
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="selectedReadersInfo" class="mb-3">
+                        <p>Chưa chọn độc giả nào</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Chọn thao tác:</label>
+                        <select class="form-select" id="bulkAction">
+                            <option value="">-- Chọn thao tác --</option>
+                            <option value="extend">Gia hạn thẻ hàng loạt</option>
+                            <option value="block">Khóa thẻ hàng loạt</option>
+                            <option value="unblock">Mở khóa thẻ hàng loạt</option>
+                            <option value="export">Xuất danh sách đã chọn</option>
+                        </select>
+                    </div>
+                    
+                    <div id="bulkExtendOptions" class="d-none">
+                        <div class="mb-3">
+                            <label class="form-label">Gia hạn đến ngày:</label>
+                            <input type="date" class="form-control" id="bulkExtendDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-primary-custom" onclick="executeBulkAction()">
+                        <i class="fas fa-play"></i> Thực hiện
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay d-none">
+        <div class="loading-spinner">
+            <div class="spinner-border text-success" style="width: 3rem; height: 3rem;"></div>
+            <div class="mt-3">Đang xử lý...</div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Global variables
+        let currentReaders = [];
+        let filteredReaders = [];
+        let currentPage = 1;
+        let itemsPerPage = 10;
+        let currentView = 'table';
+        let editingReaderId = null;
+        let selectedReaders = new Set();
+        let extendingReaderId = null;
+        let paymentReaderId = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            initializeReadersPage();
+            loadReaders();
+            setCurrentUser();
+            loadClassOptions();
+        });
+
+        // Check authentication
+        function checkAuthentication() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'index.html';
+                return;
+            }
+        }
+
+        // Set current user
+        function setCurrentUser() {
+            const username = sessionStorage.getItem('username') || 'Admin';
+            document.getElementById('currentUser').textContent = username;
+        }
+
+        // Initialize readers page
+        function initializeReadersPage() {
+            // Set default view
+            document.getElementById('tableViewBtn').classList.add('active');
+            
+            // Set default expiry date (1 year from now)
+            const nextYear = new Date();
+            nextYear.setFullYear(nextYear.getFullYear() + 1);
+            document.getElementById('readerExpiry').value = nextYear.toISOString().split('T')[0];
+            
+            // Load initial data
+            loadReadersStatistics();
+        }
+
+        // Load class options
+        function loadClassOptions() {
+            const classes = getUniqueClasses();
+            const classFilter = document.getElementById('classFilter');
+            
+            classFilter.innerHTML = '<option value="">Tất cả lớp</option>';
+            classes.forEach(className => {
+                classFilter.innerHTML += `<option value="${className}">${className}</option>`;
+            });
+        }
+
+        // Load readers data
+        function loadReaders() {
+            showLoading();
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                currentReaders = getAllReaders();
+                filteredReaders = [...currentReaders];
+                
+                updateReadersStatistics();
+                displayReaders();
+                updatePagination();
+                
+                hideLoading();
+            }, 500);
+        }
+
+        // Load readers statistics
+        function loadReadersStatistics() {
+            const stats = getReadersStatistics();
+            document.getElementById('totalReadersCount').textContent = stats.total;
+            document.getElementById('activeReadersCount').textContent = stats.active;
+            document.getElementById('expiringReadersCount').textContent = stats.expiring;
+            document.getElementById('expiredReadersCount').textContent = stats.expired;
+            document.getElementById('borrowingReadersCount').textContent = stats.borrowing;
+            document.getElementById('debtReadersCount').textContent = stats.debt;
+        }
+
+        // Update readers statistics
+        function updateReadersStatistics() {
+            const total = currentReaders.length;
+            let active = 0, expiring = 0, expired = 0, borrowing = 0, debt = 0;
+            
+            currentReaders.forEach(reader => {
+                const status = getReaderStatus(reader);
+                switch(status.type) {
+                    case 'active': active++; break;
+                    case 'expiring': expiring++; break;
+                    case 'expired': expired++; break;
+                }
+                
+                if (getReaderBorrowedBooks(reader.maThe).length > 0) borrowing++;
+                if (getReaderDebt(reader.maThe) > 0) debt++;
+            });
+            
+            document.getElementById('totalReadersCount').textContent = total;
+            document.getElementById('activeReadersCount').textContent = active;
+            document.getElementById('expiringReadersCount').textContent = expiring;
+            document.getElementById('expiredReadersCount').textContent = expired;
+            document.getElementById('borrowingReadersCount').textContent = borrowing;
+            document.getElementById('debtReadersCount').textContent = debt;
+        }
+
+        // Display readers
+        function displayReaders() {
+            if (currentView === 'table') {
+                displayReadersTable();
+            } else {
+                displayReadersCards();
+            }
+            
+            document.getElementById('filteredCount').textContent = filteredReaders.length;
+        }
+
+        // Display readers in table format
+        function displayReadersTable() {
+            const tbody = document.getElementById('readersTableBody');
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const readersToShow = filteredReaders.slice(startIndex, endIndex);
+            
+            if (readersToShow.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="text-center py-4">
+                            <i class="fas fa-user-slash fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">Không tìm thấy độc giả nào</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            let html = '';
+            readersToShow.forEach(reader => {
+                const status = getReaderStatus(reader);
+                const debt = getReaderDebt(reader.maThe);
+                const debtClass = debt === 0 ? 'debt-none' : debt < 50000 ? 'debt-low' : 'debt-high';
+                
+                html += `
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="form-check-input reader-checkbox" 
+                                   value="${reader.maThe}" onchange="updateSelectedReaders()">
+                        </td>
+                        <td><strong>${reader.maThe}</strong></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <div class="reader-avatar">
+                                    ${reader.hoTen.charAt(0).toUpperCase()}
+                                </div>
+                                <div>
+                                    <div class="fw-bold">${reader.hoTen}</div>
+                                    <small class="text-muted">${reader.email || 'Chưa có email'}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge bg-info">${reader.lop}</span>
+                        </td>
+                        <td>
+                            <div>${formatDate(reader.hanThe)}</div>
+                            <small class="text-muted">${getDaysUntilExpiry(reader.hanThe)} ngày</small>
+                        </td>
+                        <td>
+                            <span class="debt-badge ${debtClass}">
+                                ${formatCurrency(debt)}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-badge ${status.class}">${status.text}</span>
+                        </td>
+                        <td>
+                            <div class="reader-actions">
+                                <button class="btn-action btn-view" onclick="viewReaderDetails('${reader.maThe}')" title="Xem chi tiết">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-action btn-edit" onclick="editReader('${reader.maThe}')" title="Chỉnh sửa">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-action btn-extend" onclick="showExtendCardModal('${reader.maThe}')" title="Gia hạn thẻ">
+                                    <i class="fas fa-calendar-plus"></i>
+                                </button>
+                                ${debt > 0 ? `
+                                    <button class="btn-action btn-payment" onclick="showPaymentModal('${reader.maThe}')" title="Thanh toán">
+                                        <i class="fas fa-money-bill"></i>
+                                    </button>
+                                ` : ''}
+                                <button class="btn-action btn-block" onclick="toggleReaderStatus('${reader.maThe}')" 
+                                        title="${status.type === 'blocked' ? 'Mở khóa' : 'Khóa thẻ'}">
+                                    <i class="fas ${status.type === 'blocked' ? 'fa-unlock' : 'fa-lock'}"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        // Display readers in cards format
+        function displayReadersCards() {
+            const container = document.getElementById('readersCardsContainer');
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const readersToShow = filteredReaders.slice(startIndex, endIndex);
+            
+            if (readersToShow.length === 0) {
+                container.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-user-slash fa-3x text-muted mb-3"></i>
+                        <p class="text-muted">Không tìm thấy độc giả nào</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            readersToShow.forEach(reader => {
+                const status = getReaderStatus(reader);
+                const debt = getReaderDebt(reader.maThe);
+                const borrowedBooks = getReaderBorrowedBooks(reader.maThe);
+                
+                html += `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="reader-avatar me-3" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                        ${reader.hoTen.charAt(0).toUpperCase()}
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h6 class="card-title mb-1">${reader.hoTen}</h6>
+                                        <small class="text-muted">${reader.maThe} - ${reader.lop}</small>
+                                    </div>
+                                    <input type="checkbox" class="form-check-input reader-checkbox" 
+                                           value="${reader.maThe}" onchange="updateSelectedReaders()">
+                                </div>
+                                
+                                <div class="mb-2">
+                                    <small class="text-muted">Hạn thẻ:</small>
+                                    <div>${formatDate(reader.hanThe)} (${getDaysUntilExpiry(reader.hanThe)} ngày)</div>
+                                </div>
+                                
+                                <div class="mb-2">
+                                    <small class="text-muted">Trạng thái:</small>
+                                    <div><span class="status-badge ${status.class}">${status.text}</span></div>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <div class="d-flex justify-content-between">
+                                        <span>Nợ phí: <span class="fw-bold text-${debt > 0 ? 'danger' : 'success'}">${formatCurrency(debt)}</span></span>
+                                        <span>Đang mượn: <span class="badge bg-warning">${borrowedBooks.length}</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <div class="reader-actions justify-content-center">
+                                    <button class="btn-action btn-view" onclick="viewReaderDetails('${reader.maThe}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-action btn-edit" onclick="editReader('${reader.maThe}')">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn-action btn-extend" onclick="showExtendCardModal('${reader.maThe}')">
+                                        <i class="fas fa-calendar-plus"></i>
+                                    </button>
+                                    ${debt > 0 ? `
+                                        <button class="btn-action btn-payment" onclick="showPaymentModal('${reader.maThe}')">
+                                            <i class="fas fa-money-bill"></i>
+                                        </button>
+                                    ` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Toggle view between table and cards
+        function toggleView(view) {
+            currentView = view;
+            
+            // Update buttons
+            document.getElementById('tableViewBtn').classList.toggle('active', view === 'table');
+            document.getElementById('cardsViewBtn').classList.toggle('active', view === 'cards');
+            
+            // Toggle views
+            document.getElementById('tableView').classList.toggle('d-none', view !== 'table');
+            document.getElementById('cardsView').classList.toggle('d-none', view !== 'cards');
+            
+            // Redisplay readers
+            displayReaders();
+        }
+
+        // Search readers
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                searchReaders();
+            }
+        }
+
+        function searchReaders() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                filteredReaders = [...currentReaders];
+            } else {
+                filteredReaders = currentReaders.filter(reader => 
+                    reader.maThe.toLowerCase().includes(searchTerm) ||
+                    reader.hoTen.toLowerCase().includes(searchTerm) ||
+                    reader.lop.toLowerCase().includes(searchTerm) ||
+                    (reader.email && reader.email.toLowerCase().includes(searchTerm)) ||
+                    (reader.soDienThoai && reader.soDienThoai.includes(searchTerm))
+                );
+            }
+            
+            currentPage = 1;
+            displayReaders();
+            updatePagination();
+        }
+
+        // Filter readers
+        function filterReaders() {
+            const classFilter = document.getElementById('classFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const debtFilter = document.getElementById('debtFilter').value;
+            
+            filteredReaders = currentReaders.filter(reader => {
+                let matchClass = !classFilter || reader.lop === classFilter;
+                let matchStatus = true;
+                let matchDebt = true;
+                
+                if (statusFilter) {
+                    const status = getReaderStatus(reader);
+                    matchStatus = status.type === statusFilter;
+                }
+                
+                if (debtFilter) {
+                    const debt = getReaderDebt(reader.maThe);
+                    switch(debtFilter) {
+                        case 'none':
+                            matchDebt = debt === 0;
+                            break;
+                        case 'low':
+                            matchDebt = debt > 0 && debt < 50000;
+                            break;
+                        case 'high':
+                            matchDebt = debt >= 50000;
+                            break;
+                    }
+                }
+                
+                return matchClass && matchStatus && matchDebt;
+            });
+            
+            // Apply search if exists
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            if (searchTerm) {
+                filteredReaders = filteredReaders.filter(reader => 
+                    reader.maThe.toLowerCase().includes(searchTerm) ||
+                    reader.hoTen.toLowerCase().includes(searchTerm) ||
+                    reader.lop.toLowerCase().includes(searchTerm) ||
+                    (reader.email && reader.email.toLowerCase().includes(searchTerm)) ||
+                    (reader.soDienThoai && reader.soDienThoai.includes(searchTerm))
+                );
+            }
+            
+            currentPage = 1;
+            displayReaders();
+            updatePagination();
+        }
+
+        // Change items per page
+        function changeItemsPerPage() {
+            itemsPerPage = parseInt(document.getElementById('itemsPerPage').value);
+            currentPage = 1;
+            displayReaders();
+            updatePagination();
+        }
+
+        // Clear filters
+        function clearFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('classFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('debtFilter').value = '';
+            
+            filteredReaders = [...currentReaders];
+            currentPage = 1;
+            displayReaders();
+            updatePagination();
+        }
+
+        // Refresh readers
+        function refreshReaders() {
+            loadReaders();
+            clearSelectedReaders();
+        }
+
+        // Show expiring alert
+        function showExpiringAlert() {
+            const expiringReaders = currentReaders.filter(reader => {
+                const status = getReaderStatus(reader);
+                return status.type === 'expiring' || status.type === 'expired';
+            });
+            
+            if (expiringReaders.length === 0) {
+                showNotification('Không có thẻ nào sắp hết hạn!', 'success');
+                return;
+            }
+            
+            let message = `Có ${expiringReaders.length} thẻ sắp hết hạn hoặc đã hết hạn:\n\n`;
+            expiringReaders.slice(0, 10).forEach(reader => {
+                const days = getDaysUntilExpiry(reader.hanThe);
+                message += `• ${reader.hoTen} (${reader.maThe}): ${days > 0 ? days + ' ngày' : 'Đã hết hạn'}\n`;
+            });
+            
+            if (expiringReaders.length > 10) {
+                message += `\n... và ${expiringReaders.length - 10} thẻ khác`;
+            }
+            
+            alert(message);
+        }
+
+        // Update pagination
+        function updatePagination() {
+            const totalPages = Math.ceil(filteredReaders.length / itemsPerPage);
+            const pagination = document.getElementById('readersPagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            
+            // Previous button
+            html += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage - 1})">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                </li>
+            `;
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
+                    html += `
+                        <li class="page-item ${i === currentPage ? 'active' : ''}">
+                            <a class="page-link" href="#" onclick="changePage(${i})">${i}</a>
+                        </li>
+                    `;
+                } else if (i === currentPage - 3 || i === currentPage + 3) {
+                    html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+                }
+            }
+            
+            // Next button
+            html += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" onclick="changePage(${currentPage + 1})">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </li>
+            `;
+            
+            pagination.innerHTML = html;
+        }
+
+        // Change page
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredReaders.length / itemsPerPage);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                displayReaders();
+                updatePagination();
+            }
+        }
+
+        // Show add reader modal
+        function showAddReaderModal() {
+            editingReaderId = null;
+            document.getElementById('readerModalTitle').innerHTML = '<i class="fas fa-user-plus"></i> Đăng ký độc giả mới';
+            document.getElementById('readerForm').reset();
+            document.getElementById('readerId').readOnly = false;
+            
+            // Set default expiry date
+            const nextYear = new Date();
+            nextYear.setFullYear(nextYear.getFullYear() + 1);
+            document.getElementById('readerExpiry').value = nextYear.toISOString().split('T')[0];
+            
+            const modal = new bootstrap.Modal(document.getElementById('readerModal'));
+            modal.show();
+        }
+
+        // Edit reader
+        function editReader(readerId) {
+            const reader = currentReaders.find(r => r.maThe === readerId);
+            if (!reader) {
+                showNotification('Không tìm thấy độc giả!', 'error');
+                return;
+            }
+            
+            editingReaderId = readerId;
+            document.getElementById('readerModalTitle').innerHTML = '<i class="fas fa-user-edit"></i> Chỉnh sửa thông tin độc giả';
+            
+            // Fill form with reader data
+            document.getElementById('readerId').value = reader.maThe;
+            document.getElementById('readerId').readOnly = true;
+            document.getElementById('readerName').value = reader.hoTen;
+            document.getElementById('readerClass').value = reader.lop;
+            document.getElementById('readerExpiry').value = reader.hanThe;
+            document.getElementById('readerPhone').value = reader.soDienThoai || '';
+            document.getElementById('readerEmail').value = reader.email || '';
+            document.getElementById('readerBirthDate').value = reader.ngaySinh || '';
+            document.getElementById('readerStatus').value = reader.tinhTrang;
+            document.getElementById('readerAddress').value = reader.diaChi || '';
+            document.getElementById('readerNotes').value = reader.ghiChu || '';
+            
+            const modal = new bootstrap.Modal(document.getElementById('readerModal'));
+            modal.show();
+        }
+
+        // Save reader
+        function saveReader() {
+            const form = document.getElementById('readerForm');
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            
+            const readerData = {
+                maThe: document.getElementById('readerId').value.trim(),
+                hoTen: document.getElementById('readerName').value.trim(),
+                lop: document.getElementById('readerClass').value,
+                hanThe: document.getElementById('readerExpiry').value,
+                soDienThoai: document.getElementById('readerPhone').value.trim() || null,
+                email: document.getElementById('readerEmail').value.trim() || null,
+                ngaySinh: document.getElementById('readerBirthDate').value || null,
+                tinhTrang: document.getElementById('readerStatus').value,
+                diaChi: document.getElementById('readerAddress').value.trim() || null,
+                ghiChu: document.getElementById('readerNotes').value.trim() || null
+            };
+            
+            // Validate reader ID uniqueness for new readers
+            if (!editingReaderId && currentReaders.some(r => r.maThe === readerData.maThe)) {
+                showNotification('Mã thẻ đã tồn tại!', 'error');
+                return;
+            }
+            
+            // Validate expiry date
+            const expiryDate = new Date(readerData.hanThe);
+            const today = new Date();
+            if (expiryDate <= today) {
+                showNotification('Ngày hết hạn phải sau ngày hiện tại!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            // Simulate save delay
+            setTimeout(() => {
+                if (editingReaderId) {
+                    // Update existing reader
+                    updateReaderInData(readerData);
+                    showNotification('Cập nhật thông tin độc giả thành công!', 'success');
+                } else {
+                    // Add new reader
+                    addReaderToData(readerData);
+                    showNotification('Đăng ký độc giả mới thành công!', 'success');
+                }
+                
+                // Refresh data
+                loadReaders();
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('readerModal'));
+                modal.hide();
+                
+                hideLoading();
+            }, 1000);
+        }
+
+        // View reader details
+        function viewReaderDetails(readerId) {
+            const reader = currentReaders.find(r => r.maThe === readerId);
+            if (!reader) {
+                showNotification('Không tìm thấy độc giả!', 'error');
+                return;
+            }
+            
+            const status = getReaderStatus(reader);
+            const debt = getReaderDebt(readerId);
+            const borrowedBooks = getReaderBorrowedBooks(readerId);
+            const borrowHistory = getReaderBorrowHistory(readerId);
+            const paymentHistory = getReaderPaymentHistory(readerId);
+            
+            const detailsContent = document.getElementById('readerDetailsContent');
+            detailsContent.innerHTML = `
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center mb-4">
+                            <div class="reader-avatar mx-auto mb-3" style="width: 80px; height: 80px; font-size: 2rem;">
+                                ${reader.hoTen.charAt(0).toUpperCase()}
+                            </div>
+                            <h5>${reader.hoTen}</h5>
+                            <p class="text-muted">${reader.maThe} - ${reader.lop}</p>
+                            <span class="status-badge ${status.class}">${status.text}</span>
+                        </div>
+                        
+                        <h6 class="text-success">Thông tin cơ bản</h6>
+                        <table class="table table-borderless table-sm">
+                            <tr><td><strong>Mã thẻ:</strong></td><td>${reader.maThe}</td></tr>
+                            <tr><td><strong>Họ tên:</strong></td><td>${reader.hoTen}</td></tr>
+                            <tr><td><strong>Lớp:</strong></td><td>${reader.lop}</td></tr>
+                            <tr><td><strong>Hạn thẻ:</strong></td><td>${formatDate(reader.hanThe)}</td></tr>
+                            <tr><td><strong>Còn lại:</strong></td><td>${getDaysUntilExpiry(reader.hanThe)} ngày</td></tr>
+                            <tr><td><strong>SĐT:</strong></td><td>${reader.soDienThoai || 'Chưa có'}</td></tr>
+                            <tr><td><strong>Email:</strong></td><td>${reader.email || 'Chưa có'}</td></tr>
+                            <tr><td><strong>Ngày sinh:</strong></td><td>${reader.ngaySinh ? formatDate(reader.ngaySinh) : 'Chưa có'}</td></tr>
+                        </table>
+                        
+                        ${reader.diaChi ? `
+                            <h6 class="text-success mt-3">Địa chỉ</h6>
+                            <p class="text-muted">${reader.diaChi}</p>
+                        ` : ''}
+                        
+                        ${reader.ghiChu ? `
+                            <h6 class="text-success mt-3">Ghi chú</h6>
+                            <p class="text-muted">${reader.ghiChu}</p>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="col-md-8">
+                        <div class="row mb-4">
+                            <div class="col-md-3 col-6">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="h4 text-warning">${borrowedBooks.length}</div>
+                                    <small>Đang mượn</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="h4 text-info">${borrowHistory.length}</div>
+                                    <small>Tổng lượt mượn</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="h4 text-${debt > 0 ? 'danger' : 'success'}">${formatCurrency(debt)}</div>
+                                    <small>Nợ phí</small>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6">
+                                <div class="text-center p-3 bg-light rounded">
+                                    <div class="h4 text-secondary">${paymentHistory.length}</div>
+                                    <small>Lần thanh toán</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <ul class="nav nav-tabs" id="readerDetailsTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="borrowed-tab" data-bs-toggle="tab" data-bs-target="#borrowed" type="button">
+                                    Đang mượn (${borrowedBooks.length})
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="history-tab" data-bs-toggle="tab" data-bs-target="#history" type="button">
+                                    Lịch sử mượn
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="payments-tab" data-bs-toggle="tab" data-bs-target="#payments" type="button">
+                                    Thanh toán
+                                </button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content mt-3" id="readerDetailsTabContent">
+                            <div class="tab-pane fade show active" id="borrowed" role="tabpanel">
+                                ${borrowedBooks.length > 0 ? `
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sách</th>
+                                                    <th>Ngày mượn</th>
+                                                    <th>Hạn trả</th>
+                                                    <th>Trạng thái</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${borrowedBooks.map(borrow => {
+                                                    const book = getBookByCode(borrow.maSach);
+                                                    const isOverdue = new Date(borrow.hanTra) < new Date();
+                                                    return `
+                                                        <tr>
+                                                            <td>
+                                                                <div class="fw-bold">${book ? book.tenSach : 'Không tìm thấy'}</div>
+                                                                <small class="text-muted">${borrow.maSach}</small>
+                                                            </td>
+                                                            <td>${formatDate(borrow.ngayMuon)}</td>
+                                                            <td>${formatDate(borrow.hanTra)}</td>
+                                                            <td>
+                                                                <span class="badge ${isOverdue ? 'bg-danger' : 'bg-warning'}">
+                                                                    ${isOverdue ? 'Quá hạn' : 'Đang mượn'}
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    `;
+                                                }).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ` : '<p class="text-muted">Không có sách đang mượn</p>'}
+                            </div>
+                            
+                            <div class="tab-pane fade" id="history" role="tabpanel">
+                                ${borrowHistory.length > 0 ? `
+                                    <div class="activity-timeline">
+                                        ${borrowHistory.slice(0, 10).map(borrow => {
+                                            const book = getBookByCode(borrow.maSach);
+                                            return `
+                                                <div class="timeline-item">
+                                                    <div class="timeline-dot"></div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div>
+                                                            <div class="fw-bold">${book ? book.tenSach : 'Không tìm thấy'}</div>
+                                                            <small class="text-muted">${borrow.maSach}</small>
+                                                        </div>
+                                                        <div class="text-end">
+                                                            <div>${formatDate(borrow.ngayMuon)}</div>
+                                                            <span class="badge ${borrow.tinhTrang === 'Đã trả' ? 'bg-success' : 'bg-warning'}">
+                                                                ${borrow.tinhTrang}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            `;
+                                        }).join('')}
+                                    </div>
+                                ` : '<p class="text-muted">Chưa có lịch sử mượn sách</p>'}
+                            </div>
+                            
+                            <div class="tab-pane fade" id="payments" role="tabpanel">
+                                ${paymentHistory.length > 0 ? `
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ngày</th>
+                                                    <th>Số tiền</th>
+                                                    <th>Phương thức</th>
+                                                    <th>Ghi chú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${paymentHistory.map(payment => `
+                                                    <tr>
+                                                        <td>${formatDate(payment.ngayThanhToan)}</td>
+                                                        <td class="fw-bold text-success">${formatCurrency(payment.soTien)}</td>
+                                                        <td>${payment.phuongThuc}</td>
+                                                        <td>${payment.ghiChu || '-'}</td>
+                                                    </tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                ` : '<p class="text-muted">Chưa có lịch sử thanh toán</p>'}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Store current reader ID for edit button
+            window.currentDetailReaderId = readerId;
+            
+            const modal = new bootstrap.Modal(document.getElementById('readerDetailsModal'));
+            modal.show();
+        }
+
+        // Edit reader from details modal
+        function editReaderFromDetails() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('readerDetailsModal'));
+            modal.hide();
+            
+            setTimeout(() => {
+                editReader(window.currentDetailReaderId);
+            }, 300);
+        }
+
+        // Show extend card modal
+        function showExtendCardModal(readerId) {
+            const reader = currentReaders.find(r => r.maThe === readerId);
+            if (!reader) {
+                showNotification('Không tìm thấy độc giả!', 'error');
+                return;
+            }
+            
+            extendingReaderId = readerId;
+            
+            // Show reader info
+            document.getElementById('extendCardInfo').innerHTML = `
+                <div class="bg-light p-3 rounded">
+                    <strong>Độc giả:</strong> ${reader.hoTen}<br>
+                    <strong>Mã thẻ:</strong> ${reader.maThe}<br>
+                    <strong>Lớp:</strong> ${reader.lop}
+                </div>
+            `;
+            
+            // Set current expiry
+            document.getElementById('currentExpiry').value = reader.hanThe;
+            
+            // Set default new expiry (1 year from current expiry)
+            const currentExpiry = new Date(reader.hanThe);
+            const newExpiry = new Date(currentExpiry);
+            newExpiry.setFullYear(newExpiry.getFullYear() + 1);
+            document.getElementById('newExpiry').value = newExpiry.toISOString().split('T')[0];
+            
+            document.getElementById('extendReason').value = '';
+            
+            const modal = new bootstrap.Modal(document.getElementById('extendCardModal'));
+            modal.show();
+        }
+
+        // Extend reader card
+        function extendReaderCard() {
+            if (window.currentDetailReaderId) {
+                showExtendCardModal(window.currentDetailReaderId);
+            }
+        }
+
+        // Confirm extend card
+        function confirmExtendCard() {
+            if (!extendingReaderId) return;
+            
+            const newExpiry = document.getElementById('newExpiry').value;
+            const reason = document.getElementById('extendReason').value.trim();
+            
+            if (!newExpiry) {
+                showNotification('Vui lòng chọn ngày hết hạn mới!', 'error');
+                return;
+            }
+            
+            const newExpiryDate = new Date(newExpiry);
+            const currentExpiryDate = new Date(document.getElementById('currentExpiry').value);
+            
+            if (newExpiryDate <= currentExpiryDate) {
+                showNotification('Ngày hết hạn mới phải sau ngày hết hạn hiện tại!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            // Simulate extend delay
+            setTimeout(() => {
+                extendReaderCardInData(extendingReaderId, newExpiry, reason);
+                showNotification('Gia hạn thẻ thành công!', 'success');
+                
+                // Refresh data
+                loadReaders();
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('extendCardModal'));
+                modal.hide();
+                
+                extendingReaderId = null;
+                hideLoading();
+            }, 1000);
+        }
+
+        // Show payment modal
+        function showPaymentModal(readerId) {
+            const reader = currentReaders.find(r => r.maThe === readerId);
+            if (!reader) {
+                showNotification('Không tìm thấy độc giả!', 'error');
+                return;
+            }
+            
+            const debt = getReaderDebt(readerId);
+            if (debt === 0) {
+                showNotification('Độc giả không có nợ phí!', 'info');
+                return;
+            }
+            
+            paymentReaderId = readerId;
+            
+            // Show payment info
+            document.getElementById('paymentInfo').innerHTML = `
+                <div class="bg-light p-3 rounded">
+                    <strong>Độc giả:</strong> ${reader.hoTen}<br>
+                    <strong>Mã thẻ:</strong> ${reader.maThe}<br>
+                    <strong>Lớp:</strong> ${reader.lop}
+                </div>
+            `;
+            
+            // Set debt amount
+            document.getElementById('totalDebt').value = formatCurrency(debt);
+            document.getElementById('paymentAmount').value = debt;
+            document.getElementById('paymentAmount').max = debt;
+            
+            document.getElementById('paymentMethod').value = 'Tiền mặt';
+            document.getElementById('paymentNote').value = '';
+            
+            const modal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            modal.show();
+        }
+
+        // Confirm payment
+        function confirmPayment() {
+            if (!paymentReaderId) return;
+            
+            const paymentAmount = parseFloat(document.getElementById('paymentAmount').value);
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const paymentNote = document.getElementById('paymentNote').value.trim();
+            
+            if (!paymentAmount || paymentAmount <= 0) {
+                showNotification('Vui lòng nhập số tiền thanh toán!', 'error');
+                return;
+            }
+            
+            const totalDebt = getReaderDebt(paymentReaderId);
+            if (paymentAmount > totalDebt) {
+                showNotification('Số tiền thanh toán không được vượt quá tổng nợ!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            // Simulate payment delay
+            setTimeout(() => {
+                addPaymentRecord(paymentReaderId, paymentAmount, paymentMethod, paymentNote);
+                showNotification(`Thanh toán ${formatCurrency(paymentAmount)} thành công!`, 'success');
+                
+                // Refresh data
+                loadReaders();
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('paymentModal'));
+                modal.hide();
+                
+                paymentReaderId = null;
+                hideLoading();
+            }, 1000);
+        }
+
+        // Toggle reader status (block/unblock)
+        function toggleReaderStatus(readerId) {
+            const reader = currentReaders.find(r => r.maThe === readerId);
+            if (!reader) {
+                showNotification('Không tìm thấy độc giả!', 'error');
+                return;
+            }
+            
+            const isBlocked = reader.tinhTrang === 'Tạm khóa';
+            const action = isBlocked ? 'mở khóa' : 'khóa';
+            const newStatus = isBlocked ? 'Hoạt động' : 'Tạm khóa';
+            
+            if (confirm(`Bạn có chắc chắn muốn ${action} thẻ của ${reader.hoTen}?`)) {
+                showLoading();
+                
+                setTimeout(() => {
+                    updateReaderStatus(readerId, newStatus);
+                    showNotification(`${action.charAt(0).toUpperCase() + action.slice(1)} thẻ thành công!`, 'success');
+                    
+                    // Refresh data
+                    loadReaders();
+                    hideLoading();
+                }, 500);
+            }
+        }
+
+        // Select all readers
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('selectAll');
+            const checkboxes = document.querySelectorAll('.reader-checkbox');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+            
+            updateSelectedReaders();
+        }
+
+        // Update selected readers
+        function updateSelectedReaders() {
+            const checkboxes = document.querySelectorAll('.reader-checkbox:checked');
+            selectedReaders.clear();
+            
+            checkboxes.forEach(checkbox => {
+                selectedReaders.add(checkbox.value);
+            });
+            
+            // Update select all checkbox
+            const allCheckboxes = document.querySelectorAll('.reader-checkbox');
+            const selectAll = document.getElementById('selectAll');
+            selectAll.checked = allCheckboxes.length > 0 && checkboxes.length === allCheckboxes.length;
+            selectAll.indeterminate = checkboxes.length > 0 && checkboxes.length < allCheckboxes.length;
+            
+            // Update bulk actions info
+            updateBulkActionsInfo();
+        }
+
+        // Clear selected readers
+        function clearSelectedReaders() {
+            selectedReaders.clear();
+            document.querySelectorAll('.reader-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+            document.getElementById('selectAll').checked = false;
+            document.getElementById('selectAll').indeterminate = false;
+            updateBulkActionsInfo();
+        }
+
+        // Update bulk actions info
+        function updateBulkActionsInfo() {
+            const info = document.getElementById('selectedReadersInfo');
+            if (selectedReaders.size === 0) {
+                info.innerHTML = '<p class="text-muted">Chưa chọn độc giả nào</p>';
+            } else {
+                const selectedNames = Array.from(selectedReaders).map(readerId => {
+                    const reader = currentReaders.find(r => r.maThe === readerId);
+                    return reader ? reader.hoTen : readerId;
+                }).slice(0, 5);
+                
+                let html = `<p><strong>Đã chọn ${selectedReaders.size} độc giả:</strong></p><ul>`;
+                selectedNames.forEach(name => {
+                    html += `<li>${name}</li>`;
+                });
+                if (selectedReaders.size > 5) {
+                    html += `<li>... và ${selectedReaders.size - 5} độc giả khác</li>`;
+                }
+                html += '</ul>';
+                info.innerHTML = html;
+            }
+        }
+
+        // Show bulk actions modal
+        function showBulkActionsModal() {
+            updateBulkActionsInfo();
+            
+            // Reset form
+            document.getElementById('bulkAction').value = '';
+            document.getElementById('bulkExtendOptions').classList.add('d-none');
+            
+            const modal = new bootstrap.Modal(document.getElementById('bulkActionsModal'));
+            modal.show();
+        }
+
+        // Handle bulk action change
+        document.getElementById('bulkAction').addEventListener('change', function() {
+            const action = this.value;
+            const extendOptions = document.getElementById('bulkExtendOptions');
+            
+            if (action === 'extend') {
+                extendOptions.classList.remove('d-none');
+                // Set default date (1 year from now)
+                const nextYear = new Date();
+                nextYear.setFullYear(nextYear.getFullYear() + 1);
+                document.getElementById('bulkExtendDate').value = nextYear.toISOString().split('T')[0];
+            } else {
+                extendOptions.classList.add('d-none');
+            }
+        });
+
+        // Execute bulk action
+        function executeBulkAction() {
+            if (selectedReaders.size === 0) {
+                showNotification('Vui lòng chọn ít nhất một độc giả!', 'error');
+                return;
+            }
+            
+            const action = document.getElementById('bulkAction').value;
+            if (!action) {
+                showNotification('Vui lòng chọn thao tác!', 'error');
+                return;
+            }
+            
+            let confirmMessage = '';
+            switch(action) {
+                case 'extend':
+                    const extendDate = document.getElementById('bulkExtendDate').value;
+                    if (!extendDate) {
+                        showNotification('Vui lòng chọn ngày gia hạn!', 'error');
+                        return;
+                    }
+                    confirmMessage = `Gia hạn thẻ cho ${selectedReaders.size} độc giả đến ${formatDate(extendDate)}?`;
+                    break;
+                case 'block':
+                    confirmMessage = `Khóa thẻ của ${selectedReaders.size} độc giả?`;
+                    break;
+                case 'unblock':
+                    confirmMessage = `Mở khóa thẻ của ${selectedReaders.size} độc giả?`;
+                    break;
+                case 'export':
+                    exportSelectedReaders();
+                    return;
+            }
+            
+            if (confirm(confirmMessage)) {
+                showLoading();
+                
+                setTimeout(() => {
+                    executeBulkActionOnReaders(action);
+                    
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('bulkActionsModal'));
+                    modal.hide();
+                    
+                    // Clear selection
+                    clearSelectedReaders();
+                    
+                    // Refresh data
+                    loadReaders();
+                    hideLoading();
+                }, 1500);
+            }
+        }
+
+        // Execute bulk action on readers
+        function executeBulkActionOnReaders(action) {
+            let successCount = 0;
+            
+            selectedReaders.forEach(readerId => {
+                switch(action) {
+                    case 'extend':
+                        const extendDate = document.getElementById('bulkExtendDate').value;
+                        extendReaderCardInData(readerId, extendDate, 'Gia hạn hàng loạt');
+                        successCount++;
+                        break;
+                    case 'block':
+                        updateReaderStatus(readerId, 'Tạm khóa');
+                        successCount++;
+                        break;
+                    case 'unblock':
+                        updateReaderStatus(readerId, 'Hoạt động');
+                        successCount++;
+                        break;
+                }
+            });
+            
+            const actionText = {
+                'extend': 'gia hạn',
+                'block': 'khóa',
+                'unblock': 'mở khóa'
+            };
+            
+            showNotification(`${actionText[action].charAt(0).toUpperCase() + actionText[action].slice(1)} thành công ${successCount} độc giả!`, 'success');
+        }
+
+        // Export selected readers
+        function exportSelectedReaders() {
+            if (selectedReaders.size === 0) {
+                showNotification('Vui lòng chọn ít nhất một độc giả!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                const selectedReadersData = currentReaders.filter(reader => 
+                    selectedReaders.has(reader.maThe)
+                );
+                
+                const csvContent = generateReadersCSV(selectedReadersData);
+                downloadCSV(csvContent, 'danh-sach-doc-gia-da-chon.csv');
+                
+                showNotification(`Xuất ${selectedReaders.size} độc giả thành công!`, 'success');
+                
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('bulkActionsModal'));
+                modal.hide();
+                
+                hideLoading();
+            }, 1000);
+        }
+
+        // Export all readers
+        function exportReaders() {
+            showLoading();
+            
+            setTimeout(() => {
+                const csvContent = generateReadersCSV(currentReaders);
+                downloadCSV(csvContent, 'danh-sach-doc-gia.csv');
+                showNotification('Xuất danh sách độc giả thành công!', 'success');
+                hideLoading();
+            }, 1000);
+        }
+
+        // Generate CSV content for readers
+        function generateReadersCSV(readers) {
+            const headers = [
+                'Mã thẻ', 'Họ tên', 'Lớp', 'Hạn thẻ', 'Số điện thoại', 
+                'Email', 'Ngày sinh', 'Trạng thái', 'Địa chỉ', 'Ghi chú'
+            ];
+            
+            const rows = readers.map(reader => [
+                reader.maThe,
+                reader.hoTen,
+                reader.lop,
+                reader.hanThe,
+                reader.soDienThoai || '',
+                reader.email || '',
+                reader.ngaySinh || '',
+                reader.tinhTrang,
+                reader.diaChi || '',
+                reader.ghiChu || ''
+            ]);
+            
+            return [headers, ...rows].map(row => 
+                row.map(field => `"${field}"`).join(',')
+            ).join('\n');
+        }
+
+        // Download CSV file
+        function downloadCSV(content, filename) {
+            const blob = new Blob(['\ufeff' + content], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        // Helper functions
+        function getReaderStatus(reader) {
+            const today = new Date();
+            const expiryDate = new Date(reader.hanThe);
+            const daysUntilExpiry = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+            
+            if (reader.tinhTrang === 'Tạm khóa') {
+                return { type: 'blocked', class: 'status-blocked', text: 'Bị khóa' };
+            } else if (daysUntilExpiry < 0) {
+                return { type: 'expired', class: 'status-expired', text: 'Hết hạn' };
+            } else if (daysUntilExpiry <= 30) {
+                return { type: 'expiring', class: 'status-expiring', text: 'Sắp hết hạn' };
+            } else {
+                return { type: 'active', class: 'status-active', text: 'Hoạt động' };
+            }
+        }
+
+        function getDaysUntilExpiry(expiryDate) {
+            const today = new Date();
+            const expiry = new Date(expiryDate);
+            const diffTime = expiry - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays;
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN');
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(amount);
+        }
+
+        // Show/Hide loading
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('d-none');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('d-none');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // This will be implemented in app.js
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Data functions (these will be implemented in data.js)
+        function getAllReaders() {
+            return window.readersData || [];
+        }
+
+        function getReadersStatistics() {
+            const readers = getAllReaders();
+            const today = new Date();
+            
+            let stats = {
+                total: readers.length,
+                active: 0,
+                expiring: 0,
+                expired: 0,
+                borrowing: 0,
+                debt: 0
+            };
+            
+            readers.forEach(reader => {
+                const status = getReaderStatus(reader);
+                switch(status.type) {
+                    case 'active': stats.active++; break;
+                    case 'expiring': stats.expiring++; break;
+                    case 'expired': stats.expired++; break;
+                }
+                
+                if (getReaderBorrowedBooks(reader.maThe).length > 0) stats.borrowing++;
+                if (getReaderDebt(reader.maThe) > 0) stats.debt++;
+            });
+            
+            return stats;
+        }
+
+        function getUniqueClasses() {
+            const readers = getAllReaders();
+            const classes = [...new Set(readers.map(reader => reader.lop))];
+            return classes.sort();
+        }
+
+        function getReaderDebt(readerId) {
+            // This should calculate actual debt from borrow records and payments
+            return Math.floor(Math.random() * 100000); // Placeholder
+        }
+
+        function getReaderBorrowedBooks(readerId) {
+            // This should return currently borrowed books
+            return window.borrowData ? window.borrowData.filter(borrow => 
+                borrow.maThe === readerId && borrow.tinhTrang === 'Đang mượn'
+            ) : [];
+        }
+
+        function getReaderBorrowHistory(readerId) {
+            // This should return all borrow history
+            return window.borrowData ? window.borrowData.filter(borrow => 
+                borrow.maThe === readerId
+            ) : [];
+        }
+
+        function getReaderPaymentHistory(readerId) {
+            // This should return payment history
+            return window.paymentData ? window.paymentData.filter(payment => 
+                payment.maThe === readerId
+            ) : [];
+        }
+
+        function getBookByCode(bookCode) {
+            return window.booksData ? window.booksData.find(book => book.maSach === bookCode) : null;
+        }
+
+        function addReaderToData(readerData) {
+            if (!window.readersData) window.readersData = [];
+            window.readersData.push(readerData);
+            saveToLocalStorage('readersData', window.readersData);
+        }
+
+        function updateReaderInData(readerData) {
+            if (!window.readersData) return;
+            const index = window.readersData.findIndex(r => r.maThe === readerData.maThe);
+            if (index !== -1) {
+                window.readersData[index] = readerData;
+                saveToLocalStorage('readersData', window.readersData);
+            }
+        }
+
+        function updateReaderStatus(readerId, newStatus) {
+            if (!window.readersData) return;
+            const reader = window.readersData.find(r => r.maThe === readerId);
+            if (reader) {
+                reader.tinhTrang = newStatus;
+                saveToLocalStorage('readersData', window.readersData);
+            }
+        }
+
+        function extendReaderCardInData(readerId, newExpiry, reason) {
+            if (!window.readersData) return;
+            const reader = window.readersData.find(r => r.maThe === readerId);
+            if (reader) {
+                reader.hanThe = newExpiry;
+                if (reason) {
+                    reader.ghiChu = (reader.ghiChu || '') + `\nGia hạn ${formatDate(newExpiry)}: ${reason}`;
+                }
+                saveToLocalStorage('readersData', window.readersData);
+            }
+        }
+
+        function addPaymentRecord(readerId, amount, method, note) {
+            if (!window.paymentData) window.paymentData = [];
+            
+            const payment = {
+                id: Date.now(),
+                maThe: readerId,
+                soTien: amount,
+                phuongThuc: method,
+                ghiChu: note,
+                ngayThanhToan: new Date().toISOString().split('T')[0]
+            };
+            
+            window.paymentData.push(payment);
+            saveToLocalStorage('paymentData', window.paymentData);
+        }
+
+        function saveToLocalStorage(key, data) {
+            try {
+                localStorage.setItem(key, JSON.stringify(data));
+            } catch (error) {
+                console.error('Error saving to localStorage:', error);
+            }
+        }
+    </script>
+</body>
+</html>

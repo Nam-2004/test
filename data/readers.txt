@@ -1,0 +1,291 @@
+# data/readers.txt - Dữ liệu độc giả mẫu cho thư viện trường THPT
+
+# Format: ID|StudentID|FullName|Gender|DateOfBirth|ClassName|Phone|Email|Address|ParentName|ParentPhone|RegistrationDate|CardNumber|Status|Notes
+
+# HỌC SINH LỚP 10A1
+reader001|HS001001|Nguyễn Văn An|Nam|2008-03-15|10A1|0987654321|anvn.10a1@email.com|123 Đường Lê Lợi, Quận 1, TP.HCM|Nguyễn Văn Bình|0912345678|2023-08-15|LIB001001|active|Học sinh tích cực, thích đọc sách khoa học
+
+reader002|HS001002|Trần Thị Bình|Nữ|2008-05-22|10A1|0987654322|binhtt.10a1@email.com|456 Đường Nguyễn Huệ, Quận 1, TP.HCM|Trần Văn Cường|0912345679|2023-08-15|LIB001002|active|Yêu thích văn học, thường xuyên mượn sách
+
+reader003|HS001003|Lê Minh Cường|Nam|2008-01-10|10A1|0987654323|cuonglm.10a1@email.com|789 Đường Hai Bà Trưng, Quận 3, TP.HCM|Lê Văn Dũng|0912345680|2023-08-15|LIB001003|active|Học sinh giỏi toán, thích sách tham khảo
+
+reader004|HS001004|Phạm Thị Dung|Nữ|2008-07-08|10A1|0987654324|dungpt.10a1@email.com|321 Đường Lý Tự Trọng, Quận 1, TP.HCM|Phạm Văn Em|0912345681|2023-08-15|LIB001004|active|Thích đọc truyện thiếu nhi và văn học
+
+reader005|HS001005|Hoàng Văn Em|Nam|2008-11-30|10A1|0987654325|emhv.10a1@email.com|654 Đường Pasteur, Quận 3, TP.HCM|Hoàng Thị Phương|0912345682|2023-08-15|LIB001005|warning|Đã trả trễ 2 lần, cần nhắc nhở
+
+reader006|HS001006|Vũ Thị Phương|Nữ|2008-09-12|10A1|0987654326|phuongvt.10a1@email.com|987 Đường Cách Mạng Tháng 8, Quận 10, TP.HCM|Vũ Văn Giang|0912345683|2023-08-15|LIB001006|active|Học sinh năng động, thích sách ngoại ngữ
+
+reader007|HS001007|Đỗ Minh Giang|Nam|2008-04-25|10A1|0987654327|giangdm.10a1@email.com|147 Đường Võ Văn Tần, Quận 3, TP.HCM|Đỗ Thị Hoa|0912345684|2023-08-15|LIB001007|active|Thích đọc sách lịch sử và địa lý
+
+reader008|HS001008|Bùi Thị Hoa|Nữ|2008-12-03|10A1|0987654328|hoabt.10a1@email.com|258 Đường Điện Biên Phủ, Quận Bình Thạnh, TP.HCM|Bùi Văn Inh|0912345685|2023-08-15|LIB001008|active|Học sinh chăm chỉ, đọc nhiều sách tham khảo
+
+# HỌC SINH LỚP 10A2
+reader009|HS001009|Ngô Văn Inh|Nam|2008-06-18|10A2|0987654329|inhngv.10a2@email.com|369 Đường Xô Viết Nghệ Tĩnh, Quận Bình Thạnh, TP.HCM|Ngô Thị Kim|0912345686|2023-08-15|LIB001009|active|Thích sách khoa học và công nghệ
+
+reader010|HS001010|Lý Thị Kim|Nữ|2008-02-14|10A2|0987654330|kimlt.10a2@email.com|741 Đường Hoàng Văn Thụ, Quận Tân Bình, TP.HCM|Lý Văn Long|0912345687|2023-08-15|LIB001010|active|Yêu thích văn học nước ngoài
+
+reader011|HS001011|Trịnh Minh Long|Nam|2008-08-07|10A2|0987654331|longtm.10a2@email.com|852 Đường Cộng Hòa, Quận Tân Bình, TP.HCM|Trịnh Thị Mai|0912345688|2023-08-15|LIB001011|active|Học sinh tích cực tham gia hoạt động thư viện
+
+reader012|HS001012|Cao Thị Mai|Nữ|2008-10-20|10A2|0987654332|maict.10a2@email.com|963 Đường Lạc Long Quân, Quận 11, TP.HCM|Cao Văn Nam|0912345689|2023-08-15|LIB001012|active|Thích đọc sách tâm lý và giáo dục
+
+reader013|HS001013|Đinh Văn Nam|Nam|2008-05-11|10A2|0987654333|namdv.10a2@email.com|159 Đường An Dương Vương, Quận 5, TP.HCM|Đinh Thị Oanh|0912345690|2023-08-15|LIB001013|warning|Có 1 cuốn sách quá hạn
+
+reader014|HS001014|Phan Thị Oanh|Nữ|2008-09-28|10A2|0987654334|oanhpt.10a2@email.com|357 Đường Hùng Vương, Quận 5, TP.HCM|Phan Văn Phúc|0912345691|2023-08-15|LIB001014|active|Học sinh giỏi, thường mượn sách nâng cao
+
+reader015|HS001015|Tôn Minh Phúc|Nam|2008-03-05|10A2|0987654335|phuctm.10a2@email.com|468 Đường Trần Hưng Đạo, Quận 1, TP.HCM|Tôn Thị Quỳnh|0912345692|2023-08-15|LIB001015|active|Thích sách tin học và lập trình
+
+# HỌC SINH LỚP 10B1
+reader016|HS001016|Võ Thị Quỳnh|Nữ|2008-07-19|10B1|0987654336|quynhvt.10b1@email.com|579 Đường Nam Kỳ Khởi Nghĩa, Quận 3, TP.HCM|Võ Văn Rồng|0912345693|2023-08-15|LIB001016|active|Yêu thích thơ ca và văn học
+
+reader017|HS001017|Đặng Văn Rồng|Nam|2008-11-16|10B1|0987654337|rongdv.10b1@email.com|680 Đường Nguyễn Thị Minh Khai, Quận 3, TP.HCM|Đặng Thị Sương|0912345694|2023-08-15|LIB001017|active|Học sinh chăm chỉ, đọc đa dạng thể loại
+
+reader018|HS001018|Huỳnh Thị Sương|Nữ|2008-04-02|10B1|0987654338|suonght.10b1@email.com|791 Đường Võ Thị Sáu, Quận 3, TP.HCM|Huỳnh Văn Tài|0912345695|2023-08-15|LIB001018|active|Thích sách khoa học tự nhiên
+
+reader019|HS001019|Lâm Minh Tài|Nam|2008-12-09|10B1|0987654339|tailm.10b1@email.com|802 Đường Ký Con, Quận 1, TP.HCM|Lâm Thị Uyên|0912345696|2023-08-15|LIB001019|active|Học sinh giỏi toán, thích sách logic
+
+reader020|HS001020|Kiều Thị Uyên|Nữ|2008-06-26|10B1|0987654340|uyenkt.10b1@email.com|913 Đường Mạc Thị Bưởi, Quận 1, TP.HCM|Kiều Văn Vinh|0912345697|2023-08-15|LIB001020|active|Thích đọc sách ngoại ngữ và du lịch
+
+# HỌC SINH LỚP 11A1
+reader021|HS002001|Nguyễn Thị Vân|Nữ|2007-01-15|11A1|0987654341|vannth.11a1@email.com|124 Đường Trần Quang Khải, Quận 1, TP.HCM|Nguyễn Văn Xuân|0912345698|2022-08-15|LIB002001|active|Học sinh lớp trưởng, rất tích cực
+
+reader022|HS002002|Trần Văn Xuân|Nam|2007-03-22|11A1|0987654342|xuantv.11a1@email.com|235 Đường Tôn Đức Thắng, Quận 1, TP.HCM|Trần Thị Yến|0912345699|2022-08-15|LIB002002|active|Thích sách lịch sử và triết học
+
+reader023|HS002003|Lê Thị Yến|Nữ|2007-05-10|11A1|0987654343|yenlt.11a1@email.com|346 Đường Nguyễn Du, Quận 1, TP.HCM|Lê Văn Zung|0912345700|2022-08-15|LIB002003|active|Học sinh giỏi văn, yêu thích văn học
+
+reader024|HS002004|Phạm Minh Zung|Nam|2007-07-08|11A1|0987654344|zungpm.11a1@email.com|457 Đường Đồng Khởi, Quận 1, TP.HCM|Phạm Thị An|0912345701|2022-08-15|LIB002004|warning|Đã có 2 lần trả muộn
+
+reader025|HS002005|Hoàng Thị An|Nữ|2007-09-30|11A1|0987654345|anht.11a1@email.com|568 Đường Lê Duẩn, Quận 1, TP.HCM|Hoàng Văn Bảo|0912345702|2022-08-15|LIB002005|active|Thích sách khoa học và công nghệ
+
+reader026|HS002006|Vũ Văn Bảo|Nam|2007-11-12|11A1|0987654346|baovv.11a1@email.com|679 Đường Hai Bà Trưng, Quận 1, TP.HCM|Vũ Thị Cẩm|0912345703|2022-08-15|LIB002006|active|Học sinh năng động, đọc nhiều thể loại
+
+reader027|HS002007|Đỗ Thị Cẩm|Nữ|2007-02-25|11A1|0987654347|camdt.11a1@email.com|780 Đường Pasteur, Quận 1, TP.HCM|Đỗ Văn Duy|0912345704|2022-08-15|LIB002007|active|Thích sách tâm lý và kỹ năng sống
+
+reader028|HS002008|Bùi Minh Duy|Nam|2007-04-03|11A1|0987654348|duybm.11a1@email.com|891 Đường Cách Mạng Tháng 8, Quận 3, TP.HCM|Bùi Thị Ế|0912345705|2022-08-15|LIB002008|active|Học sinh chăm chỉ, thích sách tham khảo
+
+# HỌC SINH LỚP 11A2
+reader029|HS002009|Ngô Thị Ế|Nữ|2007-06-18|11A2|0987654349|ent.11a2@email.com|902 Đường Võ Văn Tần, Quận 3, TP.HCM|Ngô Văn Phong|0912345706|2022-08-15|LIB002009|active|Yêu thích văn học và nghệ thuật
+
+reader030|HS002010|Lý Văn Phong|Nam|2007-08-14|11A2|0987654350|phonglv.11a2@email.com|013 Đường Điện Biên Phủ, Quận 3, TP.HCM|Lý Thị Giang|0912345707|2022-08-15|LIB002010|active|Thích sách địa lý và du lịch
+
+reader031|HS002011|Trịnh Thị Giang|Nữ|2007-10-07|11A2|0987654351|giangtt.11a2@email.com|124 Đường Xô Viết Nghệ Tĩnh, Quận 3, TP.HCM|Trịnh Văn Hải|0912345708|2022-08-15|LIB002011|active|Học sinh tích cực, đọc nhiều sách
+
+reader032|HS002012|Cao Văn Hải|Nam|2007-12-20|11A2|0987654352|haicv.11a2@email.com|235 Đường Hoàng Văn Thụ, Quận Tân Bình, TP.HCM|Cao Thị Inh|0912345709|2022-08-15|LIB002012|suspended|Vi phạm quy định thư viện 3 lần
+
+reader033|HS002013|Đinh Thị Inh|Nữ|2007-05-11|11A2|0987654353|inhdt.11a2@email.com|346 Đường Cộng Hòa, Quận Tân Bình, TP.HCM|Đinh Văn Khánh|0912345710|2022-08-15|LIB002013|active|Thích sách khoa học và thí nghiệm
+
+reader034|HS002014|Phan Minh Khánh|Nam|2007-09-28|11A2|0987654354|khanhpm.11a2@email.com|457 Đường Lạc Long Quân, Quận Tân Bình, TP.HCM|Phan Thị Linh|0912345711|2022-08-15|LIB002014|active|Học sinh giỏi, thường mượn sách nâng cao
+
+reader035|HS002015|Tôn Thị Linh|Nữ|2007-03-05|11A2|0987654355|linhtt.11a2@email.com|568 Đường An Dương Vương, Quận 11, TP.HCM|Tôn Văn Minh|0912345712|2022-08-15|LIB002015|active|Thích đọc sách ngoại ngữ
+
+# HỌC SINH LỚP 11B1
+reader036|HS002016|Võ Văn Minh|Nam|2007-07-19|11B1|0987654356|minhvv.11b1@email.com|679 Đường Hùng Vương, Quận 5, TP.HCM|Võ Thị Nga|0912345713|2022-08-15|LIB002016|active|Thích sách tin học và lập trình
+
+reader037|HS002017|Đặng Thị Nga|Nữ|2007-11-16|11B1|0987654357|ngadt.11b1@email.com|780 Đường Trần Hưng Đạo, Quận 5, TP.HCM|Đặng Văn Oanh|0912345714|2022-08-15|LIB002017|active|Học sinh chăm chỉ, đọc đa dạng
+
+reader038|HS002018|Huỳnh Minh Oanh|Nam|2007-04-02|11B1|0987654358|oanhhm.11b1@email.com|891 Đường Nam Kỳ Khởi Nghĩa, Quận 1, TP.HCM|Huỳnh Thị Phúc|0912345715|2022-08-15|LIB002018|active|Thích sách khoa học tự nhiên
+
+reader039|HS002019|Lâm Thị Phúc|Nữ|2007-12-09|11B1|0987654359|phuclth.11b1@email.com|902 Đường Nguyễn Thị Minh Khai, Quận 1, TP.HCM|Lâm Văn Quang|0912345716|2022-08-15|LIB002019|warning|Có 1 cuốn sách quá hạn 5 ngày
+
+reader040|HS002020|Kiều Văn Quang|Nam|2007-06-26|11B1|0987654360|quangkv.11b1@email.com|013 Đường Võ Thị Sáu, Quận 1, TP.HCM|Kiều Thị Rồng|0912345717|2022-08-15|LIB002020|active|Học sinh tích cực, thích sách lịch sử
+
+# HỌC SINH LỚP 12A1
+reader041|HS003001|Nguyễn Thị Rồng|Nữ|2006-01-15|12A1|0987654361|rongnt.12a1@email.com|124 Đường Ký Con, Quận 1, TP.HCM|Nguyễn Văn Sơn|0912345718|2021-08-15|LIB003001|active|Học sinh lớp trưởng, gương mẫu
+
+reader042|HS003002|Trần Văn Sơn|Nam|2006-03-22|12A1|0987654362|sontv.12a1@email.com|235 Đường Mạc Thị Bưởi, Quận 1, TP.HCM|Trần Thị Tâm|0912345719|2021-08-15|LIB003002|active|Thích sách luyện thi đại học
+
+reader043|HS003003|Lê Thị Tâm|Nữ|2006-05-10|12A1|0987654363|tamlt.12a1@email.com|346 Đường Trần Quang Khải, Quận 1, TP.HCM|Lê Văn Uyên|0912345720|2021-08-15|LIB003003|active|Học sinh giỏi, chuẩn bị thi đại học
+
+reader044|HS003004|Phạm Minh Uyên|Nam|2006-07-08|12A1|0987654364|uyenpm.12a1@email.com|457 Đường Tôn Đức Thắng, Quận 1, TP.HCM|Phạm Thị Vân|0912345721|2021-08-15|LIB003004|active|Thích sách khoa học và công nghệ
+
+reader045|HS003005|Hoàng Thị Vân|Nữ|2006-09-30|12A1|0987654365|vanht.12a1@email.com|568 Đường Nguyễn Du, Quận 1, TP.HCM|Hoàng Văn Xuân|0912345722|2021-08-15|LIB003005|active|Yêu thích văn học, chuẩn bị thi khối C
+
+reader046|HS003006|Vũ Văn Xuân|Nam|2006-11-12|12A1|0987654366|xuanvv.12a1@email.com|679 Đường Đồng Khởi, Quận 1, TP.HCM|Vũ Thị Yến|0912345723|2021-08-15|LIB003006|active|Học sinh giỏi toán, chuẩn bị thi khối A
+
+reader047|HS003007|Đỗ Thị Yến|Nữ|2006-02-25|12A1|0987654367|yendt.12a1@email.com|780 Đường Lê Duẩn, Quận 1, TP.HCM|Đỗ Văn Zung|0912345724|2021-08-15|LIB003007|active|Thích sách tâm lý và định hướng nghề nghiệp
+
+reader048|HS003008|Bùi Minh Zung|Nam|2006-04-03|12A1|0987654368|zungbm.12a1@email.com|891 Đường Hai Bà Trưng, Quận 1, TP.HCM|Bùi Thị An|0912345725|2021-08-15|LIB003008|warning|Đang có 3 cuốn sách quá hạn
+
+# HỌC SINH LỚP 12A2
+reader049|HS003009|Ngô Thị An|Nữ|2006-06-18|12A2|0987654369|anng.12a2@email.com|902 Đường Pasteur, Quận 1, TP.HCM|Ngô Văn Bình|0912345726|2021-08-15|LIB003009|active|Học sinh tích cực, chuẩn bị thi đại học
+
+reader050|HS003010|Lý Văn Bình|Nam|2006-08-14|12A2|0987654370|binhlv.12a2@email.com|013 Đường Cách Mạng Tháng 8, Quận 3, TP.HCM|Lý Thị Cẩm|0912345727|2021-08-15|LIB003010|active|Thích sách lịch sử và địa lý
+
+reader051|HS003011|Trịnh Thị Cẩm|Nữ|2006-10-07|12A2|0987654371|camtt.12a2@email.com|124 Đường Võ Văn Tần, Quận 3, TP.HCM|Trịnh Văn Dũng|0912345728|2021-08-15|LIB003011|active|Yêu thích văn học nước ngoài
+
+reader052|HS003012|Cao Văn Dũng|Nam|2006-12-20|12A2|0987654372|dungcv.12a2@email.com|235 Đường Điện Biên Phủ, Quận 3, TP.HCM|Cao Thị Em|0912345729|2021-08-15|LIB003012|active|Học sinh chăm chỉ, thích sách tham khảo
+
+reader053|HS003013|Đinh Thị Em|Nữ|2006-05-11|12A2|0987654373|emdt.12a2@email.com|346 Đường Xô Viết Nghệ Tĩnh, Quận 3, TP.HCM|Đinh Văn Phong|0912345730|2021-08-15|LIB003013|active|Thích sách khoa học và thí nghiệm
+
+reader054|HS003014|Phan Minh Phong|Nam|2006-09-28|12A2|0987654374|phongpm.12a2@email.com|457 Đường Hoàng Văn Thụ, Quận Tân Bình, TP.HCM|Phan Thị Giang|0912345731|2021-08-15|LIB003014|active|Chuẩn bị thi đại học khối A1
+
+reader055|HS003015|Tôn Thị Giang|Nữ|2006-03-05|12A2|0987654375|giangtt.12a2@email.com|568 Đường Cộng Hòa, Quận Tân Bình, TP.HCM|Tôn Văn Hải|0912345732|2021-08-15|LIB003015|active|Thích đọc sách ngoại ngữ và du lịch
+
+# HỌC SINH LỚP 12B1
+reader056|HS003016|Võ Văn Hải|Nam|2006-07-19|12B1|0987654376|haivv.12b1@email.com|679 Đường Lạc Long Quân, Quận Tân Bình, TP.HCM|Võ Thị Inh|0912345733|2021-08-15|LIB003016|active|Thích sách tin học và công nghệ
+
+reader057|HS003017|Đặng Thị Inh|Nữ|2006-11-16|12B1|0987654377|inhdt.12b1@email.com|780 Đường An Dương Vương, Quận 11, TP.HCM|Đặng Văn Khánh|0912345734|2021-08-15|LIB003017|active|Học sinh chăm chỉ, chuẩn bị thi đại học
+
+reader058|HS003018|Huỳnh Minh Khánh|Nam|2006-04-02|12B1|0987654378|khanhhm.12b1@email.com|891 Đường Hùng Vương, Quận 5, TP.HCM|Huỳnh Thị Linh|0912345735|2021-08-15|LIB003018|active|Thích sách khoa học tự nhiên
+
+reader059|HS003019|Lâm Thị Linh|Nữ|2006-12-09|12B1|0987654379|linhlt.12b1@email.com|902 Đường Trần Hưng Đạo, Quận 5, TP.HCM|Lâm Văn Minh|0912345736|2021-08-15|LIB003019|suspended|Mất sách, chưa bồi thường
+
+reader060|HS003020|Kiều Văn Minh|Nam|2006-06-26|12B1|0987654380|minhkv.12b1@email.com|013 Đường Nam Kỳ Khởi Nghĩa, Quận 1, TP.HCM|Kiều Thị Nga|0912345737|2021-08-15|LIB003020|active|Học sinh tích cực, thích sách lịch sử
+
+# GIÁO VIÊN VÀ CÁN BỘ
+reader061|GV001|Nguyễn Thị Hồng|Nữ|1985-05-15|Giáo viên|0901234567|hongnt.gv@school.edu.vn|123 Đường Nguyễn Văn Cừ, Quận 5, TP.HCM|N/A|N/A|2020-09-01|LIB004001|active|Giáo viên Văn học, thích nghiên cứu
+
+reader062|GV002|Trần Văn Minh|Nam|1980-03-22|Giáo viên|0901234568|minhtv.gv@school.edu.vn|456 Đường Võ Văn Kiệt, Quận 5, TP.HCM|N/A|N/A|2018-09-01|LIB004002|active|Giáo viên Toán, thích sách khoa học
+
+reader063|GV003|Lê Thị Lan|Nữ|1982-07-10|Giáo viên|0901234569|lanlt.gv@school.edu.vn|789 Đường Nguyễn Tri Phương, Quận 10, TP.HCM|N/A|N/A|2019-09-01|LIB004003|active|Giáo viên Tiếng Anh, yêu thích văn học
+
+reader064|GV004|Phạm Minh Tuấn|Nam|1978-11-08|Giáo viên|0901234570|tuanpm.gv@school.edu.vn|321 Đường Lý Thường Kiệt, Quận 10, TP.HCM|N/A|N/A|2017-09-01|LIB004004|active|Giáo viên Vật lý, thích sách khoa học
+
+reader065|GV005|Hoàng Thị Mai|Nữ|1983-09-30|Giáo viên|0901234571|maiht.gv@school.edu.vn|654 Đường Sư Vạn Hạnh, Quận 10, TP.HCM|N/A|N/A|2020-09-01|LIB004005|active|Giáo viên Hóa học, nghiên cứu khoa học
+
+reader066|GV006|Vũ Văn Đức|Nam|1981-01-12|Giáo viên|0901234572|ducvv.gv@school.edu.vn|987 Đường 3 Tháng 2, Quận 10, TP.HCM|N/A|N/A|2019-09-01|LIB004006|active|Giáo viên Sinh học, thích sách môi trường
+
+reader067|GV007|Đỗ Thị Phương|Nữ|1984-04-25|Giáo viên|0901234573|phuongdt.gv@school.edu.vn|147 Đường Hòa Hưng, Quận 10, TP.HCM|N/A|N/A|2021-09-01|LIB004007|active|Giáo viên Lịch sử, yêu thích sách cổ
+
+reader068|GV008|Bùi Minh Hùng|Nam|1979-12-03|Giáo viên|0901234574|hungbm.gv@school.edu.vn|258 Đường Nguyễn Chí Thanh, Quận 11, TP.HCM|N/A|N/A|2016-09-01|LIB004008|active|Giáo viên Địa lý, thích sách du lịch
+
+reader069|CB001|Ngô Thị Linh|Nữ|1986-06-18|Cán bộ|0901234575|linhnt.cb@school.edu.vn|369 Đường Lê Hồng Phong, Quận 10, TP.HCM|N/A|N/A|2022-01-15|LIB004009|active|Thủ thư trưởng, quản lý thư viện
+
+reader070|CB002|Lý Văn Thành|Nam|1987-02-14|Cán bộ|0901234576|thanhlv.cb@school.edu.vn|741 Đường Bà Huyện Thanh Quan, Quận 3, TP.HCM|N/A|N/A|2022-01-15|LIB004010|active|Thủ thư phụ, hỗ trợ học sinh
+
+# HỌC SINH CHUYỂN TRƯỜNG/TỐT NGHIỆP
+reader071|HS004001|Trịnh Văn Cường|Nam|2005-03-15|Tốt nghiệp|0987654381|cuongtv.tn@email.com|852 Đường Đinh Tiên Hoàng, Quận 1, TP.HCM|Trịnh Thị Dung|0912345738|2020-08-15|LIB005001|inactive|Đã tốt nghiệp năm 2023
+
+reader072|HS004002|Cao Thị Dung|Nữ|2005-05-22|Tốt nghiệp|0987654382|dungct.tn@email.com|963 Đường Lê Thánh Tôn, Quận 1, TP.HCM|Cao Văn Em|0912345739|2020-08-15|LIB005002|inactive|Đã tốt nghiệp năm 2023
+
+reader073|HS004003|Đinh Minh Em|Nam|2008-01-10|Chuyển trường|0987654383|emdm.ct@email.com|159 Đường Nguyễn Thái Học, Quận 1, TP.HCM|Đinh Thị Phương|0912345740|2023-08-15|LIB005003|inactive|Chuyển trường tháng 12/2023
+
+reader074|HS004004|Phan Thị Phương|Nữ|2008-07-08|Chuyển trường|0987654384|phuongpt.ct@email.com|357 Đường Lý Tự Trọng, Quận 1, TP.HCM|Phan Văn Giang|0912345741|2023-08-15|LIB005004|inactive|Chuyển trường tháng 11/2023
+
+reader075|HS004005|Tôn Văn Giang|Nam|2007-11-30|Chuyển trường|0987654385|giangtv.ct@email.com|468 Đường Mạc Đĩnh Chi, Quận 1, TP.HCM|Tôn Thị Hoa|0912345742|2022-08-15|LIB005005|inactive|Chuyển trường tháng 10/2023
+
+# HỌC SINH CÓ VẤN ĐỀ
+reader076|HS005001|Võ Minh Hoa|Nam|2008-09-12|10C1|0987654386|hoavm.10c1@email.com|579 Đường Nguyễn Văn Cừ, Quận 1, TP.HCM|Võ Thị Inh|0912345743|2023-08-15|LIB006001|suspended|Làm hỏng sách 2 lần, đang bị đình chỉ
+
+reader077|HS005002|Đặng Thị Inh|Nữ|2007-04-25|11C1|0987654387|inhdt.11c1@email.com|680 Đường Trần Hưng Đạo, Quận 1, TP.HCM|Đặng Văn Khánh|0912345744|2022-08-15|LIB006002|warning|Trả muộn 5 lần, cảnh cáo lần cuối
+
+reader078|HS005003|Huỳnh Văn Khánh|Nam|2006-12-03|12C1|0987654388|khanhhv.12c1@email.com|791 Đường Nguyễn Thái Bình, Quận 1, TP.HCM|Huỳnh Thị Linh|0912345745|2021-08-15|LIB006003|suspended|Mất sách 3 cuốn, chưa bồi thường
+
+reader079|HS005004|Lâm Thị Linh|Nữ|2008-06-18|10C2|0987654389|linhlt.10c2@email.com|802 Đường Phạm Ngũ Lão, Quận 1, TP.HCM|Lâm Văn Minh|0912345746|2023-08-15|LIB006004|warning|Vi phạm quy định thư viện 2 lần
+
+reader080|HS005005|Kiều Minh Minh|Nam|2007-08-26|11C2|0987654390|minhkm.11c2@email.com|913 Đường Bùi Viện, Quận 1, TP.HCM|Kiều Thị Nga|0912345747|2022-08-15|LIB006005|warning|Có 2 cuốn sách quá hạn 10 ngày
+
+# HỌC SINH MỚI CHUYỂN ĐẾN
+reader081|HS006001|Nguyễn Minh Nga|Nữ|2008-02-14|10D1|0987654391|ngann.10d1@email.com|124 Đường Cô Giang, Quận 1, TP.HCM|Nguyễn Văn Oanh|0912345748|2024-01-15|LIB007001|active|Học sinh chuyển từ trường khác, tích cực
+
+reader082|HS006002|Trần Văn Oanh|Nam|2007-10-07|11D1|0987654392|oanhtv.11d1@email.com|235 Đường Cô Bắc, Quận 1, TP.HCM|Trần Thị Phúc|0912345749|2024-01-15|LIB007002|active|Chuyển từ Hà Nội, thích đọc sách
+
+reader083|HS006003|Lê Thị Phúc|Nữ|2006-05-20|12D1|0987654393|phuclth.12d1@email.com|346 Đường Nguyễn An Ninh, Quận 1, TP.HCM|Lê Văn Quang|0912345750|2024-01-15|LIB007003|active|Học sinh giỏi, chuẩn bị thi đại học
+
+reader084|HS006004|Phạm Minh Quang|Nam|2008-09-11|10D2|0987654394|quangpm.10d2@email.com|457 Đường Nguyễn Cư Trinh, Quận 1, TP.HCM|Phạm Thị Rồng|0912345751|2024-01-15|LIB007004|active|Thích sách khoa học và công nghệ
+
+reader085|HS006005|Hoàng Thị Rồng|Nữ|2007-03-28|11D2|0987654395|ronghthi.11d2@email.com|568 Đường Hai Bà Trưng, Quận 1, TP.HCM|Hoàng Văn Sơn|0912345752|2024-01-15|LIB007005|active|Yêu thích văn học và nghệ thuật
+
+# HỌC SINH QUỐC TẾ
+reader086|HS007001|David Smith|Nam|2008-01-15|10INT|+84987654396|david.smith@intschool.edu.vn|123 International Street, District 2, HCMC|John Smith|+84912345753|2023-08-15|LIB008001|active|Học sinh quốc tế, thích sách tiếng Anh
+
+reader087|HS007002|Emma Johnson|Nữ|2007-06-22|11INT|+84987654397|emma.johnson@intschool.edu.vn|456 Global Avenue, District 2, HCMC|Michael Johnson|+84912345754|2022-08-15|LIB008002|active|Học sinh Mỹ, yêu thích văn học
+
+reader088|HS007003|Tanaka Hiroshi|Nam|2006-11-10|12INT|+84987654398|hiroshi.tanaka@intschool.edu.vn|789 Asia Road, District 7, HCMC|Tanaka Kenji|+84912345755|2021-08-15|LIB008003|active|Học sinh Nhật, thích manga và khoa học
+
+reader089|HS007004|Kim Min-jun|Nam|2008-04-08|10INT|+84987654399|minjun.kim@intschool.edu.vn|321 Korea Street, District 7, HCMC|Kim Dong-ho|+84912345756|2023-08-15|LIB008004|active|Học sinh Hàn Quốc, thích công nghệ
+
+reader090|HS007005|Li Wei|Nữ|2007-12-30|11INT|+84987654400|wei.li@intschool.edu.vn|654 China Town, District 5, HCMC|Li Ming|+84912345757|2022-08-15|LIB008005|active|Học sinh Trung Quốc, thích toán học
+
+# HỌC SINH HỌC BỔ TÚC
+reader091|HS008001|Nguyễn Văn Tài|Nam|1995-05-15|Bổ túc|0987654401|taingv.bt@email.com|987 Đường Lê Văn Sỹ, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB009001|active|Học sinh bổ túc văn hóa, đi làm ban ngày
+
+reader092|HS008002|Trần Thị Uyên|Nữ|1994-03-22|Bổ túc|0987654402|uyentt.bt@email.com|147 Đường Nguyễn Đình Chiểu, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB009002|active|Học bổ túc để thi đại học, thích văn học
+
+reader093|HS008003|Lê Minh Vũ|Nam|1996-07-10|Bổ túc|0987654403|vulm.bt@email.com|258 Đường Võ Thị Sáu, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB009003|active|Công nhân, học bổ túc buổi tối
+
+reader094|HS008004|Phạm Thị Xuân|Nữ|1993-11-08|Bổ túc|0987654404|xuanpt.bt@email.com|369 Đường Cách Mạng Tháng 8, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB009004|active|Nhân viên văn phòng, học thêm
+
+reader095|HS008005|Hoàng Văn Yên|Nam|1997-09-30|Bổ túc|0987654405|yenhv.bt@email.com|741 Đường Điện Biên Phủ, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB009005|active|Thích sách kỹ thuật và công nghệ
+
+# GIÁO VIÊN THỈNH GIẢNG
+reader096|GV009|Dr. Nguyễn Thị Zung|Nữ|1975-01-12|Giảng viên|0901234577|zungnt.gv@university.edu.vn|852 Đường Nguyễn Văn Trỗi, Quận Phú Nhuận, TP.HCM|N/A|N/A|2023-09-01|LIB004011|active|Tiến sĩ Văn học, giảng dạy thỉnh giảng
+
+reader097|GV010|Prof. Trần Minh Anh|Nam|1970-08-25|Giáo sư|0901234578|anhtm.prof@university.edu.vn|963 Đường Hoàng Minh Giám, Quận Phú Nhuận, TP.HCM|N/A|N/A|2023-09-01|LIB004012|active|Giáo sư Toán học, nghiên cứu khoa học
+
+reader098|GV011|Dr. Lê Thị Bích|Nữ|1978-04-18|Giảng viên|0901234579|bichlt.dr@university.edu.vn|159 Đường Phan Đăng Lưu, Quận Phú Nhuận, TP.HCM|N/A|N/A|2023-09-01|LIB004013|active|Tiến sĩ Hóa học, chuyên gia môi trường
+
+reader099|GV012|MSc. Phạm Văn Cường|Nam|1982-12-05|Thạc sĩ|0901234580|cuongpv.msc@university.edu.vn|357 Đường Nguyễn Văn Đậu, Quận Bình Thạnh, TP.HCM|N/A|N/A|2023-09-01|LIB004014|active|Thạc sĩ Tin học, giảng dạy lập trình
+
+reader100|GV013|Dr. Hoàng Thị Dung|Nữ|1980-06-30|Giảng viên|0901234581|dunghthi.dr@university.edu.vn|468 Đường Xô Viết Nghệ Tĩnh, Quận Bình Thạnh, TP.HCM|N/A|N/A|2023-09-01|LIB004015|active|Tiến sĩ Sinh học, nghiên cứu di truyền
+
+# NHÂN VIÊN HÀNH CHÍNH
+reader101|NV001|Vũ Thị Em|Nữ|1988-02-14|Nhân viên|0901234582|emvt.nv@school.edu.vn|579 Đường Nguyễn Xí, Quận Bình Thạnh, TP.HCM|N/A|N/A|2022-03-01|LIB004016|active|Nhân viên văn phòng, thích đọc sách
+
+reader102|NV002|Đỗ Văn Phong|Nam|1985-10-07|Nhân viên|0901234583|phongdv.nv@school.edu.vn|680 Đường Ung Văn Khiêm, Quận Bình Thạnh, TP.HCM|N/A|N/A|2021-06-15|LIB004017|active|Nhân viên kế toán, thích sách kinh tế
+
+reader103|NV003|Bùi Thị Giang|Nữ|1990-05-20|Nhân viên|0901234584|giangbt.nv@school.edu.vn|791 Đường Đinh Bộ Lĩnh, Quận Bình Thạnh, TP.HCM|N/A|N/A|2022-08-01|LIB004018|active|Nhân viên y tế trường, quan tâm sức khỏe
+
+reader104|NV004|Lâm Văn Hải|Nam|1987-09-11|Nhân viên|0901234585|hailv.nv@school.edu.vn|802 Đường Nơ Trang Long, Quận Bình Thạnh, TP.HCM|N/A|N/A|2020-12-01|LIB004019|active|Nhân viên bảo vệ, thích sách lịch sử
+
+reader105|NV005|Kiều Thị Inh|Nữ|1989-03-28|Nhân viên|0901234586|inhkt.nv@school.edu.vn|913 Đường Bạch Đằng, Quận Bình Thạnh, TP.HCM|N/A|N/A|2023-01-15|LIB004020|active|Nhân viên làm vườn, yêu thiên nhiên
+
+# PHỤ HUYNH ĐĂNG KÝ ĐỌC
+reader106|PH001|Nguyễn Văn Khánh|Nam|1975-08-15|Phụ huynh|0912345758|khanhngv.ph@email.com|124 Đường Lê Lợi, Quận 1, TP.HCM|N/A|N/A|2023-09-01|LIB010001|active|Phụ huynh HS Nguyễn Văn An, thích đọc sách
+
+reader107|PH002|Trần Thị Linh|Nữ|1978-04-22|Phụ huynh|0912345759|linhtt.ph@email.com|456 Đường Nguyễn Huệ, Quận 1, TP.HCM|N/A|N/A|2023-09-01|LIB010002|active|Phụ huynh HS Trần Thị Bình, yêu văn học
+
+reader108|PH003|Lê Văn Minh|Nam|1973-01-10|Phụ huynh|0912345760|minhlv.ph@email.com|789 Đường Hai Bà Trưng, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB010003|active|Phụ huynh HS Lê Minh Cường, kỹ sư
+
+reader109|PH004|Phạm Thị Nga|Nữ|1980-07-08|Phụ huynh|0912345761|ngapt.ph@email.com|321 Đường Lý Tự Trọng, Quận 1, TP.HCM|N/A|N/A|2023-09-01|LIB010004|active|Phụ huynh HS Phạm Thị Dung, bác sĩ
+
+reader110|PH005|Hoàng Văn Oanh|Nam|1976-11-30|Phụ huynh|0912345762|oanhhv.ph@email.com|654 Đường Pasteur, Quận 3, TP.HCM|N/A|N/A|2023-09-01|LIB010005|active|Phụ huynh HS Hoàng Văn Em, giáo viên
+
+# CỰU HỌC SINH
+reader111|CHS001|Nguyễn Thị Phúc|Nữ|2003-03-15|Cựu HS|0987654406|phucnt.chs@email.com|987 Đường Lê Văn Sỹ, Quận 3, TP.HCM|N/A|N/A|2024-01-01|LIB011001|active|Cựu học sinh khóa 2018-2021, hiện là sinh viên
+
+reader112|CHS002|Trần Văn Quang|Nam|2003-05-22|Cựu HS|0987654407|quangtv.chs@email.com|147 Đường Nguyễn Đình Chiểu, Quận 3, TP.HCM|N/A|N/A|2024-01-01|LIB011002|active|Cựu học sinh, hiện làm việc tại công ty IT
+
+reader113|CHS003|Lê Thị Rồng|Nữ|2004-01-10|Cựu HS|0987654408|ronglt.chs@email.com|258 Đường Võ Thị Sáu, Quận 3, TP.HCM|N/A|N/A|2024-01-01|LIB011003|active|Cựu học sinh, đang học đại học Y
+
+reader114|CHS004|Phạm Minh Sơn|Nam|2003-07-08|Cựu HS|0987654409|sonpm.chs@email.com|369 Đường Cách Mạng Tháng 8, Quận 3, TP.HCM|N/A|N/A|2024-01-01|LIB011004|active|Cựu học sinh, kỹ sư phần mềm
+
+reader115|CHS005|Hoàng Thị Tâm|Nữ|2004-11-30|Cựu HS|0987654410|tamht.chs@email.com|741 Đường Điện Biên Phủ, Quận 3, TP.HCM|N/A|N/A|2024-01-01|LIB011005|active|Cựu học sinh, giáo viên mầm non
+
+# KHÁCH THAM QUAN/NGHIÊN CỨU
+reader116|KH001|Dr. Smith Johnson|Nam|1965-05-15|Khách|+84901234587|smith.johnson@research.org|International Research Center, District 1, HCMC|N/A|N/A|2024-02-01|LIB012001|temporary|Nhà nghiên cứu quốc tế, tham quan 1 tháng
+
+reader117|KH002|Prof. Yamamoto Kenji|Nam|1960-08-22|Khách|+84901234588|kenji.yamamoto@university.jp|Tokyo University, Japan|N/A|N/A|2024-02-01|LIB012002|temporary|Giáo sư Nhật Bản, nghiên cứu giáo dục
+
+reader118|KH003|Nguyễn Thị Uyên|Nữ|1985-01-10|Khách|0901234589|uyennt.kh@ministry.gov.vn|Bộ Giáo dục và Đào tạo, Hà Nội|N/A|N/A|2024-02-15|LIB012003|temporary|Cán bộ Bộ GD&ĐT, khảo sát thư viện
+
+reader119|KH004|Trần Văn Vũ|Nam|1978-07-08|Khách|0901234590|vutv.kh@publisher.com.vn|NXB Giáo dục Việt Nam, TP.HCM|N/A|N/A|2024-02-20|LIB012004|temporary|Đại diện nhà xuất bản, tham quan
+
+reader120|KH005|Lê Thị Xuân|Nữ|1982-11-30|Khách|0901234591|xuanlt.kh@library.org.vn|Thư viện Khoa học Tổng hợp TP.HCM|N/A|N/A|2024-02-25|LIB012005|temporary|Thủ thư chuyên nghiệp, trao đổi kinh nghiệm
+
+# Tổng cộng: 120 độc giả
+# Phân bố:
+# - Học sinh lớp 10: 20 người (reader001-020)
+# - Học sinh lớp 11: 20 người (reader021-040) 
+# - Học sinh lớp 12: 20 người (reader041-060)
+# - Giáo viên chính thức: 8 người (reader061-068)
+# - Cán bộ thư viện: 2 người (reader069-070)
+# - Học sinh đã tốt nghiệp/chuyển trường: 5 người (reader071-075)
+# - Học sinh có vấn đề: 5 người (reader076-080)
+# - Học sinh mới chuyển đến: 5 người (reader081-085)
+# - Học sinh quốc tế: 5 người (reader086-090)
+# - Học sinh bổ túc: 5 người (reader091-095)
+# - Giáo viên thỉnh giảng: 5 người (reader096-100)
+# - Nhân viên hành chính: 5 người (reader101-105)
+# - Phụ huynh: 5 người (reader106-110)
+# - Cựu học sinh: 5 người (reader111-115)
+# - Khách tham quan: 5 người (reader116-120)
+
+# Trạng thái:
+# - active: 105 người (87.5%)
+# - warning: 8 người (6.7%) - có vấn đề nhẹ
+# - suspended: 4 người (3.3%) - bị đình chỉ
+# - inactive: 3 người (2.5%) - không còn hoạt động
+# - temporary: 5 người - khách tham quan tạm thời
+
+# Ghi chú về format:
+# ID|StudentID|FullName|Gender|DateOfBirth|ClassName|Phone|Email|Address|ParentName|ParentPhone|RegistrationDate|CardNumber|Status|Notes

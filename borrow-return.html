@@ -1,0 +1,3649 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mượn/Trả sách - Hệ thống quản lý thư viện</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-custom {
+            background: linear-gradient(45deg, #2c3e50, #3498db);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            padding: 20px 0;
+        }
+        
+        .page-header {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .action-tabs {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .borrow-return-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            padding: 12px 15px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.25);
+        }
+        
+        .btn-custom {
+            border-radius: 10px;
+            padding: 12px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            border: none;
+            color: white;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+            color: white;
+        }
+        
+        .btn-success-custom {
+            background: linear-gradient(45deg, #27ae60, #229954);
+            border: none;
+            color: white;
+        }
+        
+        .btn-success-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
+            color: white;
+        }
+        
+        .btn-danger-custom {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border: none;
+            color: white;
+        }
+        
+        .btn-danger-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.3);
+            color: white;
+        }
+        
+        .btn-warning-custom {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            border: none;
+            color: white;
+        }
+        
+        .btn-warning-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
+            color: white;
+        }
+        
+        .nav-tabs-custom {
+            border-bottom: 3px solid #e74c3c;
+        }
+        
+        .nav-tabs-custom .nav-link {
+            border: none;
+            border-radius: 10px 10px 0 0;
+            padding: 15px 25px;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-tabs-custom .nav-link:hover {
+            background: #f8f9fa;
+            color: #e74c3c;
+        }
+        
+        .nav-tabs-custom .nav-link.active {
+            background: #e74c3c;
+            color: white;
+            border-bottom: 3px solid #e74c3c;
+        }
+        
+        .search-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .search-result {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .search-result:hover {
+            border-color: #e74c3c;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.1);
+        }
+        
+        .search-result.selected {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+        
+        .reader-info {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .book-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .book-item:hover {
+            border-color: #27ae60;
+            box-shadow: 0 5px 15px rgba(39, 174, 96, 0.1);
+        }
+        
+        .book-item.overdue {
+            border-color: #e74c3c;
+            background: #fff5f5;
+        }
+        
+        .book-item.selected {
+            border-color: #27ae60;
+            background: #f0fff4;
+        }
+        
+        .status-badge {
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-borrowed {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .status-returned {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-overdue {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .status-renewed {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .table-custom {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+        }
+        
+        .table-custom thead {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .table-custom thead th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .table-custom tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .table-custom tbody tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-row {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            color: #6c757d;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .quick-actions {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .quick-action-btn {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action-btn:hover {
+            border-color: #e74c3c;
+            background: #fff5f5;
+            transform: translateY(-2px);
+        }
+        
+        .barcode-scanner {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .barcode-scanner.active {
+            border-color: #27ae60;
+            background: #f0fff4;
+        }
+        
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .loading-spinner {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        
+        .modal-custom .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .modal-custom .modal-header {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .receipt-print {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .receipt-header {
+            text-align: center;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .fine-calculator {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .fine-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #856404;
+        }
+        
+        @media (max-width: 768px) {
+            .btn-custom {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .table-responsive {
+                font-size: 0.9rem;
+            }
+            
+            .search-result, .book-item {
+                padding: 10px;
+            }
+            
+            .reader-info {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+        <div class="container">
+            <a class="navbar-brand" href="dashboard.html">
+                <i class="fas fa-exchange-alt"></i> 
+                Mượn/Trả sách
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">
+                            <i class="fas fa-home"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="books.html">
+                            <i class="fas fa-book"></i> Quản lý sách
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="readers.html">
+                            <i class="fas fa-users"></i> Quản lý độc giả
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="borrow-return.html">
+                            <i class="fas fa-exchange-alt"></i> Mượn/Trả sách
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.html">
+                            <i class="fas fa-chart-bar"></i> Báo cáo
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="navbar-nav">
+                    <span class="nav-link">
+                        <i class="fas fa-user"></i> 
+                        <span id="currentUser">Admin</span>
+                    </span>
+                    <button class="btn btn-outline-light btn-sm" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2 class="mb-0">
+                        <i class="fas fa-exchange-alt text-danger"></i> 
+                        Mượn/Trả sách
+                    </h2>
+                    <p class="text-muted mb-0">Quản lý việc mượn và trả sách của độc giả</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <button class="btn btn-primary-custom btn-custom" onclick="showBorrowHistoryModal()">
+                        <i class="fas fa-history"></i> Lịch sử mượn/trả
+                    </button>
+                    <button class="btn btn-warning-custom btn-custom" onclick="showOverdueModal()">
+                        <i class="fas fa-exclamation-triangle"></i> Sách quá hạn
+                    </button>
+                    <button class="btn btn-success-custom btn-custom" onclick="printDailyReport()">
+                        <i class="fas fa-print"></i> In báo cáo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Row -->
+        <div class="stats-row">
+            <div class="row">
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-primary" id="todayBorrowCount">0</div>
+                        <div class="stat-label">Mượn hôm nay</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-success" id="todayReturnCount">0</div>
+                        <div class="stat-label">Trả hôm nay</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-warning" id="totalBorrowedCount">0</div>
+                        <div class="stat-label">Đang mượn</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-danger" id="overdueCount">0</div>
+                        <div class="stat-label">Quá hạn</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-info" id="renewedCount">0</div>
+                        <div class="stat-label">Gia hạn</div>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number text-secondary" id="totalFineAmount">0đ</div>
+                        <div class="stat-label">Tổng phí phạt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Tabs -->
+        <div class="action-tabs">
+            <ul class="nav nav-tabs nav-tabs-custom" id="actionTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="borrow-tab" data-bs-toggle="tab" data-bs-target="#borrow" type="button" role="tab">
+                        <i class="fas fa-plus-circle"></i> Mượn sách
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="return-tab" data-bs-toggle="tab" data-bs-target="#return" type="button" role="tab">
+                        <i class="fas fa-undo"></i> Trả sách
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="renew-tab" data-bs-toggle="tab" data-bs-target="#renew" type="button" role="tab">
+                        <i class="fas fa-calendar-plus"></i> Gia hạn
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="search-tab" data-bs-toggle="tab" data-bs-target="#search" type="button" role="tab">
+                        <i class="fas fa-search"></i> Tra cứu
+                    </button>
+                </li>
+            </ul>
+            
+            <div class="tab-content mt-4" id="actionTabsContent">
+                <!-- Borrow Tab -->
+                <div class="tab-pane fade show active" id="borrow" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Reader Search -->
+                            <div class="search-section">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-user-search text-primary"></i> 
+                                    Tìm độc giả
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="readerSearchInput" 
+                                                   placeholder="Nhập mã thẻ hoặc tên độc giả..."
+                                                   onkeyup="handleReaderSearch(event)">
+                                            <button class="btn btn-primary-custom" onclick="searchReader()">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <button class="btn btn-outline-secondary w-100" onclick="scanReaderCard()">
+                                            <i class="fas fa-qrcode"></i> Quét mã thẻ
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="readerSearchResults"></div>
+                            </div>
+                            
+                            <!-- Selected Reader Info -->
+                            <div id="selectedReaderInfo" class="d-none">
+                                <div class="reader-info">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="mb-1" id="selectedReaderName">Tên độc giả</h5>
+                                            <p class="mb-1">
+                                                <strong>Mã thẻ:</strong> <span id="selectedReaderId"></span> |
+                                                <strong>Lớp:</strong> <span id="selectedReaderClass"></span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <strong>Hạn thẻ:</strong> <span id="selectedReaderExpiry"></span> |
+                                                <strong>Đang mượn:</strong> <span id="selectedReaderBorrowed">0</span> sách
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <button class="btn btn-outline-light" onclick="clearSelectedReader()">
+                                                <i class="fas fa-times"></i> Hủy chọn
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Book Search -->
+                            <div class="search-section">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-book text-success"></i> 
+                                    Chọn sách mượn
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="bookSearchInput" 
+                                                   placeholder="Nhập mã sách hoặc tên sách..."
+                                                   onkeyup="handleBookSearch(event)">
+                                            <button class="btn btn-success-custom" onclick="searchBook()">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <button class="btn btn-outline-secondary w-100" onclick="scanBookBarcode()">
+                                            <i class="fas fa-barcode"></i> Quét mã vạch
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="bookSearchResults"></div>
+                            </div>
+                            
+                            <!-- Selected Books -->
+                            <div id="selectedBooksSection" class="d-none">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-list text-warning"></i> 
+                                    Sách đã chọn (<span id="selectedBooksCount">0</span>)
+                                </h5>
+                                <div id="selectedBooksList"></div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-danger-custom btn-custom" onclick="processBorrow()">
+                                        <i class="fas fa-check"></i> Xác nhận mượn sách
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-custom" onclick="clearSelectedBooks()">
+                                        <i class="fas fa-times"></i> Xóa tất cả
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <!-- Quick Actions -->
+                            <div class="quick-actions">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-bolt text-warning"></i> 
+                                    Thao tác nhanh
+                                </h6>
+                                
+                                <button class="quick-action-btn" onclick="showFrequentBooksModal()">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <div class="mt-2">
+                                        <strong>Sách phổ biến</strong>
+                                        <small class="d-block text-muted">Chọn từ sách hay mượn</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showNewBooksModal()">
+                                    <i class="fas fa-plus text-success"></i>
+                                    <div class="mt-2">
+                                        <strong>Sách mới</strong>
+                                        <small class="d-block text-muted">Sách mới nhập gần đây</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showRecommendedBooksModal()">
+                                    <i class="fas fa-thumbs-up text-info"></i>
+                                    <div class="mt-2">
+                                        <strong>Gợi ý cho độc giả</strong>
+                                        <small class="d-block text-muted">Dựa trên lịch sử mượn</small>
+                                    </div>
+                                </button>
+                            </div>
+                            
+                            <!-- Barcode Scanner -->
+                            <div class="barcode-scanner" id="barcodeScanner">
+                                <i class="fas fa-qrcode fa-3x text-muted mb-3"></i>
+                                <h6>Quét mã vạch</h6>
+                                <p class="text-muted mb-3">Nhấn để kích hoạt camera quét mã</p>
+                                <button class="btn btn-outline-primary" onclick="toggleBarcodeScanner()">
+                                    <i class="fas fa-camera"></i> Bật camera
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Return Tab -->
+                <div class="tab-pane fade" id="return" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Reader Search for Return -->
+                            <div class="search-section">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-user-check text-primary"></i> 
+                                    Tìm độc giả trả sách
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="returnReaderSearchInput" 
+                                                   placeholder="Nhập mã thẻ hoặc tên độc giả..."
+                                                   onkeyup="handleReturnReaderSearch(event)">
+                                            <button class="btn btn-primary-custom" onclick="searchReturnReader()">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <button class="btn btn-outline-secondary w-100" onclick="scanReturnReaderCard()">
+                                            <i class="fas fa-qrcode"></i> Quét mã thẻ
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="returnReaderSearchResults"></div>
+                            </div>
+                            
+                            <!-- Borrowed Books List -->
+                            <div id="borrowedBooksSection" class="d-none">
+                                <div class="reader-info">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="mb-1" id="returnReaderName">Tên độc giả</h5>
+                                            <p class="mb-1">
+                                                <strong>Mã thẻ:</strong> <span id="returnReaderId"></span> |
+                                                <strong>Lớp:</strong> <span id="returnReaderClass"></span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <strong>Đang mượn:</strong> <span id="returnReaderBorrowedCount">0</span> sách |
+                                                <strong>Quá hạn:</strong> <span id="returnReaderOverdueCount">0</span> sách
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <button class="btn btn-outline-light" onclick="clearReturnReader()">
+                                                <i class="fas fa-times"></i> Hủy chọn
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h5 class="mb-3">
+                                    <i class="fas fa-books text-warning"></i> 
+                                    Sách đang mượn
+                                </h5>
+                                
+                                <div id="borrowedBooksList"></div>
+                                
+                                <!-- Fine Calculator -->
+                                <div id="fineCalculator" class="fine-calculator d-none">
+                                    <h6><i class="fas fa-calculator text-warning"></i> Tính phí phạt</h6>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <p class="mb-1"><strong>Số ngày quá hạn:</strong> <span id="overdueDays">0</span> ngày</p>
+                                            <p class="mb-1"><strong>Phí phạt/ngày:</strong> 2,000đ</p>
+                                        </div>
+                                        <div class="col-md-6 text-end">
+                                            <div class="fine-amount" id="totalFine">0đ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-success-custom btn-custom" onclick="processReturn()">
+                                        <i class="fas fa-check"></i> Xác nhận trả sách
+                                    </button>
+                                    <button class="btn btn-warning-custom btn-custom" onclick="processReturnWithFine()">
+                                        <i class="fas fa-money-bill"></i> Trả sách + Thu phí
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <!-- Quick Return -->
+                            <div class="quick-actions">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-bolt text-success"></i> 
+                                    Trả sách nhanh
+                                </h6>
+                                
+                                <div class="search-section">
+                                    <label class="form-label">Quét mã sách trả:</label>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" id="quickReturnBookCode" 
+                                               placeholder="Mã sách..."
+                                               onkeyup="handleQuickReturn(event)">
+                                        <button class="btn btn-success-custom" onclick="quickReturnBook()">
+                                            <i class="fas fa-undo"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <button class="quick-action-btn" onclick="showOverdueBooksModal()">
+                                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                                    <div class="mt-2">
+                                        <strong>Sách quá hạn</strong>
+                                        <small class="d-block text-muted">Danh sách sách quá hạn</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showDueTodayModal()">
+                                    <i class="fas fa-clock text-warning"></i>
+                                    <div class="mt-2">
+                                        <strong>Hết hạn hôm nay</strong>
+                                        <small class="d-block text-muted">Sách hết hạn trong ngày</small>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Renew Tab -->
+                <div class="tab-pane fade" id="renew" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Reader Search for Renewal -->
+                            <div class="search-section">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-user-clock text-primary"></i> 
+                                    Tìm độc giả gia hạn
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="renewReaderSearchInput" 
+                                                   placeholder="Nhập mã thẻ hoặc tên độc giả..."
+                                                   onkeyup="handleRenewReaderSearch(event)">
+                                            <button class="btn btn-primary-custom" onclick="searchRenewReader()">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <button class="btn btn-outline-secondary w-100" onclick="scanRenewReaderCard()">
+                                            <i class="fas fa-qrcode"></i> Quét mã thẻ
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div id="renewReaderSearchResults"></div>
+                            </div>
+                            
+                            <!-- Renewable Books List -->
+                            <div id="renewableBooksSection" class="d-none">
+                                <div class="reader-info">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-8">
+                                            <h5 class="mb-1" id="renewReaderName">Tên độc giả</h5>
+                                            <p class="mb-1">
+                                                <strong>Mã thẻ:</strong> <span id="renewReaderId"></span> |
+                                                <strong>Lớp:</strong> <span id="renewReaderClass"></span>
+                                            </p>
+                                            <p class="mb-0">
+                                                <strong>Có thể gia hạn:</strong> <span id="renewableCount">0</span> sách
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4 text-end">
+                                            <button class="btn btn-outline-light" onclick="clearRenewReader()">
+                                                <i class="fas fa-times"></i> Hủy chọn
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h5 class="mb-3">
+                                    <i class="fas fa-calendar-plus text-info"></i> 
+                                    Chọn sách gia hạn
+                                </h5>
+                                
+                                <div id="renewableBooksList"></div>
+                                
+                                <div class="mt-3">
+                                    <button class="btn btn-warning-custom btn-custom" onclick="processRenewal()">
+                                        <i class="fas fa-calendar-plus"></i> Xác nhận gia hạn
+                                    </button>
+                                    <button class="btn btn-primary-custom btn-custom" onclick="renewAllBooks()">
+                                        <i class="fas fa-calendar-check"></i> Gia hạn tất cả
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <!-- Renewal Rules -->
+                            <div class="quick-actions">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-info-circle text-info"></i> 
+                                    Quy định gia hạn
+                                </h6>
+                                
+                                <div class="alert alert-info">
+                                    <ul class="mb-0">
+                                        <li>Mỗi sách chỉ được gia hạn tối đa 2 lần</li>
+                                        <li>Thời gian gia hạn: 14 ngày</li>
+                                        <li>Không gia hạn sách quá hạn</li>
+                                        <li>Không gia hạn khi có sách khác quá hạn</li>
+                                        <li>Phí gia hạn: 5,000đ/sách</li>
+                                    </ul>
+                                </div>
+                                
+                                <button class="quick-action-btn" onclick="showRenewalHistoryModal()">
+                                    <i class="fas fa-history text-info"></i>
+                                    <div class="mt-2">
+                                        <strong>Lịch sử gia hạn</strong>
+                                        <small class="d-block text-muted">Xem lịch sử gia hạn</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showRenewalStatsModal()">
+                                    <i class="fas fa-chart-bar text-success"></i>
+                                    <div class="mt-2">
+                                        <strong>Thống kê gia hạn</strong>
+                                        <small class="d-block text-muted">Báo cáo gia hạn</small>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Tab -->
+                <div class="tab-pane fade" id="search" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <!-- Advanced Search -->
+                            <div class="search-section">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-search-plus text-primary"></i> 
+                                    Tra cứu nâng cao
+                                </h5>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Tìm theo:</label>
+                                        <select class="form-select" id="searchType">
+                                            <option value="reader">Độc giả</option>
+                                            <option value="book">Sách</option>
+                                            <option value="transaction">Giao dịch</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Từ khóa:</label>
+                                        <input type="text" class="form-control" id="searchKeyword" 
+                                               placeholder="Nhập từ khóa tìm kiếm...">
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Từ ngày:</label>
+                                        <input type="date" class="form-control" id="searchFromDate">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Đến ngày:</label>
+                                        <input type="date" class="form-control" id="searchToDate">
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Trạng thái:</label>
+                                        <select class="form-select" id="searchStatus">
+                                            <option value="">Tất cả</option>
+                                            <option value="borrowed">Đang mượn</option>
+                                            <option value="returned">Đã trả</option>
+                                            <option value="overdue">Quá hạn</option>
+                                            <option value="renewed">Đã gia hạn</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Lớp:</label>
+                                        <select class="form-select" id="searchClass">
+                                            <option value="">Tất cả lớp</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="text-center">
+                                    <button class="btn btn-primary-custom btn-custom" onclick="performAdvancedSearch()">
+                                        <i class="fas fa-search"></i> Tìm kiếm
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-custom" onclick="clearSearchForm()">
+                                        <i class="fas fa-times"></i> Xóa form
+                                    </button>
+                                    <button class="btn btn-success-custom btn-custom" onclick="exportSearchResults()">
+                                        <i class="fas fa-download"></i> Xuất kết quả
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Search Results -->
+                            <div id="searchResultsSection" class="d-none">
+                                <h5 class="mb-3">
+                                    <i class="fas fa-list text-success"></i> 
+                                    Kết quả tìm kiếm (<span id="searchResultsCount">0</span>)
+                                </h5>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-custom">
+                                        <thead id="searchResultsHeader">
+                                            <!-- Dynamic header based on search type -->
+                                        </thead>
+                                        <tbody id="searchResultsBody">
+                                            <!-- Search results will be displayed here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <!-- Pagination for search results -->
+                                <nav aria-label="Search results pagination" class="mt-4">
+                                    <ul class="pagination justify-content-center" id="searchPagination">
+                                        <!-- Pagination will be generated here -->
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <!-- Quick Search -->
+                            <div class="quick-actions">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-bolt text-warning"></i> 
+                                    Tra cứu nhanh
+                                </h6>
+                                
+                                <button class="quick-action-btn" onclick="showTodayTransactions()">
+                                    <i class="fas fa-calendar-day text-primary"></i>
+                                    <div class="mt-2">
+                                        <strong>Giao dịch hôm nay</strong>
+                                        <small class="d-block text-muted">Mượn/trả trong ngày</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showOverdueBooks()">
+                                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                                    <div class="mt-2">
+                                        <strong>Sách quá hạn</strong>
+                                        <small class="d-block text-muted">Tất cả sách quá hạn</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showPopularBooks()">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <div class="mt-2">
+                                        <strong>Sách phổ biến</strong>
+                                        <small class="d-block text-muted">Sách được mượn nhiều</small>
+                                    </div>
+                                </button>
+                                
+                                <button class="quick-action-btn" onclick="showActiveReaders()">
+                                    <i class="fas fa-users text-success"></i>
+                                    <div class="mt-2">
+                                        <strong>Độc giả tích cực</strong>
+                                        <small class="d-block text-muted">Độc giả mượn nhiều</small>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Borrow Confirmation Modal -->
+    <div class="modal fade modal-custom" id="borrowConfirmModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle"></i> Xác nhận mượn sách
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="borrowConfirmContent">
+                        <!-- Borrow confirmation details will be displayed here -->
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Ngày mượn:</label>
+                            <input type="date" class="form-control" id="borrowDate" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Hạn trả:</label>
+                            <input type="date" class="form-control" id="dueDate">
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="form-label">Ghi chú:</label>
+                        <textarea class="form-control" id="borrowNote" rows="2" 
+                                placeholder="Ghi chú thêm..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-danger-custom" onclick="confirmBorrow()">
+                        <i class="fas fa-check"></i> Xác nhận mượn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Return Confirmation Modal -->
+    <div class="modal fade modal-custom" id="returnConfirmModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h5 class="modal-title text-white">
+                        <i class="fas fa-undo"></i> Xác nhận trả sách
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="returnConfirmContent">
+                        <!-- Return confirmation details will be displayed here -->
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Ngày trả:</label>
+                            <input type="date" class="form-control" id="returnDate" readonly>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tình trạng sách:</label>
+                            <select class="form-select" id="bookCondition">
+                                <option value="good">Tốt</option>
+                                <option value="fair">Khá</option>
+                                <option value="poor">Kém</option>
+                                <option value="damaged">Hư hỏng</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div id="fineSection" class="mt-3 d-none">
+                        <div class="fine-calculator">
+                            <h6><i class="fas fa-money-bill-wave text-warning"></i> Phí phạt</h6>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="mb-1"><strong>Số ngày quá hạn:</strong> <span id="confirmOverdueDays">0</span> ngày</p>
+                                    <p class="mb-1"><strong>Phí phạt/ngày:</strong> 2,000đ</p>
+                                    <p class="mb-1"><strong>Phí hư hỏng:</strong> <span id="damageeFee">0đ</span></p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <div class="fine-amount" id="confirmTotalFine">0đ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="form-label">Ghi chú:</label>
+                        <textarea class="form-control" id="returnNote" rows="2" 
+                                placeholder="Ghi chú về tình trạng sách..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-success-custom" onclick="confirmReturn()">
+                        <i class="fas fa-check"></i> Xác nhận trả
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Renewal Confirmation Modal -->
+    <div class="modal fade modal-custom" id="renewConfirmModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-warning">
+                    <h5 class="modal-title text-dark">
+                        <i class="fas fa-calendar-plus"></i> Xác nhận gia hạn
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="renewConfirmContent">
+                        <!-- Renewal confirmation details will be displayed here -->
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-4">
+                            <label class="form-label">Hạn trả hiện tại:</label>
+                            <input type="date" class="form-control" id="currentDueDate" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Hạn trả mới:</label>
+                            <input type="date" class="form-control" id="newDueDate" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Phí gia hạn:</label>
+                            <input type="text" class="form-control" id="renewalFee" readonly>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-3">
+                        <label class="form-label">Lý do gia hạn:</label>
+                        <textarea class="form-control" id="renewalReason" rows="2" 
+                                placeholder="Nhập lý do gia hạn..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="button" class="btn btn-warning-custom" onclick="confirmRenewal()">
+                        <i class="fas fa-check"></i> Xác nhận gia hạn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Receipt Modal -->
+    <div class="modal fade modal-custom" id="receiptModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-receipt"></i> Phiếu giao dịch
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="receipt-print" id="receiptContent">
+                        <!-- Receipt content will be generated here -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                    <button type="button" class="btn btn-primary-custom" onclick="printReceipt()">
+                        <i class="fas fa-print"></i> In phiếu
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Borrow History Modal -->
+    <div class="modal fade modal-custom" id="borrowHistoryModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-history"></i> Lịch sử mượn/trả sách
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <select class="form-select" id="historyFilter">
+                                <option value="all">Tất cả</option>
+                                <option value="today">Hôm nay</option>
+                                <option value="week">Tuần này</option>
+                                <option value="month">Tháng này</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-select" id="historyType">
+                                <option value="all">Tất cả giao dịch</option>
+                                <option value="borrow">Chỉ mượn</option>
+                                <option value="return">Chỉ trả</option>
+                                <option value="renew">Chỉ gia hạn</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="historySearch" 
+                                   placeholder="Tìm theo tên độc giả hoặc sách...">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary-custom w-100" onclick="filterHistory()">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Thời gian</th>
+                                    <th>Độc giả</th>
+                                    <th>Sách</th>
+                                    <th>Loại giao dịch</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historyTableBody">
+                                <!-- History data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success-custom" onclick="exportHistory()">
+                        <i class="fas fa-download"></i> Xuất Excel
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overdue Books Modal -->
+    <div class="modal fade modal-custom" id="overdueModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white">
+                        <i class="fas fa-exclamation-triangle"></i> Sách quá hạn
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <select class="form-select" id="overdueFilter">
+                                <option value="all">Tất cả</option>
+                                <option value="1-7">1-7 ngày</option>
+                                <option value="8-14">8-14 ngày</option>
+                                <option value="15-30">15-30 ngày</option>
+                                <option value="30+">Trên 30 ngày</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="overdueSearch" 
+                                   placeholder="Tìm theo tên độc giả...">
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-danger-custom w-100" onclick="sendOverdueNotifications()">
+                                <i class="fas fa-bell"></i> Gửi thông báo
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-custom">
+                            <thead>
+                                <tr>
+                                    <th>Độc giả</th>
+                                    <th>Sách</th>
+                                    <th>Ngày mượn</th>
+                                    <th>Hạn trả</th>
+                                    <th>Quá hạn</th>
+                                    <th>Phí phạt</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overdueTableBody">
+                                <!-- Overdue data will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning-custom" onclick="exportOverdueList()">
+                        <i class="fas fa-download"></i> Xuất danh sách
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay d-none">
+        <div class="loading-spinner">
+            <div class="spinner-border text-danger" style="width: 3rem; height: 3rem;"></div>
+            <div class="mt-3">Đang xử lý...</div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+    
+    <script>
+        // Global variables
+        let selectedReader = null;
+        let selectedBooks = [];
+        let selectedReturnReader = null;
+        let selectedReturnBooks = [];
+        let selectedRenewReader = null;
+        let selectedRenewBooks = [];
+        let currentSearchResults = [];
+        let barcodeScanner = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthentication();
+            initializeBorrowReturnPage();
+            loadStatistics();
+            setCurrentUser();
+            loadClassOptions();
+        });
+
+        // Check authentication
+        function checkAuthentication() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+            if (!isLoggedIn) {
+                window.location.href = 'index.html';
+                return;
+            }
+        }
+
+        // Set current user
+        function setCurrentUser() {
+            const username = sessionStorage.getItem('username') || 'Admin';
+            document.getElementById('currentUser').textContent = username;
+        }
+
+        // Initialize borrow return page
+        function initializeBorrowReturnPage() {
+            // Set default dates
+            const today = new Date();
+            const dueDate = new Date();
+            dueDate.setDate(today.getDate() + 14); // Default 14 days loan period
+            
+            document.getElementById('borrowDate').value = today.toISOString().split('T')[0];
+            document.getElementById('dueDate').value = dueDate.toISOString().split('T')[0];
+            document.getElementById('returnDate').value = today.toISOString().split('T')[0];
+            
+            // Set search date range (last 30 days)
+            const fromDate = new Date();
+            fromDate.setDate(today.getDate() - 30);
+            document.getElementById('searchFromDate').value = fromDate.toISOString().split('T')[0];
+            document.getElementById('searchToDate').value = today.toISOString().split('T')[0];
+        }
+
+        // Load statistics
+        function loadStatistics() {
+            const stats = getBorrowReturnStatistics();
+            document.getElementById('todayBorrowCount').textContent = stats.todayBorrow;
+            document.getElementById('todayReturnCount').textContent = stats.todayReturn;
+            document.getElementById('totalBorrowedCount').textContent = stats.totalBorrowed;
+            document.getElementById('overdueCount').textContent = stats.overdue;
+            document.getElementById('renewedCount').textContent = stats.renewed;
+            document.getElementById('totalFineAmount').textContent = formatCurrency(stats.totalFine);
+        }
+
+        // Load class options
+        function loadClassOptions() {
+            const classes = getUniqueClasses();
+            const searchClassSelect = document.getElementById('searchClass');
+            
+            searchClassSelect.innerHTML = '<option value="">Tất cả lớp</option>';
+            classes.forEach(className => {
+                searchClassSelect.innerHTML += `<option value="${className}">${className}</option>`;
+            });
+        }
+
+        // BORROW FUNCTIONS
+        
+        // Handle reader search
+        function handleReaderSearch(event) {
+            if (event.key === 'Enter') {
+                searchReader();
+            }
+        }
+
+        // Search reader
+        function searchReader() {
+            const searchTerm = document.getElementById('readerSearchInput').value.trim();
+            if (!searchTerm) {
+                showNotification('Vui lòng nhập mã thẻ hoặc tên độc giả!', 'error');
+                return;
+            }
+
+            showLoading();
+            
+            setTimeout(() => {
+                const readers = searchReaders(searchTerm);
+                displayReaderSearchResults(readers);
+                hideLoading();
+            }, 500);
+        }
+
+        // Display reader search results
+        function displayReaderSearchResults(readers) {
+            const container = document.getElementById('readerSearchResults');
+            
+            if (readers.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Không tìm thấy độc giả nào!
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            readers.forEach(reader => {
+                const status = getReaderStatus(reader);
+                const borrowedCount = getReaderBorrowedBooks(reader.maThe).length;
+                const canBorrow = canReaderBorrow(reader);
+                
+                html += `
+                    <div class="search-result ${canBorrow ? '' : 'border-danger'}" onclick="selectReader('${reader.maThe}')">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${reader.hoTen}</h6>
+                                <p class="mb-1">
+                                    <strong>Mã thẻ:</strong> ${reader.maThe} | 
+                                    <strong>Lớp:</strong> ${reader.lop}
+                                </p>
+                                <p class="mb-0">
+                                    <span class="status-badge ${status.class}">${status.text}</span>
+                                    <span class="ms-2">Đang mượn: <strong>${borrowedCount}</strong> sách</span>
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                ${canBorrow ? 
+                                    '<button class="btn btn-primary-custom btn-sm">Chọn</button>' :
+                                    '<span class="text-danger"><i class="fas fa-ban"></i> Không thể mượn</span>'
+                                }
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Select reader
+        function selectReader(readerId) {
+            const reader = getReaderById(readerId);
+            if (!reader) return;
+
+            if (!canReaderBorrow(reader)) {
+                showNotification('Độc giả này không thể mượn sách!', 'error');
+                return;
+            }
+
+            selectedReader = reader;
+            
+            // Update UI
+            document.getElementById('selectedReaderName').textContent = reader.hoTen;
+            document.getElementById('selectedReaderId').textContent = reader.maThe;
+            document.getElementById('selectedReaderClass').textContent = reader.lop;
+            document.getElementById('selectedReaderExpiry').textContent = formatDate(reader.hanThe);
+            document.getElementById('selectedReaderBorrowed').textContent = getReaderBorrowedBooks(reader.maThe).length;
+            
+            document.getElementById('selectedReaderInfo').classList.remove('d-none');
+            document.getElementById('readerSearchResults').innerHTML = '';
+            document.getElementById('readerSearchInput').value = '';
+            
+            showNotification(`Đã chọn độc giả: ${reader.hoTen}`, 'success');
+        }
+
+        // Clear selected reader
+        function clearSelectedReader() {
+            selectedReader = null;
+            selectedBooks = [];
+            document.getElementById('selectedReaderInfo').classList.add('d-none');
+            document.getElementById('selectedBooksSection').classList.add('d-none');
+            document.getElementById('bookSearchInput').value = '';
+            updateSelectedBooksDisplay();
+        }
+
+        // Handle book search
+        function handleBookSearch(event) {
+            if (event.key === 'Enter') {
+                searchBook();
+            }
+        }
+
+        // Search book
+        function searchBook() {
+            if (!selectedReader) {
+                showNotification('Vui lòng chọn độc giả trước!', 'error');
+                return;
+            }
+
+            const searchTerm = document.getElementById('bookSearchInput').value.trim();
+            if (!searchTerm) {
+                showNotification('Vui lòng nhập mã sách hoặc tên sách!', 'error');
+                return;
+            }
+
+            showLoading();
+            
+            setTimeout(() => {
+                const books = searchAvailableBooks(searchTerm);
+                displayBookSearchResults(books);
+                hideLoading();
+            }, 500);
+        }
+
+        // Display book search results
+        function displayBookSearchResults(books) {
+            const container = document.getElementById('bookSearchResults');
+            
+            if (books.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Không tìm thấy sách nào có sẵn!
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            books.forEach(book => {
+                const isSelected = selectedBooks.some(b => b.maSach === book.maSach);
+                const availableCopies = getAvailableCopies(book.maSach);
+                
+                html += `
+                    <div class="search-result ${isSelected ? 'selected' : ''}" onclick="toggleBookSelection('${book.maSach}')">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${book.tenSach}</h6>
+                                <p class="mb-1">
+                                    <strong>Mã sách:</strong> ${book.maSach} | 
+                                    <strong>Tác giả:</strong> ${book.tacGia}
+                                </p>
+                                <p class="mb-0">
+                                    <strong>Thể loại:</strong> ${book.theLoai} | 
+                                    <strong>Có sẵn:</strong> ${availableCopies} cuốn
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn ${isSelected ? 'btn-danger' : 'btn-success'} btn-sm">
+                                    <i class="fas ${isSelected ? 'fa-minus' : 'fa-plus'}"></i>
+                                    ${isSelected ? 'Bỏ chọn' : 'Chọn'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Toggle book selection
+        function toggleBookSelection(bookCode) {
+            const book = getBookByCode(bookCode);
+            if (!book) return;
+
+            const existingIndex = selectedBooks.findIndex(b => b.maSach === bookCode);
+            
+            if (existingIndex >= 0) {
+                // Remove book
+                selectedBooks.splice(existingIndex, 1);
+                showNotification(`Đã bỏ chọn: ${book.tenSach}`, 'info');
+            } else {
+                // Add book
+                if (selectedBooks.length >= 5) {
+                    showNotification('Mỗi lần chỉ được mượn tối đa 5 cuốn sách!', 'error');
+                    return;
+                }
+                
+                selectedBooks.push(book);
+                showNotification(`Đã chọn: ${book.tenSach}`, 'success');
+            }
+            
+            updateSelectedBooksDisplay();
+            searchBook(); // Refresh search results
+        }
+
+        // Update selected books display
+        function updateSelectedBooksDisplay() {
+            const container = document.getElementById('selectedBooksList');
+            const section = document.getElementById('selectedBooksSection');
+            const countSpan = document.getElementById('selectedBooksCount');
+            
+            if (selectedBooks.length === 0) {
+                section.classList.add('d-none');
+                return;
+            }
+            
+            section.classList.remove('d-none');
+            countSpan.textContent = selectedBooks.length;
+            
+            let html = '';
+            selectedBooks.forEach((book, index) => {
+                html += `
+                    <div class="book-item">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${book.tenSach}</h6>
+                                <p class="mb-0">
+                                    <strong>Mã:</strong> ${book.maSach} | 
+                                    <strong>Tác giả:</strong> ${book.tacGia}
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-outline-danger btn-sm" onclick="removeSelectedBook(${index})">
+                                    <i class="fas fa-times"></i> Xóa
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Remove selected book
+        function removeSelectedBook(index) {
+            const book = selectedBooks[index];
+            selectedBooks.splice(index, 1);
+            updateSelectedBooksDisplay();
+            showNotification(`Đã xóa: ${book.tenSach}`, 'info');
+            
+            // Refresh search results if any
+            const searchTerm = document.getElementById('bookSearchInput').value.trim();
+            if (searchTerm) {
+                searchBook();
+            }
+        }
+
+        // Clear selected books
+        function clearSelectedBooks() {
+            selectedBooks = [];
+            updateSelectedBooksDisplay();
+            document.getElementById('bookSearchResults').innerHTML = '';
+            document.getElementById('bookSearchInput').value = '';
+        }
+
+        // Process borrow
+        function processBorrow() {
+            if (!selectedReader) {
+                showNotification('Vui lòng chọn độc giả!', 'error');
+                return;
+            }
+            
+            if (selectedBooks.length === 0) {
+                showNotification('Vui lòng chọn ít nhất một cuốn sách!', 'error');
+                return;
+            }
+            
+            // Show confirmation modal
+            showBorrowConfirmModal();
+        }
+
+        // Show borrow confirmation modal
+        function showBorrowConfirmModal() {
+            const content = document.getElementById('borrowConfirmContent');
+            
+            let html = `
+                <div class="reader-info mb-3">
+                    <h6>Thông tin độc giả</h6>
+                    <p class="mb-1"><strong>Tên:</strong> ${selectedReader.hoTen}</p>
+                    <p class="mb-1"><strong>Mã thẻ:</strong> ${selectedReader.maThe}</p>
+                    <p class="mb-0"><strong>Lớp:</strong> ${selectedReader.lop}</p>
+                </div>
+                
+                <h6>Danh sách sách mượn (${selectedBooks.length} cuốn)</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Mã sách</th>
+                                <th>Tên sách</th>
+                                <th>Tác giả</th>
+                                <th>Thể loại</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            selectedBooks.forEach(book => {
+                html += `
+                    <tr>
+                        <td>${book.maSach}</td>
+                        <td>${book.tenSach}</td>
+                        <td>${book.tacGia}</td>
+                        <td>${book.theLoai}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+            
+            const modal = new bootstrap.Modal(document.getElementById('borrowConfirmModal'));
+            modal.show();
+        }
+
+        // Confirm borrow
+        function confirmBorrow() {
+            const borrowDate = document.getElementById('borrowDate').value;
+            const dueDate = document.getElementById('dueDate').value;
+            const note = document.getElementById('borrowNote').value.trim();
+            
+            if (!borrowDate || !dueDate) {
+                showNotification('Vui lòng chọn ngày mượn và hạn trả!', 'error');
+                return;
+            }
+            
+            if (new Date(dueDate) <= new Date(borrowDate)) {
+                showNotification('Hạn trả phải sau ngày mượn!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                // Process borrow transaction
+                const borrowData = {
+                    readerId: selectedReader.maThe,
+                    books: selectedBooks.map(book => book.maSach),
+                    borrowDate: borrowDate,
+                    dueDate: dueDate,
+                    note: note,
+                    librarian: sessionStorage.getItem('username') || 'Admin'
+                };
+                
+                const success = processBorrowTransaction(borrowData);
+                
+                if (success) {
+                    showNotification(`Mượn sách thành công cho ${selectedReader.hoTen}!`, 'success');
+                    
+                    // Generate receipt
+                    generateBorrowReceipt(borrowData);
+                    
+                    // Reset form
+                    clearSelectedReader();
+                    loadStatistics();
+                    
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('borrowConfirmModal'));
+                    modal.hide();
+                    
+                    // Show receipt
+                    setTimeout(() => {
+                        const receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+                        receiptModal.show();
+                    }, 500);
+                } else {
+                    showNotification('Có lỗi xảy ra khi mượn sách!', 'error');
+                }
+                
+                hideLoading();
+            }, 1000);
+        }
+
+        // RETURN FUNCTIONS
+        
+        // Handle return reader search
+        function handleReturnReaderSearch(event) {
+            if (event.key === 'Enter') {
+                searchReturnReader();
+            }
+        }
+
+        // Search return reader
+        function searchReturnReader() {
+            const searchTerm = document.getElementById('returnReaderSearchInput').value.trim();
+            if (!searchTerm) {
+                showNotification('Vui lòng nhập mã thẻ hoặc tên độc giả!', 'error');
+                return;
+            }
+
+            showLoading();
+            
+            setTimeout(() => {
+                const readers = searchReadersWithBorrowedBooks(searchTerm);
+                displayReturnReaderSearchResults(readers);
+                hideLoading();
+            }, 500);
+        }
+
+        // Display return reader search results
+        function displayReturnReaderSearchResults(readers) {
+            const container = document.getElementById('returnReaderSearchResults');
+            
+            if (readers.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Không tìm thấy độc giả nào đang mượn sách!
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            readers.forEach(reader => {
+                const borrowedBooks = getReaderBorrowedBooks(reader.maThe);
+                const overdueBooks = borrowedBooks.filter(book => isBookOverdue(book));
+                
+                html += `
+                    <div class="search-result" onclick="selectReturnReader('${reader.maThe}')">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${reader.hoTen}</h6>
+                                <p class="mb-1">
+                                    <strong>Mã thẻ:</strong> ${reader.maThe} | 
+                                    <strong>Lớp:</strong> ${reader.lop}
+                                </p>
+                                <p class="mb-0">
+                                    <span class="badge bg-warning">Đang mượn: ${borrowedBooks.length}</span>
+                                    ${overdueBooks.length > 0 ? 
+                                        `<span class="badge bg-danger ms-2">Quá hạn: ${overdueBooks.length}</span>` : 
+                                        ''
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-success-custom btn-sm">Chọn</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Select return reader
+        function selectReturnReader(readerId) {
+            const reader = getReaderById(readerId);
+            if (!reader) return;
+
+            selectedReturnReader = reader;
+            const borrowedBooks = getReaderBorrowedBooks(readerId);
+            selectedReturnBooks = [];
+            
+            // Update UI
+            document.getElementById('returnReaderName').textContent = reader.hoTen;
+            document.getElementById('returnReaderId').textContent = reader.maThe;
+            document.getElementById('returnReaderClass').textContent = reader.lop;
+            document.getElementById('returnReaderBorrowedCount').textContent = borrowedBooks.length;
+            
+            const overdueBooks = borrowedBooks.filter(book => isBookOverdue(book));
+            document.getElementById('returnReaderOverdueCount').textContent = overdueBooks.length;
+            
+            document.getElementById('borrowedBooksSection').classList.remove('d-none');
+            document.getElementById('returnReaderSearchResults').innerHTML = '';
+            document.getElementById('returnReaderSearchInput').value = '';
+            
+            displayBorrowedBooks(borrowedBooks);
+            showNotification(`Đã chọn độc giả: ${reader.hoTen}`, 'success');
+        }
+
+        // Display borrowed books
+        function displayBorrowedBooks(borrowedBooks) {
+            const container = document.getElementById('borrowedBooksList');
+            
+            if (borrowedBooks.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        Độc giả này không có sách đang mượn.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            borrowedBooks.forEach(borrowRecord => {
+                const book = getBookByCode(borrowRecord.maSach);
+                const isOverdue = isBookOverdue(borrowRecord);
+                const isSelected = selectedReturnBooks.includes(borrowRecord.id);
+                const overdueDays = isOverdue ? calculateOverdueDays(borrowRecord.hanTra) : 0;
+                
+                html += `
+                    <div class="book-item ${isOverdue ? 'overdue' : ''} ${isSelected ? 'selected' : ''}" 
+                         onclick="toggleReturnBookSelection('${borrowRecord.id}')">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${book ? book.tenSach : 'Không tìm thấy sách'}</h6>
+                                <p class="mb-1">
+                                    <strong>Mã sách:</strong> ${borrowRecord.maSach} | 
+                                    <strong>Ngày mượn:</strong> ${formatDate(borrowRecord.ngayMuon)}
+                                </p>
+                                <p class="mb-0">
+                                    <strong>Hạn trả:</strong> ${formatDate(borrowRecord.hanTra)}
+                                    ${isOverdue ? 
+                                        `<span class="text-danger ms-2"><i class="fas fa-exclamation-triangle"></i> Quá hạn ${overdueDays} ngày</span>` :
+                                        ''
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" 
+                                           ${isSelected ? 'checked' : ''} 
+                                           onchange="toggleReturnBookSelection('${borrowRecord.id}')">
+                                    <label class="form-check-label">Chọn trả</label>
+                                </div>
+                                ${isOverdue ? 
+                                    `<div class="text-danger small mt-1">Phí phạt: ${formatCurrency(overdueDays * 2000)}</div>` :
+                                    ''
+                                }
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            updateFineCalculator();
+        }
+
+        // Toggle return book selection
+        function toggleReturnBookSelection(borrowId) {
+            const index = selectedReturnBooks.indexOf(borrowId);
+            
+            if (index >= 0) {
+                selectedReturnBooks.splice(index, 1);
+            } else {
+                selectedReturnBooks.push(borrowId);
+            }
+            
+            updateFineCalculator();
+            
+            // Update display
+            const borrowedBooks = getReaderBorrowedBooks(selectedReturnReader.maThe);
+            displayBorrowedBooks(borrowedBooks);
+        }
+
+        // Update fine calculator
+        function updateFineCalculator() {
+            const fineCalculator = document.getElementById('fineCalculator');
+            
+            if (selectedReturnBooks.length === 0) {
+                fineCalculator.classList.add('d-none');
+                return;
+            }
+            
+            let totalOverdueDays = 0;
+            let totalFine = 0;
+            
+            selectedReturnBooks.forEach(borrowId => {
+                const borrowRecord = getBorrowRecordById(borrowId);
+                if (borrowRecord && isBookOverdue(borrowRecord)) {
+                    const overdueDays = calculateOverdueDays(borrowRecord.hanTra);
+                    totalOverdueDays += overdueDays;
+                    totalFine += overdueDays * 2000; // 2000đ per day
+                }
+            });
+            
+            if (totalFine > 0) {
+                document.getElementById('overdueDays').textContent = totalOverdueDays;
+                document.getElementById('totalFine').textContent = formatCurrency(totalFine);
+                fineCalculator.classList.remove('d-none');
+            } else {
+                fineCalculator.classList.add('d-none');
+            }
+        }
+
+        // Clear return reader
+        function clearReturnReader() {
+            selectedReturnReader = null;
+            selectedReturnBooks = [];
+            document.getElementById('borrowedBooksSection').classList.add('d-none');
+            document.getElementById('fineCalculator').classList.add('d-none');
+        }
+
+        // Process return
+        function processReturn() {
+            if (!selectedReturnReader) {
+                showNotification('Vui lòng chọn độc giả!', 'error');
+                return;
+            }
+            
+            if (selectedReturnBooks.length === 0) {
+                showNotification('Vui lòng chọn ít nhất một cuốn sách để trả!', 'error');
+                return;
+            }
+            
+            showReturnConfirmModal();
+        }
+
+        // Process return with fine
+        function processReturnWithFine() {
+            processReturn();
+        }
+
+        // Show return confirmation modal
+        function showReturnConfirmModal() {
+            const content = document.getElementById('returnConfirmContent');
+            
+            let html = `
+                <div class="reader-info mb-3">
+                    <h6>Thông tin độc giả</h6>
+                    <p class="mb-1"><strong>Tên:</strong> ${selectedReturnReader.hoTen}</p>
+                    <p class="mb-1"><strong>Mã thẻ:</strong> ${selectedReturnReader.maThe}</p>
+                    <p class="mb-0"><strong>Lớp:</strong> ${selectedReturnReader.lop}</p>
+                </div>
+                
+                <h6>Danh sách sách trả (${selectedReturnBooks.length} cuốn)</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Mã sách</th>
+                                <th>Tên sách</th>
+                                <th>Ngày mượn</th>
+                                <th>Hạn trả</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            let totalFine = 0;
+            let totalOverdueDays = 0;
+            
+            selectedReturnBooks.forEach(borrowId => {
+                const borrowRecord = getBorrowRecordById(borrowId);
+                const book = getBookByCode(borrowRecord.maSach);
+                const isOverdue = isBookOverdue(borrowRecord);
+                const overdueDays = isOverdue ? calculateOverdueDays(borrowRecord.hanTra) : 0;
+                
+                if (isOverdue) {
+                    totalOverdueDays += overdueDays;
+                    totalFine += overdueDays * 2000;
+                }
+                
+                html += `
+                    <tr>
+                        <td>${borrowRecord.maSach}</td>
+                        <td>${book ? book.tenSach : 'Không tìm thấy'}</td>
+                        <td>${formatDate(borrowRecord.ngayMuon)}</td>
+                        <td>${formatDate(borrowRecord.hanTra)}</td>
+                        <td>
+                            ${isOverdue ? 
+                                `<span class="badge bg-danger">Quá hạn ${overdueDays} ngày</span>` :
+                                `<span class="badge bg-success">Đúng hạn</span>`
+                            }
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+            
+            // Update fine section
+            const fineSection = document.getElementById('fineSection');
+            if (totalFine > 0) {
+                document.getElementById('confirmOverdueDays').textContent = totalOverdueDays;
+                document.getElementById('confirmTotalFine').textContent = formatCurrency(totalFine);
+                fineSection.classList.remove('d-none');
+            } else {
+                fineSection.classList.add('d-none');
+            }
+            
+            const modal = new bootstrap.Modal(document.getElementById('returnConfirmModal'));
+            modal.show();
+        }
+
+        // Confirm return
+        function confirmReturn() {
+            const returnDate = document.getElementById('returnDate').value;
+            const bookCondition = document.getElementById('bookCondition').value;
+            const note = document.getElementById('returnNote').value.trim();
+            
+            if (!returnDate) {
+                showNotification('Vui lòng chọn ngày trả!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                // Calculate damage fee based on condition
+                let damageFee = 0;
+                switch(bookCondition) {
+                    case 'poor': damageFee = 10000; break;
+                    case 'damaged': damageFee = 50000; break;
+                }
+                
+                // Process return transaction
+                const returnData = {
+                    readerId: selectedReturnReader.maThe,
+                    borrowIds: selectedReturnBooks,
+                    returnDate: returnDate,
+                    bookCondition: bookCondition,
+                    damageFee: damageFee,
+                    note: note,
+                    librarian: sessionStorage.getItem('username') || 'Admin'
+                };
+                
+                const success = processReturnTransaction(returnData);
+                
+                if (success) {
+                    showNotification(`Trả sách thành công cho ${selectedReturnReader.hoTen}!`, 'success');
+                    
+                    // Generate receipt
+                    generateReturnReceipt(returnData);
+                    
+                    // Reset form
+                    clearReturnReader();
+                    loadStatistics();
+                    
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('returnConfirmModal'));
+                    modal.hide();
+                    
+                    // Show receipt
+                    setTimeout(() => {
+                        const receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+                        receiptModal.show();
+                    }, 500);
+                } else {
+                    showNotification('Có lỗi xảy ra khi trả sách!', 'error');
+                }
+                
+                hideLoading();
+            }, 1000);
+        }
+
+        // Quick return book
+        function handleQuickReturn(event) {
+            if (event.key === 'Enter') {
+                quickReturnBook();
+            }
+        }
+
+        function quickReturnBook() {
+            const bookCode = document.getElementById('quickReturnBookCode').value.trim();
+            if (!bookCode) {
+                showNotification('Vui lòng nhập mã sách!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                const borrowRecord = findBorrowRecordByBookCode(bookCode);
+                
+                if (!borrowRecord) {
+                    showNotification('Không tìm thấy sách đang được mượn!', 'error');
+                    hideLoading();
+                    return;
+                }
+                
+                const reader = getReaderById(borrowRecord.maThe);
+                const success = processQuickReturn(borrowRecord);
+                
+                if (success) {
+                    showNotification(`Trả sách thành công! Độc giả: ${reader.hoTen}`, 'success');
+                    document.getElementById('quickReturnBookCode').value = '';
+                    loadStatistics();
+                } else {
+                    showNotification('Có lỗi xảy ra khi trả sách!', 'error');
+                }
+                
+                hideLoading();
+            }, 500);
+        }
+
+        // RENEWAL FUNCTIONS
+        
+        // Handle renew reader search
+        function handleRenewReaderSearch(event) {
+            if (event.key === 'Enter') {
+                searchRenewReader();
+            }
+        }
+
+        // Search renew reader
+        function searchRenewReader() {
+            const searchTerm = document.getElementById('renewReaderSearchInput').value.trim();
+            if (!searchTerm) {
+                showNotification('Vui lòng nhập mã thẻ hoặc tên độc giả!', 'error');
+                return;
+            }
+
+            showLoading();
+            
+            setTimeout(() => {
+                const readers = searchReadersWithRenewableBooks(searchTerm);
+                displayRenewReaderSearchResults(readers);
+                hideLoading();
+            }, 500);
+        }
+
+        // Display renew reader search results
+        function displayRenewReaderSearchResults(readers) {
+            const container = document.getElementById('renewReaderSearchResults');
+            
+            if (readers.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Không tìm thấy độc giả nào có sách có thể gia hạn!
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            readers.forEach(reader => {
+                const renewableBooks = getRenewableBooks(reader.maThe);
+                
+                html += `
+                    <div class="search-result" onclick="selectRenewReader('${reader.maThe}')">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${reader.hoTen}</h6>
+                                <p class="mb-1">
+                                    <strong>Mã thẻ:</strong> ${reader.maThe} | 
+                                    <strong>Lớp:</strong> ${reader.lop}
+                                </p>
+                                <p class="mb-0">
+                                    <span class="badge bg-info">Có thể gia hạn: ${renewableBooks.length} sách</span>
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <button class="btn btn-warning-custom btn-sm">Chọn</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Select renew reader
+        function selectRenewReader(readerId) {
+            const reader = getReaderById(readerId);
+            if (!reader) return;
+
+            selectedRenewReader = reader;
+            const renewableBooks = getRenewableBooks(readerId);
+            selectedRenewBooks = [];
+            
+            // Update UI
+            document.getElementById('renewReaderName').textContent = reader.hoTen;
+            document.getElementById('renewReaderId').textContent = reader.maThe;
+            document.getElementById('renewReaderClass').textContent = reader.lop;
+            document.getElementById('renewableCount').textContent = renewableBooks.length;
+            
+            document.getElementById('renewableBooksSection').classList.remove('d-none');
+            document.getElementById('renewReaderSearchResults').innerHTML = '';
+            document.getElementById('renewReaderSearchInput').value = '';
+            
+            displayRenewableBooks(renewableBooks);
+            showNotification(`Đã chọn độc giả: ${reader.hoTen}`, 'success');
+        }
+
+        // Display renewable books
+        function displayRenewableBooks(renewableBooks) {
+            const container = document.getElementById('renewableBooksList');
+            
+            if (renewableBooks.length === 0) {
+                container.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        Độc giả này không có sách có thể gia hạn.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '';
+            renewableBooks.forEach(borrowRecord => {
+                const book = getBookByCode(borrowRecord.maSach);
+                const isSelected = selectedRenewBooks.includes(borrowRecord.id);
+                const renewCount = borrowRecord.soLanGiaHan || 0;
+                const canRenew = renewCount < 2; // Maximum 2 renewals
+                
+                html += `
+                    <div class="book-item ${isSelected ? 'selected' : ''} ${!canRenew ? 'border-warning' : ''}" 
+                         onclick="toggleRenewBookSelection('${borrowRecord.id}')">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h6 class="mb-1">${book ? book.tenSach : 'Không tìm thấy sách'}</h6>
+                                <p class="mb-1">
+                                    <strong>Mã sách:</strong> ${borrowRecord.maSach} | 
+                                    <strong>Hạn trả:</strong> ${formatDate(borrowRecord.hanTra)}
+                                </p>
+                                <p class="mb-0">
+                                    <strong>Đã gia hạn:</strong> ${renewCount}/2 lần
+                                    ${!canRenew ? 
+                                        '<span class="text-warning ms-2"><i class="fas fa-exclamation-triangle"></i> Đã hết lượt gia hạn</span>' :
+                                        ''
+                                    }
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" 
+                                           ${isSelected ? 'checked' : ''} 
+                                           ${!canRenew ? 'disabled' : ''}
+                                           onchange="toggleRenewBookSelection('${borrowRecord.id}')">
+                                    <label class="form-check-label">Chọn gia hạn</label>
+                                </div>
+                                <div class="text-info small mt-1">Phí: 5,000đ</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Toggle renew book selection
+        function toggleRenewBookSelection(borrowId) {
+            const borrowRecord = getBorrowRecordById(borrowId);
+            const renewCount = borrowRecord.soLanGiaHan || 0;
+            
+            if (renewCount >= 2) {
+                showNotification('Sách này đã hết lượt gia hạn!', 'error');
+                return;
+            }
+            
+            const index = selectedRenewBooks.indexOf(borrowId);
+            
+            if (index >= 0) {
+                selectedRenewBooks.splice(index, 1);
+            } else {
+                selectedRenewBooks.push(borrowId);
+            }
+            
+            // Update display
+            const renewableBooks = getRenewableBooks(selectedRenewReader.maThe);
+            displayRenewableBooks(renewableBooks);
+        }
+
+        // Clear renew reader
+        function clearRenewReader() {
+            selectedRenewReader = null;
+            selectedRenewBooks = [];
+            document.getElementById('renewableBooksSection').classList.add('d-none');
+        }
+
+        // Process renewal
+        function processRenewal() {
+            if (!selectedRenewReader) {
+                showNotification('Vui lòng chọn độc giả!', 'error');
+                return;
+            }
+            
+            if (selectedRenewBooks.length === 0) {
+                showNotification('Vui lòng chọn ít nhất một cuốn sách để gia hạn!', 'error');
+                return;
+            }
+            
+            showRenewConfirmModal();
+        }
+
+        // Renew all books
+        function renewAllBooks() {
+            if (!selectedRenewReader) {
+                showNotification('Vui lòng chọn độc giả!', 'error');
+                return;
+            }
+            
+            const renewableBooks = getRenewableBooks(selectedRenewReader.maThe);
+            selectedRenewBooks = renewableBooks
+                .filter(book => (book.soLanGiaHan || 0) < 2)
+                .map(book => book.id);
+            
+            if (selectedRenewBooks.length === 0) {
+                showNotification('Không có sách nào có thể gia hạn!', 'error');
+                return;
+            }
+            
+            displayRenewableBooks(renewableBooks);
+            showRenewConfirmModal();
+        }
+
+        // Show renew confirmation modal
+        function showRenewConfirmModal() {
+            const content = document.getElementById('renewConfirmContent');
+            
+            let html = `
+                <div class="reader-info mb-3">
+                    <h6>Thông tin độc giả</h6>
+                    <p class="mb-1"><strong>Tên:</strong> ${selectedRenewReader.hoTen}</p>
+                    <p class="mb-1"><strong>Mã thẻ:</strong> ${selectedRenewReader.maThe}</p>
+                    <p class="mb-0"><strong>Lớp:</strong> ${selectedRenewReader.lop}</p>
+                </div>
+                
+                <h6>Danh sách sách gia hạn (${selectedRenewBooks.length} cuốn)</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th>Mã sách</th>
+                                <th>Tên sách</th>
+                                <th>Hạn trả hiện tại</th>
+                                <th>Hạn trả mới</th>
+                                <th>Phí gia hạn</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+            
+            let totalFee = 0;
+            let firstCurrentDue = null;
+            let firstNewDue = null;
+            
+            selectedRenewBooks.forEach(borrowId => {
+                const borrowRecord = getBorrowRecordById(borrowId);
+                const book = getBookByCode(borrowRecord.maSach);
+                const currentDue = new Date(borrowRecord.hanTra);
+                const newDue = new Date(currentDue);
+                newDue.setDate(newDue.getDate() + 14); // Extend 14 days
+                
+                if (!firstCurrentDue) {
+                    firstCurrentDue = borrowRecord.hanTra;
+                    firstNewDue = newDue.toISOString().split('T')[0];
+                }
+                
+                totalFee += 5000; // 5000đ per book
+                
+                html += `
+                    <tr>
+                        <td>${borrowRecord.maSach}</td>
+                        <td>${book ? book.tenSach : 'Không tìm thấy'}</td>
+                        <td>${formatDate(borrowRecord.hanTra)}</td>
+                        <td>${formatDate(newDue.toISOString().split('T')[0])}</td>
+                        <td>5,000đ</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                        </tbody>
+                        <tfoot>
+                            <tr class="table-warning">
+                                <th colspan="4">Tổng phí gia hạn:</th>
+                                <th>${formatCurrency(totalFee)}</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            `;
+            
+            content.innerHTML = html;
+            
+            // Set dates
+            document.getElementById('currentDueDate').value = firstCurrentDue;
+            document.getElementById('newDueDate').value = firstNewDue;
+            document.getElementById('renewalFee').value = formatCurrency(totalFee);
+            
+            const modal = new bootstrap.Modal(document.getElementById('renewConfirmModal'));
+            modal.show();
+        }
+
+        // Confirm renewal
+        function confirmRenewal() {
+            const reason = document.getElementById('renewalReason').value.trim();
+            
+            if (!reason) {
+                showNotification('Vui lòng nhập lý do gia hạn!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                // Process renewal transaction
+                const renewalData = {
+                    readerId: selectedRenewReader.maThe,
+                    borrowIds: selectedRenewBooks,
+                    reason: reason,
+                    renewalDate: new Date().toISOString().split('T')[0],
+                    librarian: sessionStorage.getItem('username') || 'Admin'
+                };
+                
+                const success = processRenewalTransaction(renewalData);
+                
+                if (success) {
+                    showNotification(`Gia hạn thành công cho ${selectedRenewReader.hoTen}!`, 'success');
+                    
+                    // Generate receipt
+                    generateRenewalReceipt(renewalData);
+                    
+                    // Reset form
+                    clearRenewReader();
+                    loadStatistics();
+                    
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('renewConfirmModal'));
+                    modal.hide();
+                    
+                    // Show receipt
+                    setTimeout(() => {
+                        const receiptModal = new bootstrap.Modal(document.getElementById('receiptModal'));
+                        receiptModal.show();
+                    }, 500);
+                } else {
+                    showNotification('Có lỗi xảy ra khi gia hạn!', 'error');
+                }
+                
+                hideLoading();
+            }, 1000);
+        }
+
+        // SEARCH FUNCTIONS
+        
+        // Perform advanced search
+        function performAdvancedSearch() {
+            const searchType = document.getElementById('searchType').value;
+            const keyword = document.getElementById('searchKeyword').value.trim();
+            const fromDate = document.getElementById('searchFromDate').value;
+            const toDate = document.getElementById('searchToDate').value;
+            const status = document.getElementById('searchStatus').value;
+            const className = document.getElementById('searchClass').value;
+            
+            if (!keyword && !fromDate && !toDate && !status && !className) {
+                showNotification('Vui lòng nhập ít nhất một tiêu chí tìm kiếm!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                const searchCriteria = {
+                    type: searchType,
+                    keyword: keyword,
+                    fromDate: fromDate,
+                    toDate: toDate,
+                    status: status,
+                    className: className
+                };
+                
+                currentSearchResults = performSearch(searchCriteria);
+                displaySearchResults(currentSearchResults, searchType);
+                hideLoading();
+            }, 1000);
+        }
+
+        // Display search results
+        function displaySearchResults(results, searchType) {
+            const section = document.getElementById('searchResultsSection');
+            const header = document.getElementById('searchResultsHeader');
+            const body = document.getElementById('searchResultsBody');
+            const count = document.getElementById('searchResultsCount');
+            
+            count.textContent = results.length;
+            
+            if (results.length === 0) {
+                section.classList.remove('d-none');
+                body.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center py-4">
+                            <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">Không tìm thấy kết quả nào</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            // Generate header based on search type
+            let headerHtml = '';
+            switch(searchType) {
+                case 'reader':
+                    headerHtml = `
+                        <tr>
+                            <th>Mã thẻ</th>
+                            <th>Họ tên</th>
+                            <th>Lớp</th>
+                            <th>Đang mượn</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    `;
+                    break;
+                case 'book':
+                    headerHtml = `
+                        <tr>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Tác giả</th>
+                            <th>Thể loại</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    `;
+                    break;
+                case 'transaction':
+                    headerHtml = `
+                        <tr>
+                            <th>Ngày</th>
+                            <th>Độc giả</th>
+                            <th>Sách</th>
+                            <th>Loại giao dịch</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    `;
+                    break;
+            }
+            header.innerHTML = headerHtml;
+            
+            // Generate body
+            let bodyHtml = '';
+            results.slice(0, 50).forEach(item => { // Limit to 50 results
+                switch(searchType) {
+                    case 'reader':
+                        const borrowedCount = getReaderBorrowedBooks(item.maThe).length;
+                        const readerStatus = getReaderStatus(item);
+                        bodyHtml += `
+                            <tr>
+                                <td>${item.maThe}</td>
+                                <td>${item.hoTen}</td>
+                                <td>${item.lop}</td>
+                                <td><span class="badge bg-warning">${borrowedCount}</span></td>
+                                <td><span class="status-badge ${readerStatus.class}">${readerStatus.text}</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewReaderDetail('${item.maThe}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-success" onclick="selectReaderForBorrow('${item.maThe}')">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                        break;
+                    case 'book':
+                        const bookStatus = getBookStatus(item);
+                        const availableCopies = getAvailableCopies(item.maSach);
+                        bodyHtml += `
+                            <tr>
+                                <td>${item.maSach}</td>
+                                <td>${item.tenSach}</td>
+                                <td>${item.tacGia}</td>
+                                <td>${item.theLoai}</td>
+                                <td>
+                                    <span class="badge ${bookStatus.available ? 'bg-success' : 'bg-danger'}">
+                                        ${bookStatus.available ? `Có sẵn (${availableCopies})` : 'Hết sách'}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewBookDetail('${item.maSach}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    ${bookStatus.available ? 
+                                        `<button class="btn btn-sm btn-outline-success" onclick="selectBookForBorrow('${item.maSach}')">
+                                            <i class="fas fa-plus"></i>
+                                        </button>` : ''
+                                    }
+                                </td>
+                            </tr>
+                        `;
+                        break;
+                    case 'transaction':
+                        const reader = getReaderById(item.maThe);
+                        const book = getBookByCode(item.maSach);
+                        const transactionStatus = getTransactionStatus(item);
+                        bodyHtml += `
+                            <tr>
+                                <td>${formatDate(item.ngayMuon || item.ngayTra || item.ngayGiaHan)}</td>
+                                <td>${reader ? reader.hoTen : 'Không tìm thấy'}</td>
+                                <td>${book ? book.tenSach : 'Không tìm thấy'}</td>
+                                <td>
+                                    <span class="badge ${getTransactionTypeBadge(item.loaiGiaoDich)}">
+                                        ${getTransactionTypeText(item.loaiGiaoDich)}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="status-badge ${transactionStatus.class}">
+                                        ${transactionStatus.text}
+                                    </span>
+                                </td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="viewTransactionDetail('${item.id}')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-info" onclick="printTransactionReceipt('${item.id}')">
+                                        <i class="fas fa-print"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                        break;
+                }
+            });
+            
+            if (results.length > 50) {
+                bodyHtml += `
+                    <tr>
+                        <td colspan="6" class="text-center py-3 bg-light">
+                            <i class="fas fa-info-circle text-info"></i>
+                            Hiển thị 50 kết quả đầu tiên. Tổng cộng: ${results.length} kết quả.
+                            <button class="btn btn-sm btn-outline-primary ms-2" onclick="exportSearchResults()">
+                                <i class="fas fa-download"></i> Xuất tất cả
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }
+            
+            body.innerHTML = bodyHtml;
+            section.classList.remove('d-none');
+        }
+
+        // Clear search form
+        function clearSearchForm() {
+            document.getElementById('searchKeyword').value = '';
+            document.getElementById('searchFromDate').value = '';
+            document.getElementById('searchToDate').value = '';
+            document.getElementById('searchStatus').value = '';
+            document.getElementById('searchClass').value = '';
+            document.getElementById('searchResultsSection').classList.add('d-none');
+            currentSearchResults = [];
+        }
+
+        // Export search results
+        function exportSearchResults() {
+            if (currentSearchResults.length === 0) {
+                showNotification('Không có dữ liệu để xuất!', 'error');
+                return;
+            }
+            
+            showLoading();
+            
+            setTimeout(() => {
+                const searchType = document.getElementById('searchType').value;
+                const csvContent = generateSearchResultsCSV(currentSearchResults, searchType);
+                downloadCSV(csvContent, `ket-qua-tim-kiem-${searchType}-${new Date().toISOString().split('T')[0]}.csv`);
+                showNotification('Xuất dữ liệu thành công!', 'success');
+                hideLoading();
+            }, 1000);
+        }
+
+        // Quick search functions
+        function showTodayTransactions() {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('searchType').value = 'transaction';
+            document.getElementById('searchFromDate').value = today;
+            document.getElementById('searchToDate').value = today;
+            performAdvancedSearch();
+        }
+
+        function showOverdueBooks() {
+            document.getElementById('searchType').value = 'transaction';
+            document.getElementById('searchStatus').value = 'overdue';
+            performAdvancedSearch();
+        }
+
+        function showPopularBooks() {
+            showLoading();
+            setTimeout(() => {
+                const popularBooks = getPopularBooks();
+                currentSearchResults = popularBooks;
+                displaySearchResults(popularBooks, 'book');
+                hideLoading();
+            }, 500);
+        }
+
+        function showActiveReaders() {
+            showLoading();
+            setTimeout(() => {
+                const activeReaders = getActiveReaders();
+                currentSearchResults = activeReaders;
+                displaySearchResults(activeReaders, 'reader');
+                hideLoading();
+            }, 500);
+        }
+
+        // MODAL FUNCTIONS
+        
+        // Show borrow history modal
+        function showBorrowHistoryModal() {
+            loadBorrowHistory();
+            const modal = new bootstrap.Modal(document.getElementById('borrowHistoryModal'));
+            modal.show();
+        }
+
+        // Load borrow history
+        function loadBorrowHistory() {
+            const filter = document.getElementById('historyFilter')?.value || 'all';
+            const type = document.getElementById('historyType')?.value || 'all';
+            const search = document.getElementById('historySearch')?.value || '';
+            
+            const history = getBorrowHistory(filter, type, search);
+            displayBorrowHistory(history);
+        }
+
+        // Display borrow history
+        function displayBorrowHistory(history) {
+            const tbody = document.getElementById('historyTableBody');
+            
+            if (history.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center py-4">
+                            <i class="fas fa-history fa-3x text-muted mb-3"></i>
+                            <p class="text-muted">Không có lịch sử giao dịch</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            let html = '';
+            history.forEach(record => {
+                const reader = getReaderById(record.maThe);
+                const book = getBookByCode(record.maSach);
+                const status = getTransactionStatus(record);
+                
+                html += `
+                    <tr>
+                        <td>${formatDateTime(record.thoiGian)}</td>
+                        <td>
+                            <strong>${reader ? reader.hoTen : 'Không tìm thấy'}</strong><br>
+                            <small class="text-muted">${record.maThe}</small>
+                        </td>
+                        <td>
+                            <strong>${book ? book.tenSach : 'Không tìm thấy'}</strong><br>
+                            <small class="text-muted">${record.maSach}</small>
+                        </td>
+                        <td>
+                            <span class="badge ${getTransactionTypeBadge(record.loaiGiaoDich)}">
+                                ${getTransactionTypeText(record.loaiGiaoDich)}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="status-badge ${status.class}">
+                                ${status.text}
+                            </span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewTransactionDetail('${record.id}')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-info" onclick="printTransactionReceipt('${record.id}')">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        // Filter history
+        function filterHistory() {
+            loadBorrowHistory();
+        }
+
+        // Export history
+        function exportHistory() {
+            showLoading();
+            
+            setTimeout(() => {
+                const filter = document.getElementById('historyFilter').value;
+                const type = document.getElementById('historyType').value;
+                const search = document.getElementById('historySearch').value;
+                
+                const history = getBorrowHistory(filter, type, search);
+                const csvContent = generateHistoryCSV(history);
+                downloadCSV(csvContent, `lich-su-muon-tra-${new Date().toISOString().split('T')[0]}.csv`);
+                showNotification('Xuất lịch sử thành công!', 'success');
+                hideLoading();
+            }, 1000);
+        }
+
+        // Show overdue modal
+        function showOverdueModal() {
+            loadOverdueBooks();
+            const modal = new bootstrap.Modal(document.getElementById('overdueModal'));
+            modal.show();
+        }
+
+        // Load overdue books
+        function loadOverdueBooks() {
+            const filter = document.getElementById('overdueFilter')?.value || 'all';
+            const search = document.getElementById('overdueSearch')?.value || '';
+            
+            const overdueBooks = getOverdueBooks(filter, search);
+            displayOverdueBooks(overdueBooks);
+        }
+
+        // Display overdue books
+        function displayOverdueBooks(overdueBooks) {
+            const tbody = document.getElementById('overdueTableBody');
+            
+            if (overdueBooks.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="text-center py-4">
+                            <i class="fas fa-check-circle fa-3x text-success mb-3"></i>
+                            <p class="text-success">Không có sách quá hạn!</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+            
+            let html = '';
+            overdueBooks.forEach(record => {
+                const reader = getReaderById(record.maThe);
+                const book = getBookByCode(record.maSach);
+                const overdueDays = calculateOverdueDays(record.hanTra);
+                const fine = overdueDays * 2000;
+                
+                html += `
+                    <tr>
+                        <td>
+                            <strong>${reader ? reader.hoTen : 'Không tìm thấy'}</strong><br>
+                            <small class="text-muted">${record.maThe} - ${reader ? reader.lop : ''}</small>
+                        </td>
+                        <td>
+                            <strong>${book ? book.tenSach : 'Không tìm thấy'}</strong><br>
+                            <small class="text-muted">${record.maSach}</small>
+                        </td>
+                        <td>${formatDate(record.ngayMuon)}</td>
+                        <td>${formatDate(record.hanTra)}</td>
+                        <td>
+                            <span class="badge bg-danger">${overdueDays} ngày</span>
+                        </td>
+                        <td>
+                            <strong class="text-danger">${formatCurrency(fine)}</strong>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-success" onclick="processOverdueReturn('${record.id}')">
+                                <i class="fas fa-undo"></i> Trả
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning" onclick="sendOverdueNotification('${record.maThe}')">
+                                <i class="fas fa-bell"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        // Send overdue notifications
+        function sendOverdueNotifications() {
+            showLoading();
+            
+            setTimeout(() => {
+                const overdueBooks = getOverdueBooks('all', '');
+                const notificationsSent = sendBulkOverdueNotifications(overdueBooks);
+                
+                showNotification(`Đã gửi ${notificationsSent} thông báo quá hạn!`, 'success');
+                hideLoading();
+            }, 1500);
+        }
+
+        // Send single overdue notification
+        function sendOverdueNotification(readerId) {
+            showLoading();
+            
+            setTimeout(() => {
+                const success = sendSingleOverdueNotification(readerId);
+                
+                if (success) {
+                    showNotification('Đã gửi thông báo!', 'success');
+                } else {
+                    showNotification('Có lỗi khi gửi thông báo!', 'error');
+                }
+                
+                hideLoading();
+            }, 500);
+        }
+
+        // Process overdue return
+        function processOverdueReturn(borrowId) {
+            const borrowRecord = getBorrowRecordById(borrowId);
+            const reader = getReaderById(borrowRecord.maThe);
+            
+            // Auto-select reader and book for return
+            selectedReturnReader = reader;
+            selectedReturnBooks = [borrowId];
+            
+            // Switch to return tab
+            const returnTab = new bootstrap.Tab(document.getElementById('return-tab'));
+            returnTab.show();
+            
+            // Close overdue modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('overdueModal'));
+            modal.hide();
+            
+            // Show return confirmation
+            setTimeout(() => {
+                showReturnConfirmModal();
+            }, 500);
+        }
+
+        // Export overdue list
+        function exportOverdueList() {
+            showLoading();
+            
+            setTimeout(() => {
+                const filter = document.getElementById('overdueFilter').value;
+                const search = document.getElementById('overdueSearch').value;
+                
+                const overdueBooks = getOverdueBooks(filter, search);
+                const csvContent = generateOverdueCSV(overdueBooks);
+                downloadCSV(csvContent, `danh-sach-qua-han-${new Date().toISOString().split('T')[0]}.csv`);
+                showNotification('Xuất danh sách quá hạn thành công!', 'success');
+                hideLoading();
+            }, 1000);
+        }
+
+        // RECEIPT FUNCTIONS
+        
+        // Generate borrow receipt
+        function generateBorrowReceipt(borrowData) {
+            const reader = getReaderById(borrowData.readerId);
+            const receiptContent = document.getElementById('receiptContent');
+            
+            let html = `
+                <div class="receipt-header">
+                    <h4>PHIẾU MƯỢN SÁCH</h4>
+                    <p class="mb-0">Thư viện trường THPT ABC</p>
+                    <small>Ngày: ${formatDateTime(new Date())}</small>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Độc giả:</strong> ${reader.hoTen}<br>
+                        <strong>Mã thẻ:</strong> ${reader.maThe}<br>
+                        <strong>Lớp:</strong> ${reader.lop}
+                    </div>
+                    <div class="col-6">
+                        <strong>Ngày mượn:</strong> ${formatDate(borrowData.borrowDate)}<br>
+                        <strong>Hạn trả:</strong> ${formatDate(borrowData.dueDate)}<br>
+                        <strong>Thủ thư:</strong> ${borrowData.librarian}
+                    </div>
+                </div>
+                
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Tác giả</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            borrowData.books.forEach((bookCode, index) => {
+                const book = getBookByCode(bookCode);
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${bookCode}</td>
+                        <td>${book ? book.tenSach : 'Không tìm thấy'}</td>
+                        <td>${book ? book.tacGia : ''}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+                
+                <div class="mt-3">
+                    <p><strong>Tổng số sách:</strong> ${borrowData.books.length} cuốn</p>
+                    ${borrowData.note ? `<p><strong>Ghi chú:</strong> ${borrowData.note}</p>` : ''}
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-6 text-center">
+                        <strong>Độc giả</strong><br>
+                        <small>(Ký tên)</small>
+                    </div>
+                    <div class="col-6 text-center">
+                        <strong>Thủ thư</strong><br>
+                        <small>(Ký tên)</small>
+                    </div>
+                </div>
+            `;
+            
+            receiptContent.innerHTML = html;
+        }
+
+        // Generate return receipt
+        function generateReturnReceipt(returnData) {
+            const reader = getReaderById(returnData.readerId);
+            const receiptContent = document.getElementById('receiptContent');
+            
+            let totalFine = 0;
+            let html = `
+                <div class="receipt-header">
+                    <h4>PHIẾU TRẢ SÁCH</h4>
+                    <p class="mb-0">Thư viện trường THPT ABC</p>
+                    <small>Ngày: ${formatDateTime(new Date())}</small>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Độc giả:</strong> ${reader.hoTen}<br>
+                        <strong>Mã thẻ:</strong> ${reader.maThe}<br>
+                        <strong>Lớp:</strong> ${reader.lop}
+                    </div>
+                    <div class="col-6">
+                        <strong>Ngày trả:</strong> ${formatDate(returnData.returnDate)}<br>
+                        <strong>Tình trạng:</strong> ${getConditionText(returnData.bookCondition)}<br>
+                        <strong>Thủ thư:</strong> ${returnData.librarian}
+                    </div>
+                </div>
+                
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Hạn trả</th>
+                            <th>Phí phạt</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            returnData.borrowIds.forEach((borrowId, index) => {
+                const borrowRecord = getBorrowRecordById(borrowId);
+                const book = getBookByCode(borrowRecord.maSach);
+                const isOverdue = isBookOverdue(borrowRecord);
+                const fine = isOverdue ? calculateOverdueDays(borrowRecord.hanTra) * 2000 : 0;
+                totalFine += fine;
+                
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${borrowRecord.maSach}</td>
+                        <td>${book ? book.tenSach : 'Không tìm thấy'}</td>
+                        <td>${formatDate(borrowRecord.hanTra)}</td>
+                        <td>${fine > 0 ? formatCurrency(fine) : '-'}</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+                
+                <div class="mt-3">
+                    <p><strong>Tổng số sách:</strong> ${returnData.borrowIds.length} cuốn</p>
+                    <p><strong>Phí phạt quá hạn:</strong> ${formatCurrency(totalFine)}</p>
+                    <p><strong>Phí hư hỏng:</strong> ${formatCurrency(returnData.damageFee || 0)}</p>
+                    <p><strong>Tổng phí:</strong> ${formatCurrency(totalFine + (returnData.damageFee || 0))}</p>
+                    ${returnData.note ? `<p><strong>Ghi chú:</strong> ${returnData.note}</p>` : ''}
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-6 text-center">
+                        <strong>Độc giả</strong><br>
+                        <small>(Ký tên)</small>
+                    </div>
+                    <div class="col-6 text-center">
+                        <strong>Thủ thư</strong><br>
+                        <small>(Ký tên)</small>
+                    </div>
+                </div>
+            `;
+            
+            receiptContent.innerHTML = html;
+        }
+
+        // Generate renewal receipt
+        function generateRenewalReceipt(renewalData) {
+            const reader = getReaderById(renewalData.readerId);
+            const receiptContent = document.getElementById('receiptContent');
+            
+            const totalFee = renewalData.borrowIds.length * 5000;
+            
+            let html = `
+                <div class="receipt-header">
+                    <h4>PHIẾU GIA HẠN SÁCH</h4>
+                    <p class="mb-0">Thư viện trường THPT ABC</p>
+                    <small>Ngày: ${formatDateTime(new Date())}</small>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <strong>Độc giả:</strong> ${reader.hoTen}<br>
+                        <strong>Mã thẻ:</strong> ${reader.maThe}<br>
+                        <strong>Lớp:</strong> ${reader.lop}
+                    </div>
+                    <div class="col-6">
+                        <strong>Ngày gia hạn:</strong> ${formatDate(renewalData.renewalDate)}<br>
+                        <strong>Lý do:</strong> ${renewalData.reason}<br>
+                        <strong>Thủ thư:</strong> ${renewalData.librarian}
+                    </div>
+                </div>
+                
+                <table class="table table-sm table-bordered">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã sách</th>
+                            <th>Tên sách</th>
+                            <th>Hạn cũ</th>
+                            <th>Hạn mới</th>
+                            <th>Phí</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            renewalData.borrowIds.forEach((borrowId, index) => {
+                const borrowRecord = getBorrowRecordById(borrowId);
+                const book = getBookByCode(borrowRecord.maSach);
+                const oldDue = new Date(borrowRecord.hanTra);
+                const newDue = new Date(oldDue);
+                newDue.setDate(newDue.getDate() + 14);
+                
+                html += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${borrowRecord.maSach}</td>
+                        <td>${book ? book.tenSach : 'Không tìm thấy'}</td>
+                        <td>${formatDate(borrowRecord.hanTra)}</td>
+                        <td>${formatDate(newDue.toISOString().split('T')[0])}</td>
+                        <td>5,000đ</td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+                
+                <div class="mt-3">
+                    <p><strong>Tổng số sách:</strong> ${renewalData.borrowIds.length} cuốn</p>
+                    <p><strong>Tổng phí gia hạn:</strong> ${formatCurrency(totalFee)}</p>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-6 text-center">
+                        <strong>Độc giả</strong><br>
+                        <small>(Ký tên)</small>
+                    </div>
+                    <div class="col-6 text-center">
+                        <strong>Thủ thư</strong><br>
+                        <small>(Ký tên)</small>
+                    </div>
+                </div>
+            `;
+            
+            receiptContent.innerHTML = html;
+        }
+
+        // Print receipt
+        function printReceipt() {
+            const receiptContent = document.getElementById('receiptContent').innerHTML;
+            const printWindow = window.open('', '_blank');
+            
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Phiếu giao dịch</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .receipt-header { text-align: center; margin-bottom: 20px; border-bottom: 2px solid #000; padding-bottom: 10px; }
+                        table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+                        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+                        th { background-color: #f0f0f0; }
+                        @media print { body { margin: 0; } }
+                    </style>
+                </head>
+                <body>
+                    ${receiptContent}
+                </body>
+                </html>
+            `);
+            
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        // Print daily report
+        function printDailyReport() {
+            showLoading();
+            
+            setTimeout(() => {
+                const reportData = generateDailyReport();
+                const printWindow = window.open('', '_blank');
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Báo cáo hoạt động ngày ${formatDate(new Date().toISOString().split('T')[0])}</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; margin: 20px; }
+                            .header { text-align: center; margin-bottom: 30px; }
+                            .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+                            .stat-item { text-align: center; }
+                            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                            th { background-color: #f0f0f0; }
+                        </style>
+                    </head>
+                    <body>
+                        ${reportData}
+                    </body>
+                    </html>
+                `);
+                
+                printWindow.document.close();
+                printWindow.print();
+                hideLoading();
+            }, 1000);
+        }
+
+        // SCANNER FUNCTIONS
+        
+        // Scan reader card
+        function scanReaderCard() {
+            showNotification('Tính năng quét mã đang được phát triển!', 'info');
+        }
+
+        function scanReturnReaderCard() {
+            showNotification('Tính năng quét mã đang được phát triển!', 'info');
+        }
+
+        function scanRenewReaderCard() {
+            showNotification('Tính năng quét mã đang được phát triển!', 'info');
+        }
+
+        // Scan book barcode
+        function scanBookBarcode() {
+            showNotification('Tính năng quét mã vạch đang được phát triển!', 'info');
+        }
+
+        // Toggle barcode scanner
+        function toggleBarcodeScanner() {
+            const scanner = document.getElementById('barcodeScanner');
+            
+            if (scanner.classList.contains('active')) {
+                scanner.classList.remove('active');
+                scanner.innerHTML = `
+                    <i class="fas fa-qrcode fa-3x text-muted mb-3"></i>
+                    <h6>Quét mã vạch</h6>
+                    <p class="text-muted mb-3">Nhấn để kích hoạt camera quét mã</p>
+                    <button class="btn btn-outline-primary" onclick="toggleBarcodeScanner()">
+                        <i class="fas fa-camera"></i> Bật camera
+                    </button>
+                `;
+            } else {
+                scanner.classList.add('active');
+                scanner.innerHTML = `
+                    <i class="fas fa-camera fa-3x text-success mb-3"></i>
+                    <h6>Camera đang hoạt động</h6>
+                    <p class="text-success mb-3">Đưa mã vạch vào khung hình</p>
+                    <button class="btn btn-outline-danger" onclick="toggleBarcodeScanner()">
+                        <i class="fas fa-stop"></i> Tắt camera
+                    </button>
+                `;
+                
+                // Simulate scanner activation
+                setTimeout(() => {
+                    showNotification('Tính năng quét mã vạch đang được phát triển!', 'info');
+                }, 1000);
+            }
+        }
+
+        // UTILITY FUNCTIONS
+        
+        // Show/Hide loading
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('d-none');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('d-none');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            // This function should be implemented in app.js
+            console.log(`${type.toUpperCase()}: ${message}`);
+            
+            // Simple toast notification
+            const toast = document.createElement('div');
+            toast.className = `alert alert-${type === 'error' ? 'danger' : type} position-fixed`;
+            toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+            toast.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                ${message}
+                <button type="button" class="btn-close" onclick="this.parentElement.remove()"></button>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, 5000);
+        }
+
+        // Format functions
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('vi-VN');
+        }
+
+        function formatDateTime(date) {
+            return new Date(date).toLocaleString('vi-VN');
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(amount);
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+                sessionStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Data functions (these should be implemented in data.js)
+        function getBorrowReturnStatistics() {
+            // This should return actual statistics
+            return {
+                todayBorrow: 15,
+                todayReturn: 12,
+                totalBorrowed: 234,
+                overdue: 18,
+                renewed: 8,
+                totalFine: 360000
+            };
+        }
+
+        function searchReaders(searchTerm) {
+            // This should search readers from data
+            return window.readersData ? window.readersData.filter(reader => 
+                reader.hoTen.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                reader.maThe.includes(searchTerm)
+            ) : [];
+        }
+
+        function searchAvailableBooks(searchTerm) {
+            // This should search available books
+            return window.booksData ? window.booksData.filter(book => 
+                book.tenSach.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                book.maSach.includes(searchTerm)
+            ) : [];
+        }
+
+        function canReaderBorrow(reader) {
+            // Check if reader can borrow books
+            const status = getReaderStatus(reader);
+            const borrowedCount = getReaderBorrowedBooks(reader.maThe).length;
+            const hasOverdue = getReaderBorrowedBooks(reader.maThe).some(book => isBookOverdue(book));
+            
+            return status.type !== 'blocked' && 
+                   status.type !== 'expired' && 
+                   borrowedCount < 5 && 
+                   !hasOverdue;
+        }
+
+        function getReaderStatus(reader) {
+            const today = new Date();
+            const expiryDate = new Date(reader.hanThe);
+            
+            if (reader.tinhTrang === 'Tạm khóa') {
+                return { type: 'blocked', class: 'status-blocked', text: 'Bị khóa' };
+            } else if (expiryDate < today) {
+                return { type: 'expired', class: 'status-expired', text: 'Hết hạn' };
+            } else {
+                return { type: 'active', class: 'status-active', text: 'Hoạt động' };
+            }
+        }
+
+        function getReaderBorrowedBooks(readerId) {
+            // This should return currently borrowed books
+            return window.borrowData ? window.borrowData.filter(borrow => 
+                borrow.maThe === readerId && borrow.tinhTrang === 'Đang mượn'
+            ) : [];
+        }
+
+        function isBookOverdue(borrowRecord) {
+            const today = new Date();
+            const dueDate = new Date(borrowRecord.hanTra);
+            return dueDate < today;
+        }
+
+        function calculateOverdueDays(dueDateString) {
+            const today = new Date();
+            const dueDate = new Date(dueDateString);
+            const diffTime = today - dueDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return Math.max(0, diffDays);
+        }
+
+        // Additional helper functions would be implemented here...
+        // These functions should interact with the data layer (data.js)
+        
+    </script>
+</body>
+</html>
