@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý sách - Hệ thống quản lý thư viện</title>
-    
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         body {
             background: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .navbar-custom {
             background: linear-gradient(45deg, #2c3e50, #3498db);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .main-content {
             padding: 20px 0;
         }
-        
+
         .page-header {
             background: white;
             border-radius: 15px;
@@ -32,7 +30,7 @@
             margin-bottom: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .search-filter-card {
             background: white;
             border-radius: 15px;
@@ -40,79 +38,79 @@
             margin-bottom: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .books-table-card {
             background: white;
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .form-control, .form-select {
             border-radius: 10px;
             border: 2px solid #e9ecef;
             padding: 12px 15px;
         }
-        
+
         .form-control:focus, .form-select:focus {
             border-color: #3498db;
             box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
         }
-        
+
         .btn-custom {
             border-radius: 10px;
             padding: 12px 25px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        
+
         .btn-primary-custom {
             background: linear-gradient(45deg, #3498db, #2980b9);
             border: none;
             color: white;
         }
-        
+
         .btn-primary-custom:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
             color: white;
         }
-        
+
         .btn-success-custom {
             background: linear-gradient(45deg, #27ae60, #229954);
             border: none;
             color: white;
         }
-        
+
         .btn-success-custom:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(39, 174, 96, 0.3);
             color: white;
         }
-        
+
         .btn-warning-custom {
             background: linear-gradient(45deg, #f39c12, #e67e22);
             border: none;
             color: white;
         }
-        
+
         .btn-warning-custom:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
             color: white;
         }
-        
+
         .table-custom {
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
         }
-        
+
         .table-custom thead {
             background: linear-gradient(45deg, #34495e, #2c3e50);
             color: white;
         }
-        
+
         .table-custom thead th {
             border: none;
             padding: 15px;
@@ -120,19 +118,19 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .table-custom tbody td {
             padding: 15px;
             vertical-align: middle;
             border-bottom: 1px solid #e9ecef;
         }
-        
+
         .table-custom tbody tr:hover {
             background: #f8f9fa;
             transform: scale(1.01);
             transition: all 0.3s ease;
         }
-        
+
         .status-badge {
             padding: 8px 15px;
             border-radius: 20px;
@@ -141,37 +139,37 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .status-available {
             background: #d4edda;
             color: #155724;
             border: 1px solid #c3e6cb;
         }
-        
+
         .status-borrowed {
             background: #fff3cd;
             color: #856404;
             border: 1px solid #ffeaa7;
         }
-        
+
         .status-unavailable {
             background: #f8d7da;
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
-        
+
         .status-popular {
             background: #cce5ff;
             color: #004085;
             border: 1px solid #99d6ff;
         }
-        
+
         .book-actions {
             display: flex;
             gap: 5px;
             flex-wrap: wrap;
         }
-        
+
         .btn-action {
             padding: 5px 10px;
             border-radius: 5px;
@@ -179,81 +177,81 @@
             font-size: 0.8rem;
             transition: all 0.3s ease;
         }
-        
+
         .btn-action:hover {
             transform: translateY(-1px);
         }
-        
+
         .btn-view {
             background: #17a2b8;
             color: white;
         }
-        
+
         .btn-edit {
             background: #ffc107;
             color: #212529;
         }
-        
+
         .btn-delete {
             background: #dc3545;
             color: white;
         }
-        
+
         .stats-row {
             background: #f8f9fa;
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 20px;
         }
-        
+
         .stat-item {
             text-align: center;
             padding: 10px;
         }
-        
+
         .stat-number {
             font-size: 1.5rem;
             font-weight: bold;
             color: #2c3e50;
         }
-        
+
         .stat-label {
             color: #6c757d;
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .pagination-custom .page-link {
             border-radius: 8px;
             margin: 0 2px;
             border: 1px solid #dee2e6;
             color: #3498db;
         }
-        
+
         .pagination-custom .page-link:hover {
             background: #3498db;
             color: white;
             border-color: #3498db;
         }
-        
+
         .pagination-custom .page-item.active .page-link {
             background: #3498db;
             border-color: #3498db;
         }
-        
+
         .modal-custom .modal-content {
             border-radius: 15px;
             border: none;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
-        
+
         .modal-custom .modal-header {
             background: linear-gradient(45deg, #3498db, #2980b9);
             color: white;
             border-radius: 15px 15px 0 0;
         }
-        
+
         .loading-overlay {
             position: fixed;
             top: 0;
@@ -266,23 +264,23 @@
             align-items: center;
             z-index: 9999;
         }
-        
+
         .loading-spinner {
             background: white;
             padding: 30px;
             border-radius: 15px;
             text-align: center;
         }
-        
+
         @media (max-width: 768px) {
             .book-actions {
                 justify-content: center;
             }
-            
+
             .table-responsive {
                 font-size: 0.9rem;
             }
-            
+
             .btn-custom {
                 padding: 10px 20px;
                 font-size: 0.9rem;
@@ -291,18 +289,17 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
             <a class="navbar-brand" href="dashboard.html">
-                <i class="fas fa-book"></i> 
+                <i class="fas fa-book"></i>
                 Quản lý sách
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -331,10 +328,10 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <div class="navbar-nav">
                     <span class="nav-link">
-                        <i class="fas fa-user"></i> 
+                        <i class="fas fa-user"></i>
                         <span id="currentUser">Admin</span>
                     </span>
                     <button class="btn btn-outline-light btn-sm" onclick="logout()">
@@ -345,14 +342,12 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container main-content">
-        <!-- Page Header -->
         <div class="page-header">
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h2 class="mb-0">
-                        <i class="fas fa-books text-primary"></i> 
+                        <i class="fas fa-books text-primary"></i>
                         Quản lý sách
                     </h2>
                     <p class="text-muted mb-0">Quản lý toàn bộ sách trong thư viện</p>
@@ -368,7 +363,6 @@
             </div>
         </div>
 
-        <!-- Statistics Row -->
         <div class="stats-row">
             <div class="row">
                 <div class="col-md-3 col-6">
@@ -398,20 +392,19 @@
             </div>
         </div>
 
-        <!-- Search & Filter -->
         <div class="search-filter-card">
             <h5 class="mb-4">
-                <i class="fas fa-search text-primary"></i> 
+                <i class="fas fa-search text-primary"></i>
                 Tìm kiếm & Lọc sách
             </h5>
-            
+
             <div class="row">
                 <div class="col-md-4 mb-3">
                     <label class="form-label">Tìm kiếm:</label>
                     <div class="input-group">
-                        <input type="text" 
-                               class="form-control" 
-                               id="searchInput" 
+                        <input type="text"
+                               class="form-control"
+                               id="searchInput"
                                placeholder="Tên sách, tác giả, mã sách..."
                                onkeyup="handleSearch(event)">
                         <button class="btn btn-primary-custom" onclick="searchBooks()">
@@ -419,38 +412,35 @@
                         </button>
                     </div>
                 </div>
-                
+
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Loại sách:</label>
                     <select class="form-select" id="categoryFilter" onchange="filterBooks()">
                         <option value="">Tất cả</option>
-                        <option value="Tin học">Tin học</option>
-                        <option value="Kinh tế">Kinh tế</option>
-                        <option value="Ngoại ngữ">Ngoại ngữ</option>
-                        <option value="Chính trị">Chính trị</option>
-                    </select>
+                        </select>
                 </div>
-                
+
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Trạng thái:</label>
                     <select class="form-select" id="statusFilter" onchange="filterBooks()">
                         <option value="">Tất cả</option>
                         <option value="available">Có thể mượn</option>
                         <option value="borrowed">Đang mượn</option>
-                        <option value="popular">Phổ biến</option>
+                        <option value="reserved">Đang đặt trước</option>
+                        <option value="unavailable">Không có sẵn (hết)</option>
                     </select>
                 </div>
-                
+
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Sắp xếp:</label>
                     <select class="form-select" id="sortBy" onchange="sortBooks()">
-                        <option value="maSach">Mã sách</option>
-                        <option value="tenSach">Tên sách</option>
-                        <option value="tacGia">Tác giả</option>
-                        <option value="soLuong">Số lượng</option>
+                        <option value="title">Tên sách</option>
+                        <option value="authorId">Tác giả</option>
+                        <option value="totalCopies">Số lượng</option>
+                        <option value="id">Mã sách</option>
                     </select>
                 </div>
-                
+
                 <div class="col-md-2 mb-3">
                     <label class="form-label">Hiển thị:</label>
                     <select class="form-select" id="itemsPerPage" onchange="changeItemsPerPage()">
@@ -461,7 +451,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="row mt-3">
                 <div class="col-12">
                     <button class="btn btn-outline-secondary" onclick="clearFilters()">
@@ -474,15 +464,14 @@
             </div>
         </div>
 
-        <!-- Books Table -->
         <div class="books-table-card">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h5 class="mb-0">
-                    <i class="fas fa-list text-success"></i> 
+                    <i class="fas fa-list text-success"></i>
                     Danh sách sách
                     <span class="badge bg-primary" id="filteredCount">0</span>
                 </h5>
-                
+
                 <div class="btn-group" role="group">
                     <button class="btn btn-outline-primary btn-sm" onclick="toggleView('table')" id="tableViewBtn">
                         <i class="fas fa-table"></i> Bảng
@@ -492,8 +481,7 @@
                     </button>
                 </div>
             </div>
-            
-            <!-- Table View -->
+
             <div id="tableView">
                 <div class="table-responsive">
                     <table class="table table-custom">
@@ -509,29 +497,23 @@
                             </tr>
                         </thead>
                         <tbody id="booksTableBody">
-                            <!-- Books data will be loaded here -->
-                        </tbody>
+                            </tbody>
                     </table>
                 </div>
             </div>
-            
-            <!-- Grid View -->
+
             <div id="gridView" class="d-none">
                 <div class="row" id="booksGridContainer">
-                    <!-- Books grid will be loaded here -->
-                </div>
+                    </div>
             </div>
-            
-            <!-- Pagination -->
+
             <nav aria-label="Books pagination" class="mt-4">
                 <ul class="pagination pagination-custom justify-content-center" id="booksPagination">
-                    <!-- Pagination will be generated here -->
-                </ul>
+                    </ul>
             </nav>
         </div>
     </div>
 
-    <!-- Add/Edit Book Modal -->
     <div class="modal fade modal-custom" id="bookModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -542,72 +524,68 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="bookForm">
+                    <form id="bookForm" data-clear-on-close="true">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Mã sách <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="bookId" required>
+                                <label class="form-label">Mã sách (ID) <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="bookId" required placeholder="Ví dụ: B001">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Tên sách <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="bookTitle" required>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Loại sách <span class="text-danger">*</span></label>
                                 <select class="form-select" id="bookCategory" required>
                                     <option value="">Chọn loại sách</option>
-                                    <option value="Tin học">Tin học</option>
-                                    <option value="Kinh tế">Kinh tế</option>
-                                    <option value="Ngoại ngữ">Ngoại ngữ</option>
-                                    <option value="Chính trị">Chính trị</option>
-                                    <option value="Văn học">Văn học</option>
-                                    <option value="Khoa học">Khoa học</option>
-                                    <option value="Lịch sử">Lịch sử</option>
-                                    <option value="Khác">Khác</option>
-                                </select>
+                                    </select>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Tác giả <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="bookAuthor" required>
+                                <select class="form-select" id="bookAuthor" required>
+                                    <option value="">Chọn tác giả</option>
+                                    </select>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Số lượng <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="bookQuantity" min="1" max="999" required>
+                                <label class="form-label">Số lượng bản sao <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="bookQuantity" min="1" max="999" required value="1">
                             </div>
                             <div class="col-md-4 mb-3">
                                 <label class="form-label">Năm xuất bản</label>
-                                <input type="number" class="form-control" id="bookYear" min="1900" max="2024">
+                                <input type="number" class="form-control" id="bookYear" min="1900" max="2025" value="2023">
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label">Trạng thái</label>
-                                <select class="form-select" id="bookStatus">
-                                    <option value="Có thể mượn">Có thể mượn</option>
-                                    <option value="Không có sẵn">Không có sẵn</option>
-                                    <option value="Đang bảo trì">Đang bảo trì</option>
-                                </select>
+                                <label class="form-label">Trạng thái (Hệ thống tự cập nhật)</label>
+                                <input type="text" class="form-control" id="bookStatus" value="available" readonly>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label class="form-label">Nhà xuất bản</label>
-                                <input type="text" class="form-control" id="bookPublisher" placeholder="VD: NXB Giáo dục">
+                                <select class="form-select" id="bookPublisher">
+                                    <option value="">Chọn nhà xuất bản</option>
+                                    </select>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">Vị trí</label>
+                                <label class="form-label">Vị trí (kệ)</label>
                                 <input type="text" class="form-control" id="bookLocation" placeholder="VD: A1-01">
                             </div>
                         </div>
-                        
+
                         <div class="mb-3">
                             <label class="form-label">Mô tả</label>
                             <textarea class="form-control" id="bookDescription" rows="3" placeholder="Mô tả ngắn về nội dung sách..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ISBN</label>
+                            <input type="text" class="form-control" id="bookISBN" placeholder="VD: 978-1234567890">
                         </div>
                     </form>
                 </div>
@@ -623,7 +601,6 @@
         </div>
     </div>
 
-    <!-- Book Details Modal -->
     <div class="modal fade modal-custom" id="bookDetailsModal" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -634,8 +611,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body" id="bookDetailsContent">
-                    <!-- Book details will be loaded here -->
-                </div>
+                    </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-warning-custom" onclick="editBookFromDetails()">
                         <i class="fas fa-edit"></i> Chỉnh sửa
@@ -648,7 +624,6 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -665,8 +640,7 @@
                         <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác!
                     </div>
                     <div id="deleteBookInfo" class="bg-light p-3 rounded">
-                        <!-- Book info will be displayed here -->
-                    </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
@@ -680,7 +654,6 @@
         </div>
     </div>
 
-    <!-- Loading Overlay -->
     <div id="loadingOverlay" class="loading-overlay d-none">
         <div class="loading-spinner">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;"></div>
@@ -688,13 +661,11 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
+
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
-    
+
     <script>
         // Global variables
         let currentBooks = [];
@@ -707,10 +678,14 @@
 
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
+            // Ensure dataManager is ready before proceeding
+            if (typeof window.dataManager === 'undefined') {
+                setTimeout(initializeBooksPage, 100); // Retry after a short delay
+            } else {
+                initializeBooksPage();
+            }
             checkAuthentication();
-            initializeBooksPage();
-            loadBooks();
-            setCurrentUser();
+            setCurrentUser(); // from app.js
         });
 
         // Check authentication
@@ -732,56 +707,96 @@
         function initializeBooksPage() {
             // Set default view
             document.getElementById('tableViewBtn').classList.add('active');
-            
+
             // Load initial data
-            loadBooksStatistics();
+            loadBooks();
+            populateFilterDropdowns();
         }
+
+        // Populate category filter and modal dropdowns
+        function populateFilterDropdowns() {
+            const categories = window.dataManager.getAllCategories();
+            const authors = window.dataManager.getAllAuthors();
+            const publishers = window.dataManager.getAllPublishers();
+
+            const categoryFilter = document.getElementById('categoryFilter');
+            const bookCategorySelect = document.getElementById('bookCategory');
+            const bookAuthorSelect = document.getElementById('bookAuthor');
+            const bookPublisherSelect = document.getElementById('bookPublisher');
+
+            // Clear previous options
+            categoryFilter.innerHTML = '<option value="">Tất cả</option>';
+            bookCategorySelect.innerHTML = '<option value="">Chọn loại sách</option>';
+            bookAuthorSelect.innerHTML = '<option value="">Chọn tác giả</option>';
+            bookPublisherSelect.innerHTML = '<option value="">Chọn nhà xuất bản</option>';
+
+
+            categories.forEach(cat => {
+                const option = `<option value="${cat.id}">${cat.name}</option>`;
+                categoryFilter.innerHTML += option;
+                bookCategorySelect.innerHTML += option;
+            });
+            authors.forEach(auth => {
+                bookAuthorSelect.innerHTML += `<option value="${auth.id}">${auth.name}</option>`;
+            });
+            publishers.forEach(pub => {
+                bookPublisherSelect.innerHTML += `<option value="${pub.id}">${pub.name}</option>`;
+            });
+
+            // Set current year for bookYear input
+            document.getElementById('bookYear').value = new Date().getFullYear();
+        }
+
 
         // Load books data
         function loadBooks() {
-            showLoading();
-            
+            window.app.showLoading('Đang tải dữ liệu sách...');
+
             // Simulate loading delay
             setTimeout(() => {
-                currentBooks = getAllBooks();
-                filteredBooks = [...currentBooks];
-                
-                updateBooksStatistics();
-                displayBooks();
-                updatePagination();
-                
-                hideLoading();
-            }, 500);
-        }
+                currentBooks = window.dataManager.getAllBooks();
+                filterBooks(); // Apply filters and search after loading all books
 
-        // Load books statistics
-        function loadBooksStatistics() {
-            const stats = getBooksStatistics();
-            document.getElementById('totalBooksCount').textContent = stats.total;
-            document.getElementById('availableBooksCount').textContent = stats.available;
-            document.getElementById('borrowedBooksCount').textContent = stats.borrowed;
-            document.getElementById('categoriesCount').textContent = stats.categories;
+                updateBooksStatistics();
+                // displayBooks() and updatePagination() are called inside filterBooks()
+                window.app.hideLoading();
+            }, 500);
         }
 
         // Update books statistics
         function updateBooksStatistics() {
-            const total = currentBooks.length;
-            let available = 0;
-            let borrowed = 0;
-            const categories = new Set();
-            
-            currentBooks.forEach(book => {
-                const status = getBookDisplayStatus(book);
-                available += status.available;
-                borrowed += (book.soLuong - status.available);
-                categories.add(book.loaiSach);
-            });
-            
-            document.getElementById('totalBooksCount').textContent = total;
-            document.getElementById('availableBooksCount').textContent = available;
-            document.getElementById('borrowedBooksCount').textContent = borrowed;
-            document.getElementById('categoriesCount').textContent = categories.size;
+            const stats = window.dataManager.getStatistics();
+            document.getElementById('totalBooksCount').textContent = stats.books.titles; // Total unique book titles
+            document.getElementById('availableBooksCount').textContent = stats.books.available;
+            document.getElementById('borrowedBooksCount').textContent = stats.books.borrowed;
+            document.getElementById('categoriesCount').textContent = window.dataManager.getAllCategories().length;
         }
+
+        // Helper to get display status of a book
+        function getBookDisplayStatus(book) {
+            let statusText = '';
+            let statusClass = '';
+
+            // Update book availability data first, as it might change from borrow/return actions
+            window.dataManager.updateBookAvailability(book.id);
+
+            if (book.availableCopies > 0) {
+                statusText = 'Có thể mượn';
+                statusClass = 'status-available';
+            } else if (book.borrowedCopies > 0) {
+                statusText = 'Đang mượn';
+                statusClass = 'status-borrowed';
+            } else if (book.reservedCopies > 0) {
+                statusText = 'Đang đặt trước';
+                statusClass = 'status-borrowed'; // Using borrowed style for reserved
+            }
+            else {
+                statusText = 'Không có sẵn';
+                statusClass = 'status-unavailable';
+            }
+            return { text: statusText, class: statusClass, available: book.availableCopies, total: book.totalCopies };
+        }
+
 
         // Display books
         function displayBooks() {
@@ -790,7 +805,7 @@
             } else {
                 displayBooksGrid();
             }
-            
+
             document.getElementById('filteredCount').textContent = filteredBooks.length;
         }
 
@@ -800,7 +815,7 @@
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const booksToShow = filteredBooks.slice(startIndex, endIndex);
-            
+
             if (booksToShow.length === 0) {
                 tbody.innerHTML = `
                     <tr>
@@ -812,36 +827,39 @@
                 `;
                 return;
             }
-            
+
             let html = '';
             booksToShow.forEach(book => {
                 const status = getBookDisplayStatus(book);
+                const categoryName = window.dataManager.getAllCategories().find(c => c.id === book.categoryId)?.name || 'Không rõ';
+                const authorName = window.dataManager.getAllAuthors().find(a => a.id === book.authorId)?.name || 'Không rõ';
+
                 html += `
                     <tr>
-                        <td><strong>${book.maSach}</strong></td>
+                        <td><strong>${book.id}</strong></td>
                         <td>
-                            <div class="fw-bold">${book.tenSach}</div>
-                            <small class="text-muted">ID: ${book.maSach}</small>
+                            <div class="fw-bold">${book.title}</div>
+                            <small class="text-muted">ISBN: ${book.isbn || 'N/A'}</small>
                         </td>
                         <td>
-                            <span class="badge bg-secondary">${book.loaiSach}</span>
+                            <span class="badge bg-secondary">${categoryName}</span>
                         </td>
-                        <td>${book.tacGia}</td>
+                        <td>${authorName}</td>
                         <td>
-                            <span class="badge bg-info">${status.available}/${book.soLuong}</span>
+                            <span class="badge bg-info">${status.available}/${book.totalCopies}</span>
                         </td>
                         <td>
                             <span class="status-badge ${status.class}">${status.text}</span>
                         </td>
                         <td>
                             <div class="book-actions">
-                                <button class="btn-action btn-view" onclick="viewBookDetails('${book.maSach}')" title="Xem chi tiết">
+                                <button class="btn-action btn-view" onclick="viewBookDetails('${book.id}')" title="Xem chi tiết">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <button class="btn-action btn-edit" onclick="editBook('${book.maSach}')" title="Chỉnh sửa">
+                                <button class="btn-action btn-edit" onclick="editBook('${book.id}')" title="Chỉnh sửa">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-action btn-delete" onclick="deleteBook('${book.maSach}')" title="Xóa">
+                                <button class="btn-action btn-delete" onclick="deleteBook('${book.id}')" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
@@ -849,7 +867,7 @@
                     </tr>
                 `;
             });
-            
+
             tbody.innerHTML = html;
         }
 
@@ -859,7 +877,7 @@
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
             const booksToShow = filteredBooks.slice(startIndex, endIndex);
-            
+
             if (booksToShow.length === 0) {
                 container.innerHTML = `
                     <div class="col-12 text-center py-5">
@@ -869,36 +887,39 @@
                 `;
                 return;
             }
-            
+
             let html = '';
             booksToShow.forEach(book => {
                 const status = getBookDisplayStatus(book);
+                const categoryName = window.dataManager.getAllCategories().find(c => c.id === book.categoryId)?.name || 'Không rõ';
+                const authorName = window.dataManager.getAllAuthors().find(a => a.id === book.authorId)?.name || 'Không rõ';
+
                 html += `
                     <div class="col-md-4 col-lg-3 mb-4">
                         <div class="card h-100 shadow-sm">
                             <div class="card-body">
-                                <h6 class="card-title">${book.tenSach}</h6>
+                                <h6 class="card-title">${book.title}</h6>
                                 <p class="card-text">
                                     <small class="text-muted">
-                                        <strong>Mã:</strong> ${book.maSach}<br>
-                                        <strong>Tác giả:</strong> ${book.tacGia}<br>
-                                        <strong>Loại:</strong> ${book.loaiSach}
+                                        <strong>Mã:</strong> ${book.id}<br>
+                                        <strong>Tác giả:</strong> ${authorName}<br>
+                                        <strong>Loại:</strong> ${categoryName}
                                     </small>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span class="status-badge ${status.class}">${status.text}</span>
-                                    <span class="badge bg-info">${status.available}/${book.soLuong}</span>
+                                    <span class="badge bg-info">${status.available}/${book.totalCopies}</span>
                                 </div>
                             </div>
                             <div class="card-footer bg-transparent">
                                 <div class="book-actions justify-content-center">
-                                    <button class="btn-action btn-view" onclick="viewBookDetails('${book.maSach}')">
+                                    <button class="btn-action btn-view" onclick="viewBookDetails('${book.id}')">
                                         <i class="fas fa-eye"></i>
                                     </button>
-                                    <button class="btn-action btn-edit" onclick="editBook('${book.maSach}')">
+                                    <button class="btn-action btn-edit" onclick="editBook('${book.id}')">
                                         <i class="fas fa-edit"></i>
                                     </button>
-                                    <button class="btn-action btn-delete" onclick="deleteBook('${book.maSach}')">
+                                    <button class="btn-action btn-delete" onclick="deleteBook('${book.id}')">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </div>
@@ -907,22 +928,22 @@
                     </div>
                 `;
             });
-            
+
             container.innerHTML = html;
         }
 
         // Toggle view between table and grid
         function toggleView(view) {
             currentView = view;
-            
+
             // Update buttons
             document.getElementById('tableViewBtn').classList.toggle('active', view === 'table');
             document.getElementById('gridViewBtn').classList.toggle('active', view === 'grid');
-            
+
             // Toggle views
             document.getElementById('tableView').classList.toggle('d-none', view !== 'table');
             document.getElementById('gridView').classList.toggle('d-none', view !== 'grid');
-            
+
             // Redisplay books
             displayBooks();
         }
@@ -935,19 +956,49 @@
         }
 
         function searchBooks() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            
+            const searchTerm = document.getElementById('searchInput').value.trim();
+
+            // Filter by existing filters first to narrow down the search pool if active
+            let tempFilteredBooks = [...window.dataManager.getAllBooks()];
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+
+            tempFilteredBooks = tempFilteredBooks.filter(book => {
+                let matchCategory = !categoryFilter || book.categoryId === categoryFilter;
+                let matchStatus = true;
+
+                if (statusFilter) {
+                    const status = getBookDisplayStatus(book); // Get real-time status
+                    switch (statusFilter) {
+                        case 'available':
+                            matchStatus = status.available > 0;
+                            break;
+                        case 'borrowed':
+                            matchStatus = book.borrowedCopies > 0;
+                            break;
+                        case 'reserved':
+                            matchStatus = book.reservedCopies > 0;
+                            break;
+                        case 'unavailable':
+                            matchStatus = (status.available === 0 && book.borrowedCopies === 0 && book.reservedCopies === 0);
+                            break;
+                    }
+                }
+                return matchCategory && matchStatus;
+            });
+
+
             if (searchTerm === '') {
-                filteredBooks = [...currentBooks];
+                filteredBooks = tempFilteredBooks;
             } else {
-                filteredBooks = currentBooks.filter(book => 
-                    book.maSach.toLowerCase().includes(searchTerm) ||
-                    book.tenSach.toLowerCase().includes(searchTerm) ||
-                    book.tacGia.toLowerCase().includes(searchTerm) ||
-                    book.loaiSach.toLowerCase().includes(searchTerm)
-                );
+                // Use dataManager.searchBooks for the search term, on the pre-filtered set
+                filteredBooks = window.dataManager.searchBooks(searchTerm, {
+                    // Pass existing category and status filters if they were selected directly via search
+                    categoryId: categoryFilter || undefined,
+                    status: statusFilter || undefined
+                }).filter(book => tempFilteredBooks.includes(book)); // Ensure it's still within the pre-filtered set
             }
-            
+
             currentPage = 1;
             displayBooks();
             updatePagination();
@@ -957,62 +1008,55 @@
         function filterBooks() {
             const categoryFilter = document.getElementById('categoryFilter').value;
             const statusFilter = document.getElementById('statusFilter').value;
-            
-            filteredBooks = currentBooks.filter(book => {
-                let matchCategory = !categoryFilter || book.loaiSach === categoryFilter;
-                let matchStatus = true;
-                
-                if (statusFilter) {
-                    const status = getBookDisplayStatus(book);
-                    switch(statusFilter) {
-                        case 'available':
-                            matchStatus = status.available > 0;
-                            break;
-                        case 'borrowed':
-                            matchStatus = status.available < book.soLuong;
-                            break;
-                        case 'popular':
-                            matchStatus = getBorrowCount(book.maSach) > 1;
-                            break;
-                    }
-                }
-                
-                return matchCategory && matchStatus;
-            });
-            
-            // Apply search if exists
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-            if (searchTerm) {
-                filteredBooks = filteredBooks.filter(book => 
-                    book.maSach.toLowerCase().includes(searchTerm) ||
-                    book.tenSach.toLowerCase().includes(searchTerm) ||
-                    book.tacGia.toLowerCase().includes(searchTerm) ||
-                    book.loaiSach.toLowerCase().includes(searchTerm)
-                );
+
+            // Start with all current books (already loaded from data.js)
+            filteredBooks = [...currentBooks];
+
+            // Apply category filter
+            if (categoryFilter) {
+                filteredBooks = filteredBooks.filter(book => book.categoryId === categoryFilter);
             }
-            
+
+            // Apply status filter
+            if (statusFilter) {
+                filteredBooks = filteredBooks.filter(book => {
+                    const status = getBookDisplayStatus(book); // Get real-time status
+                    switch (statusFilter) {
+                        case 'available':
+                            return status.available > 0;
+                        case 'borrowed':
+                            return book.borrowedCopies > 0;
+                        case 'reserved':
+                            return book.reservedCopies > 0;
+                        case 'unavailable':
+                            return (status.available === 0 && book.borrowedCopies === 0 && book.reservedCopies === 0);
+                        default:
+                            return true;
+                    }
+                });
+            }
+
+            // Apply search if exists (re-apply search on filtered results)
+            const searchTerm = document.getElementById('searchInput').value.trim();
+            if (searchTerm) {
+                const searchPredicate = window.app.createSearchFilter(searchTerm, [
+                    'title', 'isbn', 'description', 'location', 'tags'
+                ]);
+                filteredBooks = filteredBooks.filter(searchPredicate);
+            }
+
             currentPage = 1;
             displayBooks();
             updatePagination();
         }
 
+
         // Sort books
         function sortBooks() {
             const sortBy = document.getElementById('sortBy').value;
-            
-            filteredBooks.sort((a, b) => {
-                switch(sortBy) {
-                    case 'tenSach':
-                        return a.tenSach.localeCompare(b.tenSach);
-                    case 'tacGia':
-                        return a.tacGia.localeCompare(b.tacGia);
-                    case 'soLuong':
-                        return b.soLuong - a.soLuong;
-                    default:
-                        return a.maSach.localeCompare(b.maSach);
-                }
-            });
-            
+
+            filteredBooks = window.app.sortData(filteredBooks, sortBy, 'asc'); // Default to asc, can add a toggle for direction
+
             displayBooks();
         }
 
@@ -1029,31 +1073,30 @@
             document.getElementById('searchInput').value = '';
             document.getElementById('categoryFilter').value = '';
             document.getElementById('statusFilter').value = '';
-            document.getElementById('sortBy').value = 'maSach';
-            
-            filteredBooks = [...currentBooks];
-            currentPage = 1;
-            displayBooks();
-            updatePagination();
+            document.getElementById('sortBy').value = 'title'; // Default sort
+            document.getElementById('itemsPerPage').value = '10'; // Default items per page
+
+            loadBooks(); // Re-load all books and apply initial filters
         }
 
         // Refresh books
         function refreshBooks() {
             loadBooks();
+            window.app.showNotification('Dữ liệu sách đã được làm mới.', 'info', 2000);
         }
 
         // Update pagination
         function updatePagination() {
             const totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
             const pagination = document.getElementById('booksPagination');
-            
+
             if (totalPages <= 1) {
                 pagination.innerHTML = '';
                 return;
             }
-            
+
             let html = '';
-            
+
             // Previous button
             html += `
                 <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
@@ -1062,7 +1105,7 @@
                     </a>
                 </li>
             `;
-            
+
             // Page numbers
             for (let i = 1; i <= totalPages; i++) {
                 if (i === 1 || i === totalPages || (i >= currentPage - 2 && i <= currentPage + 2)) {
@@ -1075,7 +1118,7 @@
                     html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
                 }
             }
-            
+
             // Next button
             html += `
                 <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
@@ -1084,7 +1127,7 @@
                     </a>
                 </li>
             `;
-            
+
             pagination.innerHTML = html;
         }
 
@@ -1104,35 +1147,40 @@
             document.getElementById('bookModalTitle').innerHTML = '<i class="fas fa-plus"></i> Thêm sách mới';
             document.getElementById('bookForm').reset();
             document.getElementById('bookId').readOnly = false;
-            
+            document.getElementById('bookStatus').value = 'available'; // Default status for new book
+            populateFilterDropdowns(); // Re-populate dropdowns to ensure fresh data
+
             const modal = new bootstrap.Modal(document.getElementById('bookModal'));
             modal.show();
         }
 
         // Edit book
         function editBook(bookId) {
-            const book = currentBooks.find(b => b.maSach === bookId);
+            const book = window.dataManager.getBook(bookId);
             if (!book) {
-                showNotification('Không tìm thấy sách!', 'error');
+                window.app.showNotification('Không tìm thấy sách!', 'error');
                 return;
             }
-            
+
             editingBookId = bookId;
             document.getElementById('bookModalTitle').innerHTML = '<i class="fas fa-edit"></i> Chỉnh sửa sách';
-            
+
+            populateFilterDropdowns(); // Populate dropdowns before setting values
+
             // Fill form with book data
-            document.getElementById('bookId').value = book.maSach;
+            document.getElementById('bookId').value = book.id;
             document.getElementById('bookId').readOnly = true;
-            document.getElementById('bookTitle').value = book.tenSach;
-            document.getElementById('bookCategory').value = book.loaiSach;
-            document.getElementById('bookAuthor').value = book.tacGia;
-            document.getElementById('bookQuantity').value = book.soLuong;
-            document.getElementById('bookStatus').value = book.tinhTrang;
-            document.getElementById('bookYear').value = book.namXuatBan || '';
-            document.getElementById('bookPublisher').value = book.nhaXuatBan || '';
-            document.getElementById('bookLocation').value = book.viTri || '';
-            document.getElementById('bookDescription').value = book.moTa || '';
-            
+            document.getElementById('bookTitle').value = book.title;
+            document.getElementById('bookCategory').value = book.categoryId;
+            document.getElementById('bookAuthor').value = book.authorId;
+            document.getElementById('bookQuantity').value = book.totalCopies;
+            document.getElementById('bookStatus').value = book.status; // Current status
+            document.getElementById('bookYear').value = book.publicationYear || '';
+            document.getElementById('bookPublisher').value = book.publisherId || '';
+            document.getElementById('bookLocation').value = book.location || '';
+            document.getElementById('bookDescription').value = book.description || '';
+            document.getElementById('bookISBN').value = book.isbn || '';
+
             const modal = new bootstrap.Modal(document.getElementById('bookModal'));
             modal.show();
         }
@@ -1144,94 +1192,109 @@
                 form.reportValidity();
                 return;
             }
-            
+
             const bookData = {
-                maSach: document.getElementById('bookId').value.trim(),
-                tenSach: document.getElementById('bookTitle').value.trim(),
-                loaiSach: document.getElementById('bookCategory').value,
-                tacGia: document.getElementById('bookAuthor').value.trim(),
-                soLuong: parseInt(document.getElementById('bookQuantity').value),
-                tinhTrang: document.getElementById('bookStatus').value,
-                namXuatBan: document.getElementById('bookYear').value || null,
-                nhaXuatBan: document.getElementById('bookPublisher').value.trim() || null,
-                viTri: document.getElementById('bookLocation').value.trim() || null,
-                moTa: document.getElementById('bookDescription').value.trim() || null
+                id: document.getElementById('bookId').value.trim(),
+                title: document.getElementById('bookTitle').value.trim(),
+                categoryId: document.getElementById('bookCategory').value,
+                authorId: document.getElementById('bookAuthor').value,
+                totalCopies: parseInt(document.getElementById('bookQuantity').value),
+                publicationYear: parseInt(document.getElementById('bookYear').value) || null,
+                publisherId: document.getElementById('bookPublisher').value || null,
+                location: document.getElementById('bookLocation').value.trim() || null,
+                description: document.getElementById('bookDescription').value.trim() || null,
+                isbn: document.getElementById('bookISBN').value.trim() || null,
+                // status and availableCopies are managed by data.js
             };
-            
-            // Validate book ID uniqueness for new books
-            if (!editingBookId && currentBooks.some(b => b.maSach === bookData.maSach)) {
-                showNotification('Mã sách đã tồn tại!', 'error');
-                return;
-            }
-            
-            showLoading();
-            
-            // Simulate save delay
+
+            window.app.showLoading('Đang lưu sách...');
+
             setTimeout(() => {
-                if (editingBookId) {
-                    // Update existing book
-                    updateBookInData(bookData);
-                    showNotification('Cập nhật sách thành công!', 'success');
-                } else {
-                    // Add new book
-                    addBookToData(bookData);
-                    showNotification('Thêm sách mới thành công!', 'success');
+                try {
+                    if (editingBookId) {
+                        // Update existing book
+                        window.dataManager.updateBook(bookData.id, bookData);
+                        window.app.showNotification('Cập nhật sách thành công!', 'success');
+                    } else {
+                        // Add new book
+                        // Validate book ID uniqueness for new books
+                        if (window.dataManager.getBook(bookData.id)) {
+                            window.app.showNotification('Mã sách đã tồn tại!', 'error');
+                            window.app.hideLoading();
+                            return;
+                        }
+                        window.dataManager.addBook(bookData);
+                        window.app.showNotification('Thêm sách mới thành công!', 'success');
+                    }
+
+                    // Refresh data
+                    loadBooks();
+
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('bookModal'));
+                    modal.hide();
+
+                } catch (error) {
+                    window.app.showNotification(`Lỗi: ${error.message}`, 'error');
+                    console.error('Save book error:', error);
+                } finally {
+                    window.app.hideLoading();
                 }
-                
-                // Refresh data
-                loadBooks();
-                
-                // Close modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('bookModal'));
-                modal.hide();
-                
-                hideLoading();
             }, 1000);
         }
 
         // View book details
         function viewBookDetails(bookId) {
-            const book = currentBooks.find(b => b.maSach === bookId);
+            const book = window.dataManager.getBook(bookId);
             if (!book) {
-                showNotification('Không tìm thấy sách!', 'error');
+                window.app.showNotification('Không tìm thấy sách!', 'error');
                 return;
             }
-            
-            const status = getBookDisplayStatus(book);
-            const borrowHistory = getBorrowHistory(bookId);
-            
+
+            const status = getBookDisplayStatus(book); // Current display status
+            const author = window.dataManager.getAllAuthors().find(a => a.id === book.authorId);
+            const category = window.dataManager.getAllCategories().find(c => c.id === book.categoryId);
+            const publisher = window.dataManager.getAllPublishers().find(p => p.id === book.publisherId);
+            const borrowHistory = window.dataManager.getBorrowRecords({ bookId: book.id }); // Get all borrow records for this book
+
             const detailsContent = document.getElementById('bookDetailsContent');
             detailsContent.innerHTML = `
                 <div class="row">
                     <div class="col-md-6">
                         <h6 class="text-primary">Thông tin cơ bản</h6>
                         <table class="table table-borderless">
-                            <tr><td><strong>Mã sách:</strong></td><td>${book.maSach}</td></tr>
-                            <tr><td><strong>Tên sách:</strong></td><td>${book.tenSach}</td></tr>
-                            <tr><td><strong>Tác giả:</strong></td><td>${book.tacGia}</td></tr>
-                            <tr><td><strong>Loại sách:</strong></td><td><span class="badge bg-secondary">${book.loaiSach}</span></td></tr>
-                            <tr><td><strong>Số lượng:</strong></td><td><span class="badge bg-info">${status.available}/${book.soLuong}</span></td></tr>
+                            <tr><td><strong>Mã sách:</strong></td><td>${book.id}</td></tr>
+                            <tr><td><strong>Tên sách:</strong></td><td>${book.title}</td></tr>
+                            <tr><td><strong>Tác giả:</strong></td><td>${author?.name || 'Không rõ'}</td></tr>
+                            <tr><td><strong>Loại sách:</strong></td><td><span class="badge bg-secondary">${category?.name || 'Không rõ'}</span></td></tr>
+                            <tr><td><strong>Số lượng:</strong></td><td><span class="badge bg-info">${book.availableCopies}/${book.totalCopies}</span></td></tr>
+                            <tr><td><strong>Đang mượn:</strong></td><td><span class="badge bg-warning">${book.borrowedCopies}</span></td></tr>
+                            <tr><td><strong>Đang đặt trước:</strong></td><td><span class="badge bg-info">${book.reservedCopies}</span></td></tr>
                             <tr><td><strong>Trạng thái:</strong></td><td><span class="status-badge ${status.class}">${status.text}</span></td></tr>
                         </table>
                     </div>
                     <div class="col-md-6">
                         <h6 class="text-primary">Thông tin chi tiết</h6>
                         <table class="table table-borderless">
-                            <tr><td><strong>Năm XB:</strong></td><td>${book.namXuatBan || 'Chưa có'}</td></tr>
-                            <tr><td><strong>Nhà XB:</strong></td><td>${book.nhaXuatBan || 'Chưa có'}</td></tr>
-                            <tr><td><strong>Vị trí:</strong></td><td>${book.viTri || 'Chưa có'}</td></tr>
-                            <tr><td><strong>Lượt mượn:</strong></td><td><span class="badge bg-warning">${borrowHistory.length}</span></td></tr>
+                            <tr><td><strong>ISBN:</strong></td><td>${book.isbn || 'Chưa có'}</td></tr>
+                            <tr><td><strong>Năm XB:</strong></td><td>${book.publicationYear || 'Chưa có'}</td></tr>
+                            <tr><td><strong>Nhà XB:</strong></td><td>${publisher?.name || 'Chưa có'}</td></tr>
+                            <tr><td><strong>Vị trí:</strong></td><td>${book.location || 'Chưa có'}</td></tr>
+                            <tr><td><strong>Ngôn ngữ:</strong></td><td>${book.language || 'Tiếng Việt'}</td></tr>
+                            <tr><td><strong>Số trang:</strong></td><td>${book.pages || 'N/A'}</td></tr>
+                            <tr><td><strong>Ngày thêm:</strong></td><td>${window.app.formatDate(book.addedDate)}</td></tr>
+                            <tr><td><strong>Mượn lần cuối:</strong></td><td>${book.lastBorrowed ? window.app.formatDate(book.lastBorrowed) : 'Chưa có'}</td></tr>
                         </table>
                     </div>
                 </div>
-                
-                ${book.moTa ? `
+
+                ${book.description ? `
                     <div class="mt-3">
                         <h6 class="text-primary">Mô tả</h6>
-                        <p class="text-muted">${book.moTa}</p>
+                        <p class="text-muted">${book.description}</p>
                     </div>
                 ` : ''}
-                
+
                 <div class="mt-3">
                     <h6 class="text-primary">Lịch sử mượn gần đây</h6>
                     ${borrowHistory.length > 0 ? `
@@ -1246,24 +1309,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    ${borrowHistory.slice(0, 5).map(borrow => `
-                                        <tr>
-                                            <td>${getReaderName(borrow.maThe)}</td>
-                                            <td>${formatDate(borrow.ngayMuon)}</td>
-                                            <td>${formatDate(borrow.hanTra)}</td>
-                                            <td><span class="badge ${borrow.tinhTrang === 'Đang mượn' ? 'bg-warning' : 'bg-success'}">${borrow.tinhTrang}</span></td>
-                                        </tr>
-                                    `).join('')}
+                                    ${borrowHistory.sort((a, b) => b.borrowDate - a.borrowDate).slice(0, 5).map(borrow => {
+                                        const reader = window.dataManager.getReader(borrow.readerId);
+                                        const isOverdue = new Date(borrow.dueDate) < new Date() && borrow.status !== 'returned';
+                                        return `
+                                            <tr>
+                                                <td>${reader ? reader.fullName : 'Không tìm thấy'}</td>
+                                                <td>${window.app.formatDate(borrow.borrowDate)}</td>
+                                                <td>${window.app.formatDate(borrow.dueDate)}</td>
+                                                <td><span class="badge ${isOverdue ? 'bg-danger' : (borrow.status === 'returned' ? 'bg-success' : 'bg-warning')}">${borrow.status === 'borrowed' ? 'Đang mượn' : (borrow.status === 'overdue' ? 'Quá hạn' : 'Đã trả')}</span></td>
+                                            </tr>
+                                        `;
+                                    }).join('')}
                                 </tbody>
                             </table>
                         </div>
                     ` : '<p class="text-muted">Chưa có lịch sử mượn</p>'}
                 </div>
             `;
-            
+
             // Store current book ID for edit button
             window.currentDetailBookId = bookId;
-            
+
             const modal = new bootstrap.Modal(document.getElementById('bookDetailsModal'));
             modal.show();
         }
@@ -1272,7 +1339,7 @@
         function editBookFromDetails() {
             const modal = bootstrap.Modal.getInstance(document.getElementById('bookDetailsModal'));
             modal.hide();
-            
+
             setTimeout(() => {
                 editBook(window.currentDetailBookId);
             }, 300);
@@ -1280,29 +1347,35 @@
 
         // Delete book
         function deleteBook(bookId) {
-            const book = currentBooks.find(b => b.maSach === bookId);
+            const book = window.dataManager.getBook(bookId);
             if (!book) {
-                showNotification('Không tìm thấy sách!', 'error');
+                window.app.showNotification('Không tìm thấy sách!', 'error');
                 return;
             }
-            
-            // Check if book is being borrowed
-            const activeBorrows = getActiveBorrows(bookId);
+
+            // Check if book has active borrows or reservations
+            const activeBorrows = window.dataManager.getBorrowRecords({ bookId: book.id, status: 'borrowed' });
+            const activeReservations = window.dataManager.getAllReservations().filter(r => r.bookId === book.id && r.status === 'active');
+
             if (activeBorrows.length > 0) {
-                showNotification('Không thể xóa sách đang được mượn!', 'error');
+                window.app.showNotification('Không thể xóa sách đang được mượn!', 'error');
                 return;
             }
-            
+            if (activeReservations.length > 0) {
+                window.app.showNotification('Không thể xóa sách đang có người đặt trước!', 'error');
+                return;
+            }
+
             bookToDelete = bookId;
-            
+
             // Show book info in delete modal
             document.getElementById('deleteBookInfo').innerHTML = `
-                <strong>Mã sách:</strong> ${book.maSach}<br>
-                <strong>Tên sách:</strong> ${book.tenSach}<br>
-                <strong>Tác giả:</strong> ${book.tacGia}<br>
-                <strong>Loại:</strong> ${book.loaiSach}
+                <strong>Mã sách:</strong> ${book.id}<br>
+                <strong>Tên sách:</strong> ${book.title}<br>
+                <strong>Tác giả:</strong> ${window.dataManager.getAllAuthors().find(a => a.id === book.authorId)?.name || 'Không rõ'}<br>
+                <strong>Loại:</strong> ${window.dataManager.getAllCategories().find(c => c.id === book.categoryId)?.name || 'Không rõ'}
             `;
-            
+
             const modal = new bootstrap.Modal(document.getElementById('deleteConfirmModal'));
             modal.show();
         }
@@ -1310,100 +1383,93 @@
         // Confirm delete book
         function confirmDeleteBook() {
             if (!bookToDelete) return;
-            
-            showLoading();
-            
-            // Simulate delete delay
+
+            window.app.showLoading('Đang xóa sách...');
+
             setTimeout(() => {
-                deleteBookFromData(bookToDelete);
-                showNotification('Xóa sách thành công!', 'success');
-                
-                // Refresh data
-                loadBooks();
-                
-                // Close modal
-                const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
-                modal.hide();
-                
-                bookToDelete = null;
-                hideLoading();
+                try {
+                    window.dataManager.deleteBook(bookToDelete);
+                    window.app.showNotification('Xóa sách thành công!', 'success');
+
+                    // Refresh data
+                    loadBooks();
+
+                    // Close modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('deleteConfirmModal'));
+                    modal.hide();
+
+                    bookToDelete = null;
+                } catch (error) {
+                    window.app.showNotification(`Lỗi: ${error.message}`, 'error');
+                    console.error('Delete book error:', error);
+                } finally {
+                    window.app.hideLoading();
+                }
             }, 1000);
         }
 
-        // Export books to Excel
+        // Export books to CSV (Excel compatible)
         function exportBooks() {
-            showLoading();
-            
+            window.app.showLoading('Đang xuất dữ liệu sách...');
+
             // Simulate export delay
             setTimeout(() => {
                 const csvContent = generateBooksCSV();
-                downloadCSV(csvContent, 'danh-sach-sach.csv');
-                showNotification('Xuất file thành công!', 'success');
-                hideLoading();
+                window.app.downloadFile(csvContent, 'danh-sach-sach.csv', 'text/csv;charset=utf-8;');
+                window.app.showNotification('Xuất file thành công!', 'success');
+                window.app.hideLoading();
             }, 1000);
         }
 
         // Generate CSV content
         function generateBooksCSV() {
-            const headers = ['Mã sách', 'Tên sách', 'Loại sách', 'Tác giả', 'Số lượng', 'Trạng thái', 'Năm XB', 'Nhà XB', 'Vị trí'];
-            const rows = currentBooks.map(book => [
-                book.maSach,
-                book.tenSach,
-                book.loaiSach,
-                book.tacGia,
-                book.soLuong,
-                book.tinhTrang,
-                book.namXuatBan || '',
-                book.nhaXuatBan || '',
-                book.viTri || ''
-            ]);
-            
-            return [headers, ...rows].map(row => 
-                row.map(field => `"${field}"`).join(',')
+            const headers = [
+                'Mã sách', 'Tên sách', 'Loại sách', 'Tác giả', 'Nhà xuất bản',
+                'ISBN', 'Năm xuất bản', 'Số lượng tổng', 'Số lượng có sẵn',
+                'Số lượng đang mượn', 'Số lượng đặt trước', 'Vị trí', 'Mô tả',
+                'Tình trạng', 'Ngày thêm'
+            ];
+            const rows = currentBooks.map(book => {
+                const categoryName = window.dataManager.getAllCategories().find(c => c.id === book.categoryId)?.name || 'Không rõ';
+                const authorName = window.dataManager.getAllAuthors().find(a => a.id === book.authorId)?.name || 'Không rõ';
+                const publisherName = window.dataManager.getAllPublishers().find(p => p.id === book.publisherId)?.name || 'Không rõ';
+
+                return [
+                    book.id,
+                    book.title,
+                    categoryName,
+                    authorName,
+                    publisherName,
+                    book.isbn || '',
+                    book.publicationYear || '',
+                    book.totalCopies,
+                    book.availableCopies,
+                    book.borrowedCopies,
+                    book.reservedCopies,
+                    book.location || '',
+                    book.description || '',
+                    getBookDisplayStatus(book).text, // Use human-readable status
+                    window.app.formatDate(book.addedDate)
+                ];
+            });
+
+            return [headers, ...rows].map(row =>
+                row.map(field => {
+                    const stringField = String(field);
+                    // Escape quotes and wrap in quotes if contains comma or new line
+                    if (stringField.includes(',') || stringField.includes('"') || stringField.includes('\n')) {
+                        return '"' + stringField.replace(/"/g, '""') + '"';
+                    }
+                    return stringField;
+                }).join(',')
             ).join('\n');
-        }
-
-        // Download CSV file
-        function downloadCSV(content, filename) {
-            const blob = new Blob(['\ufeff' + content], { type: 'text/csv;charset=utf-8;' });
-            const link = document.createElement('a');
-            const url = URL.createObjectURL(blob);
-            link.setAttribute('href', url);
-            link.setAttribute('download', filename);
-            link.style.visibility = 'hidden';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-
-        // Show/Hide loading
-        function showLoading() {
-            document.getElementById('loadingOverlay').classList.remove('d-none');
-        }
-
-        function hideLoading() {
-            document.getElementById('loadingOverlay').classList.add('d-none');
-        }
-
-        // Show notification
-        function showNotification(message, type = 'info') {
-            // This will be implemented in app.js
-            console.log(`${type.toUpperCase()}: ${message}`);
         }
 
         // Logout function
         function logout() {
             if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-                sessionStorage.clear();
-                window.location.href = 'index.html';
+                window.app.logout(); // Use logout from app.js
             }
-        }
-
-        // Format date
-        function formatDate(dateString) {
-            if (!dateString) return '';
-            const date = new Date(dateString);
-            return date.toLocaleDateString('vi-VN');
         }
     </script>
 </body>
