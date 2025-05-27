@@ -4,27 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bảng điều khiển - Hệ thống quản lý thư viện</title>
-    
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         body {
             background: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         .navbar-custom {
             background: linear-gradient(45deg, #2c3e50, #3498db);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         .main-content {
             padding: 20px 0;
         }
-        
+
         .stats-card {
             background: white;
             border-radius: 15px;
@@ -34,50 +32,50 @@
             transition: all 0.3s ease;
             border-left: 5px solid;
         }
-        
+
         .stats-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
-        
+
         .stats-card.primary {
             border-left-color: #3498db;
         }
-        
+
         .stats-card.success {
             border-left-color: #27ae60;
         }
-        
+
         .stats-card.warning {
             border-left-color: #f39c12;
         }
-        
+
         .stats-card.danger {
             border-left-color: #e74c3c;
         }
-        
+
         .stats-card.info {
             border-left-color: #17a2b8;
         }
-        
+
         .stats-icon {
             font-size: 3rem;
             margin-bottom: 15px;
         }
-        
+
         .stats-number {
             font-size: 2.5rem;
             font-weight: bold;
             margin-bottom: 5px;
         }
-        
+
         .stats-label {
             color: #6c757d;
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .alert-card {
             background: white;
             border-radius: 15px;
@@ -85,7 +83,7 @@
             margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .alert-item {
             background: #f8f9fa;
             border-radius: 10px;
@@ -94,31 +92,31 @@
             border-left: 4px solid;
             transition: all 0.3s ease;
         }
-        
+
         .alert-item:hover {
             background: #e9ecef;
             transform: translateX(5px);
         }
-        
+
         .alert-item.warning {
             border-left-color: #f39c12;
         }
-        
+
         .alert-item.danger {
             border-left-color: #e74c3c;
         }
-        
+
         .alert-item.info {
             border-left-color: #17a2b8;
         }
-        
+
         .quick-actions {
             background: white;
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .action-btn {
             display: block;
             width: 100%;
@@ -132,47 +130,47 @@
             transition: all 0.3s ease;
             border: none;
         }
-        
+
         .action-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
             color: white;
         }
-        
+
         .action-btn.primary {
             background: linear-gradient(45deg, #3498db, #2980b9);
         }
-        
+
         .action-btn.success {
             background: linear-gradient(45deg, #27ae60, #229954);
         }
-        
+
         .action-btn.warning {
             background: linear-gradient(45deg, #f39c12, #e67e22);
         }
-        
+
         .action-btn.info {
             background: linear-gradient(45deg, #17a2b8, #138496);
         }
-        
+
         .recent-activity {
             background: white;
             border-radius: 15px;
             padding: 25px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
-        
+
         .activity-item {
             display: flex;
             align-items: center;
             padding: 15px 0;
             border-bottom: 1px solid #e9ecef;
         }
-        
+
         .activity-item:last-child {
             border-bottom: none;
         }
-        
+
         .activity-icon {
             width: 40px;
             height: 40px;
@@ -183,28 +181,28 @@
             margin-right: 15px;
             color: white;
         }
-        
+
         .activity-icon.success {
             background: #27ae60;
         }
-        
+
         .activity-icon.primary {
             background: #3498db;
         }
-        
+
         .activity-icon.warning {
             background: #f39c12;
         }
-        
+
         .activity-content {
             flex: 1;
         }
-        
+
         .activity-time {
             color: #6c757d;
             font-size: 0.9rem;
         }
-        
+
         .chart-container {
             background: white;
             border-radius: 15px;
@@ -212,13 +210,13 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             margin-bottom: 20px;
         }
-        
+
         .progress-custom {
             height: 10px;
             border-radius: 10px;
             margin-bottom: 10px;
         }
-        
+
         .btn-logout {
             background: linear-gradient(45deg, #e74c3c, #c0392b);
             border: none;
@@ -227,22 +225,22 @@
             border-radius: 20px;
             transition: all 0.3s ease;
         }
-        
+
         .btn-logout:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
             color: white;
         }
-        
+
         @media (max-width: 768px) {
             .stats-number {
                 font-size: 2rem;
             }
-            
+
             .stats-icon {
                 font-size: 2.5rem;
             }
-            
+
             .action-btn {
                 padding: 15px;
                 font-size: 0.9rem;
@@ -251,18 +249,17 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
             <a class="navbar-brand" href="dashboard.html">
-                <i class="fas fa-tachometer-alt"></i> 
+                <i class="fas fa-tachometer-alt"></i>
                 Bảng điều khiển
             </a>
-            
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
@@ -291,10 +288,10 @@
                         </a>
                     </li>
                 </ul>
-                
+
                 <div class="navbar-nav">
                     <span class="nav-link">
-                        <i class="fas fa-user"></i> 
+                        <i class="fas fa-user"></i>
                         Xin chào, <span id="currentUser">Admin</span>
                     </span>
                     <button class="btn btn-logout" onclick="logout()">
@@ -305,23 +302,20 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container main-content">
-        <!-- Welcome Section -->
         <div class="row mb-4">
             <div class="col-12">
                 <h2 class="mb-3">
-                    <i class="fas fa-chart-line text-primary"></i> 
+                    <i class="fas fa-chart-line text-primary"></i>
                     Tổng quan hệ thống
                 </h2>
                 <p class="text-muted">
-                    Chào mừng bạn đến với hệ thống quản lý thư viện. 
+                    Chào mừng bạn đến với hệ thống quản lý thư viện.
                     Hôm nay là <span id="currentDate"></span>
                 </p>
             </div>
         </div>
 
-        <!-- Statistics Cards -->
         <div class="row mb-4">
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card primary">
@@ -332,7 +326,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card success">
                     <div class="text-center">
@@ -342,7 +336,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card warning">
                     <div class="text-center">
@@ -352,7 +346,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card danger">
                     <div class="text-center">
@@ -364,7 +358,6 @@
             </div>
         </div>
 
-        <!-- Additional Stats -->
         <div class="row mb-4">
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card info">
@@ -375,7 +368,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card primary">
                     <div class="text-center">
@@ -385,7 +378,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card success">
                     <div class="text-center">
@@ -395,7 +388,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-lg-3 col-md-6">
                 <div class="stats-card warning">
                     <div class="text-center">
@@ -408,16 +401,14 @@
         </div>
 
         <div class="row">
-            <!-- Alerts & Notifications -->
             <div class="col-lg-6">
                 <div class="alert-card">
                     <h5 class="mb-4">
-                        <i class="fas fa-bell text-warning"></i> 
+                        <i class="fas fa-bell text-warning"></i>
                         Cảnh báo & Thông báo
                     </h5>
-                    
+
                     <div id="alertsList">
-                        <!-- Alerts will be loaded here -->
                         <div class="text-center text-muted py-4">
                             <i class="fas fa-check-circle fa-3x mb-3"></i>
                             <p>Không có cảnh báo nào</p>
@@ -425,44 +416,41 @@
                     </div>
                 </div>
 
-                <!-- Quick Actions -->
                 <div class="quick-actions">
                     <h5 class="mb-4">
-                        <i class="fas fa-bolt text-primary"></i> 
+                        <i class="fas fa-bolt text-primary"></i>
                         Thao tác nhanh
                     </h5>
-                    
+
                     <a href="borrow-return.html" class="action-btn primary">
-                        <i class="fas fa-plus-circle"></i> 
+                        <i class="fas fa-plus-circle"></i>
                         Mượn sách mới
                     </a>
-                    
+
                     <a href="borrow-return.html#return" class="action-btn success">
-                        <i class="fas fa-undo"></i> 
+                        <i class="fas fa-undo"></i>
                         Trả sách
                     </a>
-                    
+
                     <a href="books.html" class="action-btn warning">
-                        <i class="fas fa-search"></i> 
+                        <i class="fas fa-search"></i>
                         Tìm kiếm sách
                     </a>
-                    
+
                     <a href="reports.html" class="action-btn info">
-                        <i class="fas fa-file-alt"></i> 
+                        <i class="fas fa-file-alt"></i>
                         Xem báo cáo
                     </a>
                 </div>
             </div>
 
-            <!-- Recent Activity & Charts -->
             <div class="col-lg-6">
-                <!-- Library Usage Chart -->
                 <div class="chart-container">
                     <h5 class="mb-4">
-                        <i class="fas fa-chart-pie text-info"></i> 
+                        <i class="fas fa-chart-pie text-info"></i>
                         Tình hình sử dụng thư viện
                     </h5>
-                    
+
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
                             <span>Sách đang mượn</span>
@@ -472,7 +460,7 @@
                             <div class="progress-bar bg-warning" id="borrowProgressBar" style="width: 0%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
                             <span>Độc giả hoạt động</span>
@@ -482,7 +470,7 @@
                             <div class="progress-bar bg-success" id="readerProgressBar" style="width: 0%"></div>
                         </div>
                     </div>
-                    
+
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
                             <span>Tỷ lệ trả đúng hạn</span>
@@ -494,15 +482,13 @@
                     </div>
                 </div>
 
-                <!-- Recent Activity -->
                 <div class="recent-activity">
                     <h5 class="mb-4">
-                        <i class="fas fa-history text-success"></i> 
+                        <i class="fas fa-history text-success"></i>
                         Hoạt động gần đây
                     </h5>
-                    
+
                     <div id="recentActivities">
-                        <!-- Activities will be loaded here -->
                         <div class="text-center text-muted py-4">
                             <i class="fas fa-clock fa-3x mb-3"></i>
                             <p>Chưa có hoạt động nào</p>
@@ -513,181 +499,339 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Custom JS -->
+
     <script src="js/data.js"></script>
     <script src="js/app.js"></script>
-    
+
     <script>
         // Initialize dashboard
         document.addEventListener('DOMContentLoaded', function() {
-            checkAuthentication();
-            initializeDashboard();
-            loadDashboardData();
-            setCurrentDate();
-            setCurrentUser();
+            // Check authentication and set current user (handled by app.js's DOMContentLoaded)
+            // But we keep checkAuthentication and setCurrentUser calls here to ensure they run after dataManager is loaded
+            // or if app.js somehow loads later.
+            checkAuthentication(); //
+            setCurrentUser(); //
+            initializeDashboard(); //
+            loadDashboardData(); //
+            setCurrentDate(); //
         });
 
         // Check if user is logged in
         function checkAuthentication() {
-            const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-            if (!isLoggedIn) {
-                window.location.href = 'index.html';
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn'); //
+            if (!isLoggedIn) { //
+                window.location.href = 'index.html'; //
                 return;
             }
         }
 
         // Set current date
         function setCurrentDate() {
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
-            document.getElementById('currentDate').textContent = 
-                now.toLocaleDateString('vi-VN', options);
+            const now = new Date(); //
+            const options = {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }; //
+            document.getElementById('currentDate').textContent =
+                now.toLocaleDateString('vi-VN', options); //
         }
 
         // Set current user
         function setCurrentUser() {
-            const username = sessionStorage.getItem('username') || 'Admin';
-            document.getElementById('currentUser').textContent = username;
+            const username = sessionStorage.getItem('username') || 'Admin'; //
+            document.getElementById('currentUser').textContent = username; //
+        }
+
+        // Initialize dashboard (empty for now, main logic in loadDashboardData)
+        function initializeDashboard() {
+            // Placeholder for any specific dashboard-only initializations
+            // e.g., setting up event listeners unique to this page
         }
 
         // Load dashboard data
         function loadDashboardData() {
+            // Ensure dataManager is ready before loading stats.
+            if (typeof window.dataManager === 'undefined') {
+                console.warn('dataManager not yet available, retrying loadDashboardData...');
+                setTimeout(loadDashboardData, 100); // Retry after a short delay
+                return;
+            }
+
             // Load statistics
-            loadStatistics();
-            
+            loadStatistics(); //
+
             // Load alerts
-            loadAlerts();
-            
+            loadAlerts(); //
+
             // Load recent activities
-            loadRecentActivities();
-            
+            loadRecentActivities(); //
+
             // Load charts
-            loadCharts();
+            loadCharts(); //
         }
 
         // Load statistics
         function loadStatistics() {
-            // This will be implemented with actual data
-            const stats = getDashboardStats();
-            
-            document.getElementById('totalBooks').textContent = stats.totalBooks;
-            document.getElementById('totalReaders').textContent = stats.totalReaders;
-            document.getElementById('activeBorrows').textContent = stats.activeBorrows;
-            document.getElementById('overdueBooks').textContent = stats.overdueBooks;
-            document.getElementById('totalFines').textContent = formatCurrency(stats.totalFines);
-            document.getElementById('todayBorrows').textContent = stats.todayBorrows;
-            document.getElementById('todayReturns').textContent = stats.todayReturns;
-            document.getElementById('expiringSoon').textContent = stats.expiringSoon;
+            const stats = window.dataManager.getStatistics(); //
+
+            document.getElementById('totalBooks').textContent = stats.books.titles; // Total unique book titles
+            document.getElementById('totalReaders').textContent = stats.readers.total; //
+            document.getElementById('activeBorrows').textContent = stats.borrows.active; //
+            document.getElementById('overdueBooks').textContent = stats.borrows.overdue; //
+            document.getElementById('totalFines').textContent = window.app.formatCurrency(stats.fines.totalAmount); //
+            document.getElementById('todayBorrows').textContent = stats.borrows.today; //
+            document.getElementById('todayReturns').textContent = stats.returns.today; //
+
+            // Calculate Expiring Soon Readers
+            const allReaders = window.dataManager.getAllReaders(); //
+            const today = new Date();
+            const expiringSoonReaders = allReaders.filter(reader => { //
+                const expiryDate = new Date(reader.hanThe);
+                const daysUntilExpiry = Math.ceil((expiryDate - today) / (1000 * 60 * 60 * 24));
+                return daysUntilExpiry > 0 && daysUntilExpiry <= 30; // Within 30 days and not expired yet
+            }).length;
+            document.getElementById('expiringSoon').textContent = expiringSoonReaders;
         }
 
         // Load alerts
         function loadAlerts() {
-            const alerts = getSystemAlerts();
-            const alertsList = document.getElementById('alertsList');
-            
-            if (alerts.length === 0) {
+            const alertsList = document.getElementById('alertsList'); //
+            let alertsHtml = '';
+
+            const overdueBooks = window.dataManager.getOverdueBooks(); //
+            if (overdueBooks.length > 0) {
+                alertsHtml += `
+                    <div class="alert-item danger">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-exclamation-circle me-3"></i>
+                            <div class="flex-grow-1">
+                                <strong>Sách quá hạn (${overdueBooks.length})</strong>
+                                <div class="text-muted small">Có ${overdueBooks.length} cuốn sách chưa được trả đúng hạn.</div>
+                            </div>
+                            <small class="text-muted">Ngay lập tức</small>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const lowStockBooks = window.dataManager.getLowStockBooks(5); // threshold 5 copies
+            if (lowStockBooks.length > 0) {
+                alertsHtml += `
+                    <div class="alert-item warning">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-box-open me-3"></i>
+                            <div class="flex-grow-1">
+                                <strong>Sách sắp hết (${lowStockBooks.length})</strong>
+                                <div class="text-muted small">Có ${lowStockBooks.length} đầu sách có số lượng tồn kho thấp.</div>
+                            </div>
+                            <small class="text-muted">Ưu tiên</small>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const dueSoonBooks = window.dataManager.getDueSoonBooks(3); // Due in next 3 days
+            if (dueSoonBooks.length > 0) {
+                alertsHtml += `
+                    <div class="alert-item info">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-clock me-3"></i>
+                            <div class="flex-grow-1">
+                                <strong>Sách sắp đến hạn (${dueSoonBooks.length})</strong>
+                                <div class="text-muted small">Có ${dueSoonBooks.length} cuốn sách sắp đến hạn trả.</div>
+                            </div>
+                            <small class="text-muted">Sắp tới</small>
+                        </div>
+                    </div>
+                `;
+            }
+
+            const expiringReaders = window.dataManager.getAllReaders().filter(reader => { //
+                const expiryDate = new Date(reader.hanThe); //
+                const daysUntilExpiry = Math.ceil((expiryDate - new Date()) / (1000 * 60 * 60 * 24));
+                return daysUntilExpiry > 0 && daysUntilExpiry <= 7; // Expiring in next 7 days
+            });
+            if (expiringReaders.length > 0) {
+                alertsHtml += `
+                    <div class="alert-item warning">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-id-card me-3"></i>
+                            <div class="flex-grow-1">
+                                <strong>Thẻ độc giả sắp hết hạn (${expiringReaders.length})</strong>
+                                <div class="text-muted small">Có ${expiringReaders.length} thẻ độc giả sắp hết hạn.</div>
+                            </div>
+                            <small class="text-muted">Sắp tới</small>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (alertsHtml === '') {
                 alertsList.innerHTML = `
                     <div class="text-center text-muted py-4">
                         <i class="fas fa-check-circle fa-3x mb-3 text-success"></i>
                         <p>Không có cảnh báo nào</p>
                     </div>
                 `;
-                return;
+            } else {
+                alertsList.innerHTML = alertsHtml;
             }
-            
-            let html = '';
-            alerts.forEach(alert => {
-                html += `
-                    <div class="alert-item ${alert.type}">
-                        <div class="d-flex align-items-center">
-                            <i class="fas ${alert.icon} me-3"></i>
-                            <div class="flex-grow-1">
-                                <strong>${alert.title}</strong>
-                                <div class="text-muted small">${alert.message}</div>
-                            </div>
-                            <small class="text-muted">${alert.time}</small>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            alertsList.innerHTML = html;
         }
 
         // Load recent activities
         function loadRecentActivities() {
-            const activities = getRecentActivities();
-            const activitiesContainer = document.getElementById('recentActivities');
-            
+            const activities = window.dataManager.getActivities(5); // Get latest 5 activities
+            const activitiesContainer = document.getElementById('recentActivities'); //
+
             if (activities.length === 0) {
                 activitiesContainer.innerHTML = `
                     <div class="text-center text-muted py-4">
                         <i class="fas fa-clock fa-3x mb-3"></i>
                         <p>Chưa có hoạt động nào</p>
                     </div>
-                `;
+                `; //
                 return;
             }
-            
+
             let html = '';
-            activities.forEach(activity => {
+            activities.forEach(activity => { //
+                let iconClass = 'fas fa-info-circle';
+                let typeClass = 'info';
+
+                switch (activity.action) {
+                    case 'borrow_book':
+                        iconClass = 'fas fa-book-open';
+                        typeClass = 'primary';
+                        break;
+                    case 'return_book':
+                        iconClass = 'fas fa-undo';
+                        typeClass = 'success';
+                        break;
+                    case 'add_reader':
+                    case 'update_reader':
+                        iconClass = 'fas fa-user-plus';
+                        typeClass = 'info';
+                        break;
+                    case 'add_book':
+                    case 'update_book':
+                        iconClass = 'fas fa-book';
+                        typeClass = 'info';
+                        break;
+                    case 'create_fine':
+                        iconClass = 'fas fa-money-bill-wave';
+                        typeClass = 'warning';
+                        break;
+                    case 'pay_fine':
+                        iconClass = 'fas fa-receipt';
+                        typeClass = 'success';
+                        break;
+                    case 'overdue_book':
+                        iconClass = 'fas fa-exclamation-triangle';
+                        typeClass = 'danger';
+                        break;
+                    case 'login':
+                    case 'logout':
+                        iconClass = 'fas fa-user-circle';
+                        typeClass = 'secondary';
+                        break;
+                    case 'daily_maintenance':
+                        iconClass = 'fas fa-tools';
+                        typeClass = 'secondary';
+                        break;
+                }
+
                 html += `
                     <div class="activity-item">
-                        <div class="activity-icon ${activity.type}">
-                            <i class="fas ${activity.icon}"></i>
+                        <div class="activity-icon ${typeClass}">
+                            <i class="${iconClass}"></i>
                         </div>
                         <div class="activity-content">
-                            <div class="fw-bold">${activity.title}</div>
-                            <div class="text-muted small">${activity.description}</div>
-                            <div class="activity-time">${activity.time}</div>
+                            <div class="fw-bold">${activity.description}</div>
+                            <div class="text-muted small">Người dùng: ${activity.user}</div>
+                            <div class="activity-time">${window.app.formatDateTime(activity.timestamp)}</div>
                         </div>
                     </div>
                 `;
             });
-            
-            activitiesContainer.innerHTML = html;
+
+            activitiesContainer.innerHTML = html; //
         }
 
         // Load charts
         function loadCharts() {
-            const chartData = getChartData();
-            
-            // Update progress bars
-            document.getElementById('borrowPercentage').textContent = chartData.borrowPercentage + '%';
-            document.getElementById('borrowProgressBar').style.width = chartData.borrowPercentage + '%';
-            
-            document.getElementById('activeReaderPercentage').textContent = chartData.activeReaderPercentage + '%';
-            document.getElementById('readerProgressBar').style.width = chartData.activeReaderPercentage + '%';
-            
-            document.getElementById('onTimePercentage').textContent = chartData.onTimePercentage + '%';
-            document.getElementById('onTimeProgressBar').style.width = chartData.onTimePercentage + '%';
-        }
+            const stats = window.dataManager.getStatistics(); //
 
-        // Format currency
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN').format(amount) + 'đ';
+            // Sách đang mượn
+            const totalBooksInLibrary = stats.books.total; // Tổng số bản sách vật lý
+            const currentBorrowed = stats.borrows.active; // Sách đang được mượn
+
+            let borrowPercentage = 0;
+            if (totalBooksInLibrary > 0) {
+                borrowPercentage = (currentBorrowed / totalBooksInLibrary) * 100;
+            }
+            borrowPercentage = Math.min(100, Math.round(borrowPercentage)); // Cap at 100% and round
+
+            document.getElementById('borrowPercentage').textContent = borrowPercentage + '%'; //
+            document.getElementById('borrowProgressBar').style.width = borrowPercentage + '%'; //
+
+            // Độc giả hoạt động (chúng ta sẽ định nghĩa là những độc giả có hoạt động gần đây)
+            const totalReaders = stats.readers.total; //
+            const activeReaders = window.dataManager.getActiveReaders(30).length; // Active in last 30 days
+
+            let activeReaderPercentage = 0;
+            if (totalReaders > 0) {
+                activeReaderPercentage = (activeReaders / totalReaders) * 100;
+            }
+            activeReaderPercentage = Math.min(100, Math.round(activeReaderPercentage));
+
+            document.getElementById('activeReaderPercentage').textContent = activeReaderPercentage + '%'; //
+            document.getElementById('readerProgressBar').style.width = activeReaderPercentage + '%'; //
+
+            // Tỷ lệ trả đúng hạn
+            const totalReturns = stats.returns.today + stats.returns.thisWeek + stats.returns.thisMonth; // Lấy tổng lượt trả trong một khoảng thời gian nhất định để tính tỷ lệ. Giả sử lấy trong tháng.
+            const totalBorrowsThisMonth = stats.borrows.thisMonth;
+            
+            // Để tính tỷ lệ trả đúng hạn chính xác, cần có thông tin về sách trả đúng hạn và sách trả muộn.
+            // data.js không có sẵn thống kê trực tiếp `onTimeReturns` vs `totalReturns`
+            // Giả định: Mọi lượt trả sách trong tháng này đều có thể coi là đóng góp vào tỷ lệ đúng hạn,
+            // so với tổng lượt mượn trong tháng đó.
+            // Cách tính tốt hơn sẽ là duyệt qua `borrowRecords` và đếm sách trả đúng hạn.
+            const allBorrowRecords = window.dataManager.getAllBorrowRecords(); //
+            const returnedOnTime = allBorrowRecords.filter(record =>
+                record.status === 'returned' && record.returnDate && record.returnDate <= record.dueDate
+            ).length;
+
+            const totalReturnedRecords = allBorrowRecords.filter(record => record.status === 'returned' && record.returnDate).length;
+
+            let onTimePercentage = 0;
+            if (totalReturnedRecords > 0) {
+                onTimePercentage = (returnedOnTime / totalReturnedRecords) * 100;
+            }
+            onTimePercentage = Math.min(100, Math.round(onTimePercentage));
+
+
+            document.getElementById('onTimePercentage').textContent = onTimePercentage + '%'; //
+            document.getElementById('onTimeProgressBar').style.width = onTimePercentage + '%'; //
         }
 
         // Logout function
-        function logout() {
-            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
-                sessionStorage.clear();
-                window.location.href = 'index.html';
+        function logout() { //
+            if (confirm('Bạn có chắc chắn muốn đăng xuất?')) { //
+                window.app.logout(); // Use logout from app.js
             }
         }
 
         // Auto refresh dashboard every 5 minutes
         setInterval(function() {
-            loadDashboardData();
-        }, 300000); // 5 minutes
+            // Check if the page is visible before refreshing to save resources
+            if (document.visibilityState === 'visible') {
+                loadDashboardData();
+                window.app.showNotification('Dữ liệu bảng điều khiển đã được làm mới tự động.', 'info', 2000);
+            }
+        }, 300000); // 5 minutes (300000 milliseconds)
     </script>
 </body>
 </html>
